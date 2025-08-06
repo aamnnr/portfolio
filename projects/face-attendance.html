@@ -1,0 +1,99 @@
+<!-- File: project-face-attendance.html -->
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sistem Presensi Wajah | Nur Amin</title>
+  <link rel="stylesheet" href="../project-detail.css">
+  <link rel="icon" href="../assets/favicon.png" type="image/png">
+</head>
+<body>
+  <!-- Navbar sama seperti contoh sebelumnya -->
+  
+  <section id="project-details">
+    <div class="project-details-container">
+      <div class="project-header">
+        <h1 class="project-title">Sistem Presensi Pengenalan Wajah Berbasis IoT</h1>
+        <div class="project-meta">
+          <span class="project-category">Computer Vision & IoT</span>
+          <span class="project-date">Juni 2025 - Tugas Akhir</span>
+        </div>
+      </div>
+
+      <div class="project-content">
+        <div class="project-gallery">
+          <div class="main-image">
+            <img src="../assets/project-2.png" alt="Perangkat Presensi Wajah">
+          </div>
+          <div class="thumbnail-grid">
+            <img src="../assets/projects/p2-1.png" alt="Blog Diagram Sistem">
+            <img src="../assets/projects/p2-2.png" alt="Proses Presensi Pengenlan Wajah">
+            <img src="../assets/projects/p2-3.png" alt="Halaman Rekap Presensi Admin">
+          </div>
+        </div>
+
+        <div class="project-info">
+          <div class="project-description-detai">
+            <h2>Deskripsi Proyek</h2>
+            <p>Sistem presensi otomatis menggunakan pengenalan wajah dengan algoritma K-Nearest Neighbor (KNN) yang diimplementasikan pada ESP32-CAM. Sistem ini terintegrasi dengan platform web berbasis Flask untuk manajemen data presensi dan user. Digunakan di SMK N 1 Trucuk Klaten sebagai proyek percontohan.</p>
+          </div>
+
+          <div class="project-features">
+            <h2>Fitur Utama</h2>
+            <ul>
+              <li>Presensi dengan pengenalan wajah real-time</li>
+              <li>Verifikasi dua faktor dengan RFID (opsional)</li>
+              <li>Dashboard admin untuk manajemen pengguna</li>
+              <li>Ekspor data presensi ke Excel</li>
+              <li>Multi-level akses (admin, guru, siswa)</li>
+            </ul>
+          </div>
+
+          <div class="project-tech">
+            <h2>Teknologi Digunakan</h2>
+            <div class="tech-stack">
+              <span class="tech-item">OpenCV</span>
+              <span class="tech-item">ALgoritma KNN</span>
+              <span class="tech-item">Flask Framework</span>
+              <span class="tech-item"></span>
+              <span class="tech-item">MySQL</span>
+            </div>
+          </div>
+
+          <div class="project-challenges">
+            <h2>Tantangan & Solusi</h2>
+            <div class="challenge-item">
+              <h3>Keterbatasan Memori ESP32</h3>
+              <p>Mengoptimalkan model KNN dan mengurangi dimensi feature vector dengan PCA</p>
+            </div>
+            <div class="challenge-item">
+              <h3>Kondisi Pencahayaan Berbeda</h3>
+              <p>Menerapkan preprocessing gambar dengan histogram equalization dan normalisasi</p>
+            </div>
+          </div>
+
+          <div class="project-links">
+            <a href="https://github.com/aamnnr/Sistem-Presensi-Pengenalan-Wajah-KNN.git" class="btn btn-color-2" target="_blank">Kode Sumber</a>
+            <a href="../index.html#projects" class="btn btn-color-2">Kembali ke Portfolio</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <!-- Modal/Popup untuk gambar -->
+  <div id="imageModal" class="modal">
+    <span class="close">&times;</span>
+    <img class="modal-content" id="modalImage">
+    <div id="caption"></div>
+  </div>
+
+  <footer>
+    <p>Watermark &copy; 2025 Nur Amin.</p>
+  </footer>
+
+  <script src="../script.js"></script>
+</body>
+</html>

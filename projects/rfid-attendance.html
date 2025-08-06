@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sistem Presensi RFID | Nur Amin</title>
+  <link rel="stylesheet" href="../project-detail.css">
+  <link rel="icon" href="../assets/favicon.png" type="image/png">
+</head>
+<body>
+  <nav id="desktop-nav">
+    <div class="logo">Nur Amin</div>
+    <div>
+      <ul class="nav-links">
+        <li><a href="../index.html#about">Tentang</a></li>
+        <li><a href="../index.html#experience">Keahlian</a></li>
+        <li><a href="../index.html#projects">Proyek</a></li>
+        <li><a href="../index.html#contact">Kontak</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section id="project-details">
+    <div class="project-details-container">
+      <div class="project-header">
+        <h1 class="project-title">Sistem Presensi RFID dengan ESP32-CAM</h1>
+        <div class="project-meta">
+          <span class="project-category">Embedded System</span>
+          <span class="project-date">Desember 2024 - Kerja Praktik</span>
+        </div>
+      </div>
+
+      <div class="project-content">
+        <div class="project-gallery">
+          <div class="main-image">
+            <img src="../assets/project-4.png" alt="Perangkat Presensi RFID">
+          </div>
+          <div class="thumbnail-grid">
+            <img src="../assets/projects/p4-1.png" alt="Rangkaian Elektronik">
+            <img src="../assets/projects/p3.png" alt="Alur Kerja Sistem">
+            <img src="../assets/projects/p4.png" alt="Data Presensi">
+          </div>
+        </div>
+
+        <div class="project-info">
+          <div class="project-description">
+            <h2>Deskripsi Proyek</h2>
+            <p>Sistem presensi siswa berbasis RFID yang dikembangkan selama kerja praktik di SMK N 1 Trucuk Klaten. Sistem ini menggabungkan identifikasi kartu RFID dengan capture foto wajah menggunakan ESP32-CAM untuk verifikasi ganda. Data presensi disimpan dalam database lokal dan dapat diakses melalui antarmuka web sederhana.</p>
+          </div>
+
+          <div class="project-features">
+            <h2>Fitur Utama</h2>
+            <ul>
+              <li>Autentikasi dua faktor (RFID + Wajah)</li>
+              <li>Penyimpanan data presensi dengan timestamp</li>
+              <li>Antarmuka web untuk admin dan guru</li>
+              <li>Ekspor data ke format CSV</li>
+              <li>Mode offline dengan sinkronisasi ketika online</li>
+            </ul>
+          </div>
+
+          <div class="project-tech">
+            <h2>Teknologi Digunakan</h2>
+            <div class="tech-stack">
+              <span class="tech-item">ESP32</span>
+              <span class="tech-item">RC522 RFID</span>
+              <span class="tech-item">SPIFFS Storage</span>
+              <span class="tech-item">PHP</span>
+              <span class="tech-item">MySQL</span>
+            </div>
+          </div>
+
+          <div class="project-challenges">
+            <h2>Tantangan Teknis</h2>
+            <div class="challenge-item">
+              <h3>Penyimpanan Foto Terbatas</h3>
+              <p>Mengimplementasikan kompresi gambar JPEG dengan kualitas 60% untuk menghemat ruang penyimpanan</p>
+            </div>
+            <div class="challenge-item">
+              <h3>Multiple User Access</h3>
+              <p>Membuat sistem antrian data ketika banyak perangkat mengakses database secara bersamaan</p>
+            </div>
+          </div>
+
+          <div class="project-links">
+            <a href="https://github.com/aamnnr/KP_KerjaPraktik.git" class="btn btn-color-2" target="_blank">Kode Sumber</a>
+            <a href="../index.html#projects" class="btn btn-color-2">Kembali ke Portfolio</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <!-- Modal/Popup untuk gambar -->
+  <div id="imageModal" class="modal">
+    <span class="close">&times;</span>
+    <img class="modal-content" id="modalImage">
+    <div id="caption"></div>
+  </div>
+
+  <footer>
+    <p>Watermark &copy; 2025 Nur Amin.</p>
+  </footer>
+
+  <script src="../script.js"></script>
+</body>
+</html>

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Javis Challenge - Aplikasi Demo Autentikasi | Portfolio</title>
+  <link rel="stylesheet" href="../project-detail.css">
+  <link rel="icon" href="../assets/favicon.png" type="image/png">
+</head>
+<body>
+  <section id="project-details">
+    <div class="project-details-container">
+      <div class="project-header">
+        <h1 class="project-title">Javis Challenge - Aplikasi Demo Autentikasi</h1>
+        <div class="project-meta">
+          <span class="project-category">Full Stack Development</span>
+          <span class="project-date">Oktober 2025 - Technical Challenge</span>
+        </div>
+      </div>
+
+      <div class="project-content">
+        <div class="project-gallery">
+          <div class="main-image">
+            <img src="../assets/projects/javis-1.png" alt="Dashboard Aplikasi Autentikasi">
+          </div>
+          <div class="thumbnail-grid">
+            <img src="../assets/projects/javis-2.png" alt="Halaman Login dengan Dark Mode">
+            <img src="../assets/projects/javis-3.png" alt="Halaman Registrasi">
+            <img src="../assets/projects/javis-4.png" alt="Unit Testing Results">
+          </div>
+        </div>
+
+        <div class="project-info">
+          <div class="project-description-detail">
+            <h2>Deskripsi Proyek</h2>
+            <p>Proyek demonstrasi implementasi sistem autentikasi yang aman menggunakan MERN Stack (MySQL, Express.js, React, Node.js) dengan fitur dark mode dan unit testing. Dibangun sebagai solusi technical challenge dengan fokus pada security, scalability, dan code quality.</p>
+            <p>Aplikasi ini menampilkan best practices dalam pengembangan sistem autentikasi modern dengan proteksi keamanan berlapis dan user experience yang optimal.</p>
+          </div>
+
+          <div class="project-features">
+            <h2>Fitur Utama</h2>
+            
+            <div class="feature-category">
+              <h3>🔐 Autentikasi & Keamanan</h3>
+              <ul>
+                <li>Registrasi user baru dengan validasi</li>
+                <li>Login dengan email/username dan password</li>
+                <li>JWT-based authentication dengan HttpOnly cookies</li>
+                <li>Protected routes untuk halaman dashboard</li>
+                <li>Rate limiting pada endpoint login (5 attempts per menit)</li>
+                <li>Password hashing dengan bcrypt</li>
+              </ul>
+            </div>
+            
+            <div class="feature-category">
+              <h3>🎨 UI/UX & Responsive Design</h3>
+              <ul>
+                <li>Dark mode toggle dengan localStorage persistence</li>
+                <li>Responsive design dengan Tailwind CSS</li>
+                <li>Loading states dan error handling yang intuitif</li>
+                <li>Form validation (client-side dan server-side)</li>
+                <li>Clean dan modern interface</li>
+              </ul>
+            </div>
+            
+            <div class="feature-category">
+              <h3>🧪 Testing & Quality Assurance</h3>
+              <ul>
+                <li>Unit tests untuk components dan pages</li>
+                <li>Mocking untuk API calls dan context</li>
+                <li>Test coverage untuk critical functionality</li>
+                <li>Integration testing untuk autentikasi flow</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="project-tech">
+            <h2>Tech Stack</h2>
+            <div class="tech-stack">
+              <span class="tech-item">React 19</span>
+              <span class="tech-item">Vite</span>
+              <span class="tech-item">Node.js</span>
+              <span class="tech-item">Express.js</span>
+              <span class="tech-item">MySQL</span>
+              <span class="tech-item">JWT</span>
+              <span class="tech-item">bcrypt</span>
+              <span class="tech-item">Tailwind CSS</span>
+              <span class="tech-item">Axios</span>
+              <span class="tech-item">Vitest</span>
+              <span class="tech-item">React Testing Library</span>
+              <span class="tech-item">React Router DOM</span>
+              <span class="tech-item">Context API</span>
+            </div>
+          </div>
+
+          <div class="project-architecture">
+            <h2>Arsitektur Aplikasi</h2>
+            <div class="architecture-section">
+              <h3>Frontend (Client)</h3>
+              <ul>
+                <li><strong>React 19</strong> - Library JavaScript untuk UI dengan hooks modern</li>
+                <li><strong>Vite</strong> - Build tool dan development server yang cepat</li>
+                <li><strong>React Router DOM</strong> - Routing untuk Single Page Application</li>
+                <li><strong>Tailwind CSS</strong> - Utility-first CSS framework</li>
+                <li><strong>Context API</strong> - State management untuk autentikasi dan tema</li>
+                <li><strong>Axios</strong> - HTTP client untuk API calls dengan interceptors</li>
+              </ul>
+            </div>
+            
+            <div class="architecture-section">
+              <h3>Backend (Server)</h3>
+              <ul>
+                <li><strong>Node.js + Express.js</strong> - Runtime dan web framework</li>
+                <li><strong>MySQL2</strong> - Driver MySQL dengan connection pooling</li>
+                <li><strong>JWT</strong> - Autentikasi berbasis token dengan expiration</li>
+                <li><strong>bcrypt</strong> - Hashing password dengan salt rounds</li>
+                <li><strong>CORS</strong> - Cross-Origin Resource Sharing configuration</li>
+                <li><strong>express-rate-limit</strong> - Rate limiting untuk keamanan</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="project-challenges">
+            <h2>Tantangan & Solusi</h2>
+            <div class="challenge-item">
+              <h3>Implementasi HttpOnly Cookies untuk JWT</h3>
+              <p>Mengatasi XSS vulnerability dengan menyimpan token di HttpOnly cookies dan mengimplementasikan proper CORS configuration untuk keamanan cross-origin requests.</p>
+            </div>
+            <div class="challenge-item">
+              <h3>State Management untuk Autentikasi</h3>
+              <p>Menggunakan React Context API dengan useReducer untuk mengelola state autentikasi secara global dan memastikan konsistensi data across components.</p>
+            </div>
+            <div class="challenge-item">
+              <h3>Testing Async Components</h3>
+              <p>Mengimplementasikan mocking untuk API calls dan context providers menggunakan Vitest dan React Testing Library untuk reliable unit testing.</p>
+            </div>
+          </div>
+
+          <div class="project-links">
+            <a href="https://github.com/aamnnr/login-auth-app.git" class="btn btn-color-2" target="_blank">
+              <i class="fab fa-github"></i> Kode Sumber
+            </a>
+            <a href="../index.html#projects" class="btn btn-color-2">
+              <i class="fas fa-arrow-left"></i> Kembali ke Portfolio
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Modal/Popup untuk gambar -->
+  <div id="imageModal" class="modal">
+    <span class="close">&times;</span>
+    <img class="modal-content" id="modalImage">
+    <div id="caption"></div>
+  </div>
+
+  <footer>
+    <p>Watermark &copy; 2025 Portfolio.</p>
+  </footer>
+
+  <script src="../script.js"></script>
+</body>
+</html>

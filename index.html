@@ -1,395 +1,598 @@
 <!DOCTYPE html>
 <html lang="id">
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Nur Amin - Portfolio</title>
-  <link rel="stylesheet" href="style.css" />
-  <link rel="icon" href="assets/favicon.png" type="image/png">
-</head>
-<body>
-  <!-- Navigation -->
-  <nav id="desktop-nav">
-    <div class="logo">Nur Amin</div>
-    <ul class="nav-links">
-      <li><a href="#about">Tentang</a></li>
-      <li><a href="#experience">Keahlian</a></li>
-      <li><a href="#projects">Proyek</a></li>
-      <li><a href="#organization">Organisasi</a></li>
-      <li><a href="#contact">Kontak</a></li>
-    </ul>
-  </nav>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nur Amin - Portfolio</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="icon" href="assets/favicon.png" type="image/png" />
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav id="desktop-nav">
+      <div class="logo">Nur Amin</div>
+      <ul class="nav-links">
+        <li><a href="#about">Tentang</a></li>
+        <li><a href="#experience">Keahlian</a></li>
+        <li><a href="#projects">Proyek</a></li>
+        <li><a href="#organization">Organisasi</a></li>
+        <li><a href="#contact">Kontak</a></li>
+      </ul>
+    </nav>
 
-  <nav id="hamburger-nav">
-    <div class="logo">Nur Amin</div>
-    <div class="hamburger-menu">
-      <div class="hamburger-icon" onclick="toggleMenu()">
-        <span></span>
-        <span></span>
-        <span></span>
+    <nav id="hamburger-nav">
+      <div class="logo">Nur Amin</div>
+      <div class="hamburger-menu">
+        <div class="hamburger-icon" onclick="toggleMenu()">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <div class="menu-links">
+          <li><a href="#about" onclick="toggleMenu()">Tentang</a></li>
+          <li><a href="#experience" onclick="toggleMenu()">Keahlian</a></li>
+          <li><a href="#projects" onclick="toggleMenu()">Proyek</a></li>
+          <li><a href="#organization" onclick="toggleMenu()">Organisasi</a></li>
+          <li><a href="#contact" onclick="toggleMenu()">Kontak</a></li>
+        </div>
       </div>
-      <div class="menu-links">
-        <li><a href="#about" onclick="toggleMenu()">Tentang</a></li>
-        <li><a href="#experience" onclick="toggleMenu()">Keahlian</a></li>
-        <li><a href="#projects" onclick="toggleMenu()">Proyek</a></li>
-        <li><a href="#organization" onclick="toggleMenu()">Organisasi</a></li>
-        <li><a href="#contact" onclick="toggleMenu()">Kontak</a></li>
-      </div>
-    </div>
-  </nav>
+    </nav>
 
-  <!-- Profile Section -->
-  <section id="profile">
-    <div class="section__pic-container">
-      <img src="./assets/profile-pic.png" alt="Foto profil Nur Amin" />
-    </div>
-    <div class="section__text">
-      <p class="section__text__p1">Halo, saya</p>
-      <h1 class="title">Nur Amin</h1>
-      <p class="section__text__p2">Computer Engineering</p>
-      <div class="btn-container">
-        <button class="btn btn-color-2" onclick="window.open('./assets/cv.pdf')">
-          Unduh CV
-        </button>
-        <button class="btn btn-color-1" onclick="location.href='#contact'">
-          Info Kontak
-        </button>
-      </div>
-      <div id="socials-container">
-        <img src="./assets/linkedin.png" alt="Profil LinkedIn saya" class="icon"
-          onclick="location.href='https://linkedin.com/in/nur-amin354'" />
-        <img src="./assets/github.png" alt="Profil Github saya" class="icon"
-          onclick="location.href='https://github.com/aamnnr'" />
-      </div>
-    </div>
-  </section>
-
-  <!-- About Section -->
-  <section id="about">
-    <p class="section__text__p1">Mari Berkenalan</p>
-    <h1 class="title">Tentang Saya</h1>
-    <div class="section-container">
+    <!-- Profile Section -->
+    <section id="profile">
       <div class="section__pic-container">
-        <img src="./assets/about-pic.png" alt="Foto profil" class="about-pic">
+        <img src="./assets/profile-pic.png" alt="Foto profil Nur Amin" />
       </div>
-      <div class="about-details-container">
+      <div class="section__text">
+        <p class="section__text__p1">Halo, saya</p>
+        <h1 class="title">Nur Amin</h1>
+        <p class="section__text__p2">Computer Engineering</p>
+        <div class="btn-container">
+          <button
+            class="btn btn-color-2"
+            onclick="window.open('./assets/cv.pdf')"
+          >
+            Unduh CV
+          </button>
+          <button class="btn btn-color-1" onclick="location.href='#contact'">
+            Info Kontak
+          </button>
+        </div>
+        <div id="socials-container">
+          <img
+            src="./assets/linkedin.png"
+            alt="Profil LinkedIn saya"
+            class="icon"
+            onclick="location.href='https://linkedin.com/in/nur-amin354'"
+          />
+          <img
+            src="./assets/github.png"
+            alt="Profil Github saya"
+            class="icon"
+            onclick="location.href='https://github.com/aamnnr'"
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+      <p class="section__text__p1">Mari Berkenalan</p>
+      <h1 class="title">Tentang Saya</h1>
+      <div class="section-container">
+        <div class="section__pic-container">
+          <img
+            src="./assets/about-pic.png"
+            alt="Foto profil"
+            class="about-pic"
+          />
+        </div>
+        <div class="about-details-container">
+          <div class="about-containers">
+            <div class="details-container">
+              <img
+                src="./assets/education.png"
+                alt="Ikon pendidikan"
+                class="icon"
+              />
+              <h3>Pendidikan</h3>
+              <p>
+                Universitas Teknologi Yogyakarta<br />S1 Teknik Komputer<br /><b
+                  >IPK: 3.74</b
+                >
+              </p>
+            </div>
+            <div class="details-container">
+              <img
+                src="./assets/certificate.png"
+                alt="Ikon sertifikat"
+                class="icon"
+              />
+              <h3>Sertifikasi</h3>
+              <p>
+                Data Engineering<br />Machine Learning<br /><i
+                  >~ Altair Rapidminer</i
+                >
+              </p>
+              <a
+                href="assets/altair.pdf"
+                class="language-certificate"
+                target="_blank"
+                >Lihat Sertifikat</a
+              >
+            </div>
+          </div>
+          <div class="text-container">
+            <p>
+              Fresh graduate Teknik Komputer dari Universitas Teknologi
+              Yogyakarta dengan Indeks Prestasi Kumulatif (IPK) 3.74, memiliki
+              konsentrasi pada Internet of Things (IoT). Memiliki minat dalam
+              pengembangan solusi berbasis IoT, machine learning, dan
+              pengembangan web, serta perancang antarmuka pengguna (UI/UX).
+              Antusias untuk mengaplikasikan kemampuan teknis dalam menciptakan
+              sistem yang cerdas dan fungsional. Saat ini sedang mencari peluang
+              untuk berkontribusi dan berkembang dalam industri teknologi.
+            </p>
+          </div>
+        </div>
+      </div>
+      <img
+        src="./assets/arrow.png"
+        alt="Ikon panah"
+        class="icon arrow"
+        onclick="location.href='#experience'"
+      />
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience">
+      <p class="section__text__p1">Jelajahi</p>
+      <h1 class="title">Keahlian Saya</h1>
+      <div class="experience-details-container">
         <div class="about-containers">
           <div class="details-container">
-            <img src="./assets/education.png" alt="Ikon pendidikan" class="icon">
-            <h3>Pendidikan</h3>
-            <p>Universitas Teknologi Yogyakarta<br>S1 Teknik Komputer<br><b>IPK: 3.74</b></p>
+            <h2 class="experience-sub-title">IoT & Sistem Tertanam</h2>
+            <div class="article-container">
+              <article>
+                <img
+                  src="./assets/checkmark.png"
+                  alt="Ikon pengalaman"
+                  class="icon"
+                />
+                <div>
+                  <h3>Mikrokontroler (ESP/Arduino)</h3>
+                  <p>Mahir</p>
+                </div>
+              </article>
+              <article>
+                <img
+                  src="./assets/checkmark.png"
+                  alt="Ikon pengalaman"
+                  class="icon"
+                />
+                <div>
+                  <h3>MQTT</h3>
+                  <p>Mahir</p>
+                </div>
+              </article>
+              <article>
+                <img
+                  src="./assets/checkmark.png"
+                  alt="Ikon pengalaman"
+                  class="icon"
+                />
+                <div>
+                  <h3>Hardware/Sensor</h3>
+                  <p>Mahir</p>
+                </div>
+              </article>
+              <article>
+                <img
+                  src="./assets/checkmark.png"
+                  alt="Ikon pengalaman"
+                  class="icon"
+                />
+                <div>
+                  <h3>UI/UX</h3>
+                  <p>Mahir</p>
+                </div>
+              </article>
+            </div>
           </div>
           <div class="details-container">
-            <img src="./assets/certificate.png" alt="Ikon sertifikat" class="icon">
-            <h3>Sertifikasi</h3>
-            <p>Data Engineering<br>Machine Learning<br><i>~ Altair Rapidminer</i></p>
-            <a href="assets/altair.pdf" class="language-certificate" target="_blank">Lihat Sertifikat</a>
+            <h2 class="experience-sub-title">Pemrograman & Web</h2>
+            <div class="article-container">
+              <article>
+                <img
+                  src="./assets/checkmark.png"
+                  alt="Ikon pengalaman"
+                  class="icon"
+                />
+                <div>
+                  <h3>Python</h3>
+                  <p>Menengah</p>
+                </div>
+              </article>
+              <article>
+                <img
+                  src="./assets/checkmark.png"
+                  alt="Ikon pengalaman"
+                  class="icon"
+                />
+                <div>
+                  <h3>C++</h3>
+                  <p>Menengah</p>
+                </div>
+              </article>
+              <article>
+                <img
+                  src="./assets/checkmark.png"
+                  alt="Ikon pengalaman"
+                  class="icon"
+                />
+                <div>
+                  <h3>JavaScript</h3>
+                  <p>Menengah</p>
+                </div>
+              </article>
+              <article>
+                <img
+                  src="./assets/checkmark.png"
+                  alt="Ikon pengalaman"
+                  class="icon"
+                />
+                <div>
+                  <h3>HTML/CSS</h3>
+                  <p>Menengah</p>
+                </div>
+              </article>
+              <article>
+                <img
+                  src="./assets/checkmark.png"
+                  alt="Ikon pengalaman"
+                  class="icon"
+                />
+                <div>
+                  <h3>Flask/Laravel/PHP</h3>
+                  <p>Menengah</p>
+                </div>
+              </article>
+              <article>
+                <img
+                  src="./assets/checkmark.png"
+                  alt="Ikon pengalaman"
+                  class="icon"
+                />
+                <div>
+                  <h3>React/Express</h3>
+                  <p>Dasar</p>
+                </div>
+              </article>
+            </div>
+          </div>
+          <div class="details-container">
+            <h2 class="experience-sub-title">Data & Desain</h2>
+            <div class="article-container">
+              <article>
+                <img
+                  src="./assets/checkmark.png"
+                  alt="Ikon pengalaman"
+                  class="icon"
+                />
+                <div>
+                  <h3>Machine Learning</h3>
+                  <p>Menengah</p>
+                </div>
+              </article>
+              <article>
+                <img
+                  src="./assets/checkmark.png"
+                  alt="Ikon pengalaman"
+                  class="icon"
+                />
+                <div>
+                  <h3>MySQL</h3>
+                  <p>Menengah</p>
+                </div>
+              </article>
+              <article>
+                <img
+                  src="./assets/checkmark.png"
+                  alt="Ikon pengalaman"
+                  class="icon"
+                />
+                <div>
+                  <h3>Office (Word/Excel/PPT)</h3>
+                  <p>Mahir</p>
+                </div>
+              </article>
+              <article>
+                <img
+                  src="./assets/checkmark.png"
+                  alt="Ikon pengalaman"
+                  class="icon"
+                />
+                <div>
+                  <h3>Figma</h3>
+                  <p>Menengah</p>
+                </div>
+              </article>
+              <article>
+                <img
+                  src="./assets/checkmark.png"
+                  alt="Ikon pengalaman"
+                  class="icon"
+                />
+                <div>
+                  <h3>CorelDraw</h3>
+                  <p>Menengah</p>
+                </div>
+              </article>
+            </div>
           </div>
         </div>
-        <div class="text-container">
+      </div>
+      <img
+        src="./assets/arrow.png"
+        alt="Ikon panah"
+        class="icon arrow"
+        onclick="location.href='#projects'"
+      />
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+      <p class="section__text__p1">Lihat</p>
+      <h1 class="title">Proyek Saya</h1>
+      <div class="experience-details-container">
+        <div class="projects-grid">
+          <!-- Project 1 -->
+          <div class="details-container color-container">
+            <div class="article-container">
+              <img
+                src="./assets/project-1.png"
+                alt="Sistem Peringatan Dini Banjir"
+                class="project-img"
+              />
+            </div>
+            <h2 class="experience-sub-title project-title">
+              Sistem Peringatan Dini Banjir
+            </h2>
+            <p class="project-description">
+              Sistem berbasis IoT yang mendeteksi ketinggian air dan memberikan
+              notifikasi melalui aplikasi mobile ketika air akan meluap.
+            </p>
+            <div class="btn-container">
+              <button
+                class="btn btn-color-2 project-btn"
+                onclick="location.href='projects/flood-warning.html'"
+              >
+                Detail
+              </button>
+            </div>
+          </div>
+
+          <!-- Project 2 -->
+          <div class="details-container color-container">
+            <div class="article-container">
+              <img
+                src="./assets/project-2.png"
+                alt="Sistem Presensi Pengenalan Wajah"
+                class="project-img"
+              />
+            </div>
+            <h2 class="experience-sub-title project-title">
+              Sistem Presensi Pengenalan Wajah
+            </h2>
+            <p class="project-description">
+              Sistem presensi dengan pengenalan wajah menggunakan algoritma
+              K-Nearest Neighbor dan website untuk pengelolaan data menggunakan
+              Flask.
+            </p>
+            <div class="btn-container">
+              <button
+                class="btn btn-color-2 project-btn"
+                onclick="location.href='projects/face-attendance.html'"
+              >
+                Detail
+              </button>
+            </div>
+          </div>
+
+          <!-- Project 3 -->
+          <div class="details-container color-container">
+            <div class="article-container">
+              <img
+                src="./assets/project-4.png"
+                alt="Sistem Presensi dengan ESP32-CAM"
+                class="project-img"
+              />
+            </div>
+            <h2 class="experience-sub-title project-title">
+              Sistem Presensi dengan ESP32-CAM
+            </h2>
+            <p class="project-description">
+              Sistem presensi siswa menggunakan kartu RFID berisi identitas dan
+              foto wajah yang diambil melalui ESP32-CAM.
+            </p>
+            <div class="btn-container">
+              <button
+                class="btn btn-color-2 project-btn"
+                onclick="location.href='projects/rfid-attendance.html'"
+              >
+                Detail
+              </button>
+            </div>
+          </div>
+
+          <!-- Project 4 -->
+          <div class="details-container color-container">
+            <div class="article-container">
+              <img
+                src="./assets/project-5.png"
+                alt="Sistem Presensi Geolocation"
+                class="project-img"
+              />
+            </div>
+            <h2 class="experience-sub-title project-title">
+              Sistem Presensi Sekolah Berbasis Web & Mobile (Laravel)
+            </h2>
+            <p class="project-description">
+              Sistem presensi menggunakan geolokasi berbasis web dan mobile
+              untuk sekolah dengan dashboard admin dan antarmuka siswa.
+            </p>
+            <div class="btn-container">
+              <button
+                class="btn btn-color-2 project-btn"
+                onclick="location.href='projects/geo-attendance.html'"
+              >
+                Detail
+              </button>
+            </div>
+          </div>
+
+          <!-- Project 5 -->
+          <div class="details-container color-container">
+            <div class="article-container">
+              <img
+                src="./assets/project-6.png"
+                alt="Javis Challenge - Aplikasi Demo Autentikasi"
+                class="project-img"
+              />
+            </div>
+            <h2 class="experience-sub-title project-title">
+              Javis Challenge - Aplikasi Demo Autentikasi
+            </h2>
+            <p class="project-description">
+              Sistem autentikasi aman dengan MERN Stack (MySQL, Express, React,
+              Node.js) dilengkapi dark mode dan unit testing.
+            </p>
+            <div class="btn-container">
+              <button
+                class="btn btn-color-2 project-btn"
+                onclick="location.href='projects/javis-challange.html'"
+              >
+                Detail
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <img
+        src="./assets/arrow.png"
+        alt="Ikon panah"
+        class="icon arrow"
+        onclick="location.href='#organization'"
+      />
+    </section>
+
+    <!-- Organization Section -->
+    <section id="organization">
+      <p class="section__text__p1">Pengalaman</p>
+      <h1 class="title">Organisasi & Kegiatan</h1>
+      <div class="organization-container">
+        <div class="org-details-container">
+          <div class="org-container">
+            <h2 class="org-title">UKM Olahraga UTY</h2>
+            <p class="org-period">2021 – 2024</p>
+            <p class="org-position">Staff Administrasi dan Humas</p>
+            <ul class="org-description">
+              <li>Membuat konten dan mengelola media sosial organisasi</li>
+              <li>Membuat arsip surat menyurat dan pendataan inventaris</li>
+            </ul>
+          </div>
+          <div class="org-container">
+            <h2 class="org-title">PPK ORMAWA DIKTI (UKM Olahraga UTY)</h2>
+            <p class="org-period">2024</p>
+            <p class="org-position">Staff Media dan Humas</p>
+            <ul class="org-description">
+              <li>Mengelola media sosial dan dokumentasi kegiatan</li>
+              <li>
+                Mengelola surat menyurat dan komunikasi dengan pihak eksternal
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="languages-container">
+        <h2 class="languages-title">Kemampuan Bahasa</h2>
+        <div class="language-items">
+          <div class="language-item">
+            <span class="language-name">Bahasa Indonesia</span>
+            <span class="language-level">Penutur Asli</span>
+          </div>
+          <div class="language-item">
+            <span class="language-name">Bahasa Inggris</span>
+            <span class="language-level">Menengah (TOEFL: 480)</span>
+            <a
+              href="assets/toefl.pdf"
+              class="language-certificate"
+              target="_blank"
+              >Lihat Sertifikat</a
+            >
+          </div>
+        </div>
+      </div>
+      <img
+        src="./assets/arrow.png"
+        alt="Ikon panah"
+        class="icon arrow"
+        onclick="location.href='#contact'"
+      />
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+      <p class="section__text__p1">Hubungi</p>
+      <h1 class="title">Kontak Saya</h1>
+      <div class="contact-info-upper-container">
+        <div class="contact-info-container">
+          <img
+            src="./assets/email.png"
+            alt="Ikon email"
+            class="icon contact-icon email-icon"
+          />
           <p>
-            Fresh graduate Teknik Komputer dari Universitas Teknologi Yogyakarta dengan Indeks Prestasi Kumulatif (IPK) 3.74, memiliki konsentrasi pada Internet of Things (IoT). Memiliki minat dalam pengembangan solusi berbasis IoT, machine learning, dan pengembangan web, serta perancang antarmuka pengguna (UI/UX). Antusias untuk mengaplikasikan kemampuan teknis dalam menciptakan sistem yang cerdas dan fungsional. Saat ini sedang mencari peluang untuk berkontribusi dan berkembang dalam industri teknologi.
+            <a href="mailto:noeramin354@gmail.com">noeramin354@gmail.com</a>
+          </p>
+        </div>
+        <div class="contact-info-container">
+          <img
+            src="./assets/linkedin.png"
+            alt="Ikon LinkedIn"
+            class="icon contact-icon"
+          />
+          <p><a href="https://linkedin.com/in/nur-amin354">LinkedIn</a></p>
+        </div>
+        <div class="contact-info-container">
+          <img
+            src="./assets/phone.png"
+            alt="Ikon telepon"
+            class="icon contact-icon"
+          />
+          <p><a href="https://wa.me/6285869106314">+62 858-6910-6314</a></p>
+        </div>
+        <div class="contact-info-container">
+          <img
+            src="./assets/instagram.png"
+            alt="Ikon Instagram"
+            class="icon contact-icon"
+          />
+          <p>
+            <a href="https://www.instagram.com/aamnnr" target="_blank"
+              >@aamnnr</a
+            >
           </p>
         </div>
       </div>
-    </div>
-    <img src="./assets/arrow.png" alt="Ikon panah" class="icon arrow" onclick="location.href='#experience'" />
-  </section>
+    </section>
 
-  <!-- Experience Section -->
-  <section id="experience">
-    <p class="section__text__p1">Jelajahi</p>
-    <h1 class="title">Keahlian Saya</h1>
-    <div class="experience-details-container">
-      <div class="about-containers">
-        <div class="details-container">
-          <h2 class="experience-sub-title">IoT & Sistem Tertanam</h2>
-          <div class="article-container">
-            <article>
-              <img src="./assets/checkmark.png" alt="Ikon pengalaman" class="icon" />
-              <div>
-                <h3>Mikrokontroler (ESP/Arduino)</h3>
-                <p>Mahir</p>
-              </div>
-            </article>
-            <article>
-              <img src="./assets/checkmark.png" alt="Ikon pengalaman" class="icon" />
-              <div>
-                <h3>MQTT</h3>
-                <p>Mahir</p>
-              </div>
-            </article>
-            <article>
-              <img src="./assets/checkmark.png" alt="Ikon pengalaman" class="icon" />
-              <div>
-                <h3>Hardware/Sensor</h3>
-                <p>Mahir</p>
-              </div>
-            </article>
-            <article>
-              <img src="./assets/checkmark.png" alt="Ikon pengalaman" class="icon" />
-              <div>
-                <h3>UI/UX</h3>
-                <p>Mahir</p>
-              </div>
-            </article>
-          </div>
-        </div>
-        <div class="details-container">
-          <h2 class="experience-sub-title">Pemrograman & Web</h2>
-          <div class="article-container">
-            <article>
-              <img src="./assets/checkmark.png" alt="Ikon pengalaman" class="icon" />
-              <div>
-                <h3>Python</h3>
-                <p>Menengah</p>
-              </div>
-            </article>
-            <article>
-              <img src="./assets/checkmark.png" alt="Ikon pengalaman" class="icon" />
-              <div>
-                <h3>C++</h3>
-                <p>Menengah</p>
-              </div>
-            </article>
-            <article>
-              <img src="./assets/checkmark.png" alt="Ikon pengalaman" class="icon" />
-              <div>
-                <h3>JavaScript</h3>
-                <p>Menengah</p>
-              </div>
-            </article>
-            <article>
-              <img src="./assets/checkmark.png" alt="Ikon pengalaman" class="icon" />
-              <div>
-                <h3>HTML/CSS</h3>
-                <p>Menengah</p>
-              </div>
-            </article>
-            <article>
-              <img src="./assets/checkmark.png" alt="Ikon pengalaman" class="icon" />
-              <div>
-                <h3>Flask/Laravel/PHP</h3>
-                <p>Menengah</p>
-              </div>
-            </article>
-            <article>
-              <img src="./assets/checkmark.png" alt="Ikon pengalaman" class="icon" />
-              <div>
-                <h3>React/Express</h3>
-                <p>Dasar</p>
-              </div>
-            </article>
-          </div>
-        </div>
-        <div class="details-container">
-          <h2 class="experience-sub-title">Data & Desain</h2>
-          <div class="article-container">
-            <article>
-              <img src="./assets/checkmark.png" alt="Ikon pengalaman" class="icon" />
-              <div>
-                <h3>Machine Learning</h3>
-                <p>Menengah</p>
-              </div>
-            </article>
-            <article>
-              <img src="./assets/checkmark.png" alt="Ikon pengalaman" class="icon" />
-              <div>
-                <h3>MySQL</h3>
-                <p>Menengah</p>
-              </div>
-            </article>
-            <article>
-              <img src="./assets/checkmark.png" alt="Ikon pengalaman" class="icon" />
-              <div>
-                <h3>Office (Word/Excel/PPT)</h3>
-                <p>Mahir</p>
-              </div>
-            </article>
-            <article>
-              <img src="./assets/checkmark.png" alt="Ikon pengalaman" class="icon" />
-              <div>
-                <h3>Figma</h3>
-                <p>Menengah</p>
-              </div>
-            </article>
-            <article>
-              <img src="./assets/checkmark.png" alt="Ikon pengalaman" class="icon" />
-              <div>
-                <h3>CorelDraw</h3>
-                <p>Menengah</p>
-              </div>
-            </article>
-          </div>
-        </div>
-      </div>
-    </div>
-    <img src="./assets/arrow.png" alt="Ikon panah" class="icon arrow" onclick="location.href='#projects'" />
-  </section>
+    <!-- Footer -->
+    <footer>
+      <p>Watermark &#169; 2025 Nur Amin.</p>
+    </footer>
 
-  <!-- Projects Section -->
-  <section id="projects">
-    <p class="section__text__p1">Lihat</p>
-    <h1 class="title">Proyek Saya</h1>
-    <div class="experience-details-container">
-      <div class="projects-grid">
-        <!-- Project 1 -->
-        <div class="details-container color-container">
-          <div class="article-container">
-            <img src="./assets/project-1.png" alt="Sistem Peringatan Dini Banjir" class="project-img" />
-          </div>
-          <h2 class="experience-sub-title project-title">Sistem Peringatan Dini Banjir</h2>
-          <p class="project-description">
-            Sistem berbasis IoT yang mendeteksi ketinggian air dan memberikan notifikasi melalui aplikasi mobile ketika air akan meluap.
-          </p>
-          <div class="btn-container">
-            <button class="btn btn-color-2 project-btn" onclick="location.href='projects/flood-warning.html'">
-              Detail
-            </button>
-          </div>
-        </div>
-
-        <!-- Project 2 -->
-        <div class="details-container color-container">
-          <div class="article-container">
-            <img src="./assets/project-2.png" alt="Sistem Presensi Pengenalan Wajah" class="project-img" />
-          </div>
-          <h2 class="experience-sub-title project-title">Sistem Presensi Pengenalan Wajah</h2>
-          <p class="project-description">
-            Sistem presensi dengan pengenalan wajah menggunakan algoritma K-Nearest Neighbor dan website untuk pengelolaan data menggunakan Flask.
-          </p>
-          <div class="btn-container">
-            <button class="btn btn-color-2 project-btn" onclick="location.href='projects/face-attendance.html'">
-              Detail
-            </button>
-          </div>
-        </div>
-
-        <!-- Project 3 -->
-        <div class="details-container color-container">
-          <div class="article-container">
-            <img src="./assets/project-4.png" alt="Sistem Presensi dengan ESP32-CAM" class="project-img" />
-          </div>
-          <h2 class="experience-sub-title project-title">Sistem Presensi dengan ESP32-CAM</h2>
-          <p class="project-description">
-            Sistem presensi siswa menggunakan kartu RFID berisi identitas dan foto wajah yang diambil melalui ESP32-CAM.
-          </p>
-          <div class="btn-container">
-            <button class="btn btn-color-2 project-btn" onclick="location.href='projects/rfid-attendance.html'">
-              Detail
-            </button>
-          </div>
-        </div>
-
-        <!-- Project 4 -->
-        <div class="details-container color-container">
-          <div class="article-container">
-            <img src="./assets/project-5.png" alt="Sistem Presensi Geolocation" class="project-img" />
-          </div>
-          <h2 class="experience-sub-title project-title">Sistem Presensi Sekolah Berbasis Web & Mobile (Laravel)</h2>
-          <p class="project-description">
-            Sistem presensi menggunakan geolokasi berbasis web dan mobile untuk sekolah dengan dashboard admin dan antarmuka siswa.
-          </p>
-          <div class="btn-container">
-            <button class="btn btn-color-2 project-btn" onclick="location.href='projects/geo-attendance.html'">
-              Detail
-            </button>
-          </div>
-        </div>
-
-        <!-- Project 5 -->
-        <div class="details-container color-container">
-          <div class="article-container">
-            <img src="./assets/project-6.png" alt="Javis Challenge - Aplikasi Demo Autentikasi" class="project-img" />
-          </div>
-          <h2 class="experience-sub-title project-title">Javis Challenge - Aplikasi Demo Autentikasi</h2>
-          <p class="project-description">
-            Sistem autentikasi aman dengan MERN Stack (MySQL, Express, React, Node.js) dilengkapi dark mode dan unit testing.
-          </p>
-          <div class="btn-container">
-            <button class="btn btn-color-2 project-btn" onclick="location.href='projects/javis-challenge.html'">
-              Detail
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <img src="./assets/arrow.png" alt="Ikon panah" class="icon arrow" onclick="location.href='#organization'" />
-  </section>
-
-  <!-- Organization Section -->
-  <section id="organization">
-    <p class="section__text__p1">Pengalaman</p>
-    <h1 class="title">Organisasi & Kegiatan</h1>
-    <div class="organization-container">
-      <div class="org-details-container">
-        <div class="org-container">
-          <h2 class="org-title">UKM Olahraga UTY</h2>
-          <p class="org-period">2021 – 2024</p>
-          <p class="org-position">Staff Administrasi dan Humas</p>
-          <ul class="org-description">
-            <li>Membuat konten dan mengelola media sosial organisasi</li>
-            <li>Membuat arsip surat menyurat dan pendataan inventaris</li>
-          </ul>
-        </div>
-        <div class="org-container">
-          <h2 class="org-title">PPK ORMAWA DIKTI (UKM Olahraga UTY)</h2>
-          <p class="org-period">2024</p>
-          <p class="org-position">Staff Media dan Humas</p>
-          <ul class="org-description">
-            <li>Mengelola media sosial dan dokumentasi kegiatan</li>
-            <li>Mengelola surat menyurat dan komunikasi dengan pihak eksternal</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <div class="languages-container">
-      <h2 class="languages-title">Kemampuan Bahasa</h2>
-      <div class="language-items">
-        <div class="language-item">
-          <span class="language-name">Bahasa Indonesia</span>
-          <span class="language-level">Penutur Asli</span>
-        </div>
-        <div class="language-item">
-          <span class="language-name">Bahasa Inggris</span>
-          <span class="language-level">Menengah (TOEFL: 480)</span>
-          <a href="assets/toefl.pdf" class="language-certificate" target="_blank">Lihat Sertifikat</a>
-        </div>
-      </div>
-    </div>
-    <img src="./assets/arrow.png" alt="Ikon panah" class="icon arrow" onclick="location.href='#contact'" />
-  </section>
-
-  <!-- Contact Section -->
-  <section id="contact">
-    <p class="section__text__p1">Hubungi</p>
-    <h1 class="title">Kontak Saya</h1>
-    <div class="contact-info-upper-container">
-      <div class="contact-info-container">
-        <img src="./assets/email.png" alt="Ikon email" class="icon contact-icon email-icon" />
-        <p><a href="mailto:noeramin354@gmail.com">noeramin354@gmail.com</a></p>
-      </div>
-      <div class="contact-info-container">
-        <img src="./assets/linkedin.png" alt="Ikon LinkedIn" class="icon contact-icon" />
-        <p><a href="https://linkedin.com/in/nur-amin354">LinkedIn</a></p>
-      </div>
-      <div class="contact-info-container">
-        <img src="./assets/phone.png" alt="Ikon telepon" class="icon contact-icon" />
-        <p><a href="https://wa.me/6285869106314">+62 858-6910-6314</a></p>
-      </div>
-      <div class="contact-info-container">
-        <img src="./assets/instagram.png" alt="Ikon Instagram" class="icon contact-icon" />
-        <p><a href="https://www.instagram.com/aamnnr" target="_blank">@aamnnr</a></p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer>
-    <p>Watermark &#169; 2025 Nur Amin.</p>
-  </footer>
-
-  <script src="script.js"></script>
-</body>
+    <script src="script.js"></script>
+  </body>
 </html>

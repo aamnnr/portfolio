@@ -23,7 +23,7 @@ p {
 }
 
 /* TRANSITION */
-a, .btn {
+a, .btn, .details-container, .color-container, .org-container, .languages-container {
   transition: all 300ms ease;
 }
 
@@ -302,52 +302,7 @@ section {
   background: white;
   border-radius: 2rem;
   border: 1px solid #e0e0e0;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
   text-align: center;
-}
-
-.text-container {
-  background: white;
-  padding: 1.5rem;
-  border-radius: 2rem;
-  border: 1px solid #e0e0e0;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-  line-height: 1.7;
-}
-
-/* EXPERIENCE SECTION */
-#experience {
-  position: relative;
-  padding-top: 2rem;
-}
-
-.experience-sub-title {
-  color: rgb(85, 85, 85);
-  font-weight: 600;
-  font-size: 1.5rem;
-  margin-bottom: 1.5rem;
-  text-align: left;
-}
-
-.experience-details-container {
-  display: flex;
-  justify-content: left;
-  flex-direction: column;
-}
-
-.about-containers {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
-  margin: 1.5rem 0;
-}
-
-.details-container {
-  padding: 1.5rem;
-  background: white;
-  border-radius: 2rem;
-  border: 1px solid #e0e0e0;
-  text-align: left;
   transition: all 0.3s ease;
   box-shadow: 0 4px 6px rgba(0,0,0,0.05);
   position: relative;
@@ -387,6 +342,67 @@ section {
 
 .details-container:hover h3 {
   color: #0066cc;
+}
+
+.text-container {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 2rem;
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+  line-height: 1.7;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.text-container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  border-color: #2c3e50;
+}
+
+.text-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background-color: #2c3e50;
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.text-container:hover::before {
+  transform: scaleX(1);
+}
+
+/* EXPERIENCE SECTION */
+#experience {
+  position: relative;
+  padding-top: 2rem;
+}
+
+.experience-sub-title {
+  color: rgb(85, 85, 85);
+  font-weight: 600;
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+
+.experience-details-container {
+  display: flex;
+  justify-content: left;
+  flex-direction: column;
+}
+
+.about-containers {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin: 1.5rem 0;
 }
 
 .article-container {
@@ -438,15 +454,47 @@ article .icon {
   background: rgb(250, 250, 250);
   border-radius: 2rem;
   padding: 1.2rem;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: all 0.3s ease;
   display: flex;
   flex-direction: column;
   height: 100%;
+  margin: 0.5rem;
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+  position: relative;
+  overflow: hidden;
 }
 
 .color-container:hover {
   transform: translateY(-5px);
   box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  border-color: #2c3e50;
+}
+
+.color-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background-color: #2c3e50;
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.color-container:hover::before {
+  transform: scaleX(1);
+}
+
+.color-container h2 {
+  margin: 0.5rem 0;
+  color: #2c3e50;
+  transition: color 0.3s ease;
+}
+
+.color-container:hover h2 {
+  color: #0066cc;
 }
 
 .project-img {
@@ -497,11 +545,45 @@ article .icon {
 .org-container {
   background: white;
   border-radius: 2rem;
-  border: rgb(53, 53, 53) 0.1rem solid;
-  border-color: rgb(163, 163, 163);
+  border: 1px solid #e0e0e0;
   padding: 1.2rem;
   text-align: left;
   box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+  margin: 0.5rem;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.org-container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  border-color: #2c3e50;
+}
+
+.org-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background-color: #2c3e50;
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.org-container:hover::before {
+  transform: scaleX(1);
+}
+
+.org-container h2 {
+  color: #2c3e50;
+  transition: color 0.3s ease;
+}
+
+.org-container:hover h2 {
+  color: #0066cc;
 }
 
 .org-title {
@@ -538,11 +620,45 @@ article .icon {
   margin: 2rem auto 0;
   background: white;
   border-radius: 2rem;
-  border: rgb(53, 53, 53) 0.1rem solid;
-  border-color: rgb(163, 163, 163);
+  border: 1px solid #e0e0e0;
   padding: 1.2rem;
   text-align: center;
   box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+  margin: 0.5rem;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.languages-container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  border-color: #2c3e50;
+}
+
+.languages-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background-color: #2c3e50;
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.languages-container:hover::before {
+  transform: scaleX(1);
+}
+
+.languages-container h2 {
+  color: #2c3e50;
+  transition: color 0.3s ease;
+}
+
+.languages-container:hover h2 {
+  color: #0066cc;
 }
 
 .languages-title {
@@ -604,6 +720,12 @@ article .icon {
   padding: 0.8rem;
   max-width: 1200px;
   flex-wrap: wrap;
+  transition: all 0.3s ease;
+}
+
+.contact-info-upper-container:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 15px rgba(0,0,0,0.1);
 }
 
 .contact-info-container {
@@ -614,12 +736,13 @@ article .icon {
   margin: 0.8rem;
   padding: 0.5rem 1rem;
   border-radius: 1rem;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease;
   white-space: nowrap;
 }
 
 .contact-info-container:hover {
   background-color: rgba(0,0,0,0.05);
+  transform: translateY(-2px);
 }
 
 .contact-info-container p {
@@ -642,6 +765,12 @@ footer {
   padding: 1rem 0;
   background-color: #f8f9fa;
   border-radius: 1rem;
+  transition: all 0.3s ease;
+}
+
+footer:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 10px rgba(0,0,0,0.1);
 }
 
 footer p {
@@ -667,6 +796,93 @@ section {
 #projects { animation-delay: 0.4s; }
 #organization { animation-delay: 0.5s; }
 #contact { animation-delay: 0.6s; }
+
+/* HORIZONTAL SCROLL CONTAINERS */
+.horizontal-scroll-container {
+  display: none;
+}
+
+.scroll-wrapper {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.scroll-content {
+  display: flex;
+  gap: 1.5rem;
+  padding: 1rem 0.5rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.scroll-content::-webkit-scrollbar {
+  display: none;
+}
+
+.scroll-item {
+  flex: 0 0 calc(100% - 2rem);
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  min-width: 0;
+}
+
+/* Scroll indicators */
+.scroll-indicators {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  padding: 0.5rem;
+}
+
+.scroll-indicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #ddd;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: 2px solid transparent;
+}
+
+.scroll-indicator.active {
+  background-color: #2c3e50;
+  transform: scale(1.3);
+}
+
+.scroll-indicator:hover {
+  background-color: #95a5a6;
+  transform: scale(1.1);
+}
+
+/* MEDIA QUERIES untuk Horizontal Scroll */
+@media screen and (max-width: 768px) {
+  .horizontal-scroll-container {
+    display: block;
+  }
+
+  #experience .about-containers,
+  .projects-grid {
+    display: none;
+  }
+
+  .scroll-item {
+    flex: 0 0 calc(100% - 1rem);
+  }
+  
+  #experience .scroll-item {
+    min-height: 420px;
+  }
+  
+  #projects .scroll-item {
+    min-height: 480px;
+  }
+}
 
 /* MEDIA QUERIES */
 @media screen and (max-width: 1200px) {
@@ -723,4 +939,210 @@ section {
   .logo {
     font-size: 1.5rem;
   }
+
+  /* ABOUT SECTION - MOBILE RESPONSIVE */
+  #about .section-container {
+    flex-direction: column;
+    gap: 2rem;
+  }
+  
+  #about .section__pic-container {
+    width: 100%;
+    max-width: 100%;
+    height: 300px;
+    border-radius: 1rem;
+    margin: 0 auto;
+  }
+  
+  #about .about-details-container {
+    width: 100%;
+    gap: 1.5rem;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  #about .about-containers {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Dua kolom untuk mobile */
+    gap: 1rem;
+    order: 2; /* Memastikan berada di baris kedua */
+    margin: 0.5rem;
+  }
+  
+  #about .text-container {
+    order: 3; /* Memastikan deskripsi berada di baris ketiga */
+    margin: 0.5rem;
+    margin-top: 1rem;
+  }
+
+  /* EXPERIENCE SECTION - HORIZONTAL SCROLL MOBILE */
+  #experience .about-containers {
+    display: none; /* Sembunyikan grid biasa */
+  }
+
+  #experience .horizontal-scroll-container {
+    display: block; /* Tampilkan horizontal scroll */
+  }
+
+  #experience .scroll-item {
+    min-height: 400px; /* Tinggi konsisten untuk semua card keahlian */
+  }
+
+  #experience .details-container {
+    height: 100%;
+    margin: 0;
+  }
+
+  /* PROJECTS SECTION - HORIZONTAL SCROLL MOBILE */
+  .projects-grid {
+    display: none; /* Sembunyikan grid biasa */
+  }
+
+  #projects .horizontal-scroll-container {
+    display: block; /* Tampilkan horizontal scroll */
+  }
+
+  #projects .scroll-item {
+    min-height: 450px; /* Tinggi konsisten untuk semua card proyek */
+  }
+
+  #projects .color-container {
+    height: 100%;
+    margin: 0;
+  }
+
+  /* ORGANIZATION SECTION - MOBILE */
+  .org-details-container {
+    gap: 1rem;
+    margin: 0.5rem;
+  }
+
+  .org-container {
+    margin: 0.5rem;
+  }
+
+  .languages-container {
+    margin: 0.5rem;
+  }
+}
+
+/* Untuk tampilan yang lebih kecil */
+@media screen and (max-width: 480px) {
+  #about .section__pic-container {
+    height: 250px;
+    margin: 0.5rem;
+  }
+  
+  #about .about-containers {
+    grid-template-columns: 1fr; /* Satu kolom untuk layar sangat kecil */
+    margin: 0.5rem;
+  }
+  
+  #about .details-container {
+    padding: 1rem;
+    margin: 0.5rem;
+  }
+
+  #about .text-container {
+    margin: 0.5rem;
+  }
+
+  /* HORIZONTAL SCROLL - SMALLER SCREENS */
+  #experience .scroll-item,
+  #projects .scroll-item {
+    flex: 0 0 calc(100% - 1rem); /* Lebih sedikit margin di layar kecil */
+  }
+
+  .contact-info-upper-container {
+    flex-direction: column;
+    align-items: center;
+    margin: 0.5rem;
+  }
+
+  .contact-info-container {
+    width: 100%;
+    justify-content: flex-start;
+    padding: 0.8rem 1rem;
+    margin: 0.3rem;
+  }
+
+  .btn-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .btn {
+    width: 100%;
+    max-width: 250px;
+  }
+
+  /* Enhanced Horizontal Scroll Styles */
+.scroll-content {
+  display: flex;
+  gap: 1.5rem;
+  padding: 1rem 0.5rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.scroll-content::-webkit-scrollbar {
+  display: none;
+}
+
+.scroll-item {
+  flex: 0 0 calc(100% - 2rem);
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  /* Ensure consistent sizing */
+  min-width: 0;
+}
+
+/* Improved scroll indicators */
+.scroll-indicators {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  padding: 0.5rem;
+}
+
+.scroll-indicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #ddd;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: 2px solid transparent;
+}
+
+.scroll-indicator.active {
+  background-color: #2c3e50;
+  transform: scale(1.3);
+  border-color: #2c3e50;
+}
+
+.scroll-indicator:hover {
+  background-color: #95a5a6;
+  transform: scale(1.1);
+}
+
+/* Ensure proper container sizing */
+@media screen and (max-width: 768px) {
+  .scroll-item {
+    flex: 0 0 calc(100% - 1rem);
+  }
+  
+  #experience .scroll-item {
+    min-height: 420px; /* Sedikit lebih tinggi untuk keahlian */
+  }
+  
+  #projects .scroll-item {
+    min-height: 480px; /* Sedikit lebih tinggi untuk proyek */
+  }
+}
 }

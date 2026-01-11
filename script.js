@@ -9,35 +9,38 @@ function toggleMenu() {
 // Lazy section animation
 function initLazyAnimation() {
   const sections = document.querySelectorAll("section");
-  const observer = new IntersectionObserver((entries, obs) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("fade-in");
-        obs.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.1 });
+  const observer = new IntersectionObserver(
+    (entries, obs) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("fade-in");
+          obs.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.1 }
+  );
 
-  sections.forEach(section => observer.observe(section));
+  sections.forEach((section) => observer.observe(section));
 }
 
 // Highlight active nav link
 function highlightActiveNav() {
-  const currentPage = window.location.pathname.split('/').pop();
-  document.querySelectorAll('.nav-links a').forEach(link => {
-    if (link.getAttribute('href').includes(currentPage)) {
-      link.classList.add('active');
+  const currentPage = window.location.pathname.split("/").pop();
+  document.querySelectorAll(".nav-links a").forEach((link) => {
+    if (link.getAttribute("href").includes(currentPage)) {
+      link.classList.add("active");
     }
   });
 }
 
 // Smooth scroll for anchor links
 function smoothScroll() {
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', e => {
+  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+    anchor.addEventListener("click", (e) => {
       e.preventDefault();
-      const target = document.querySelector(anchor.getAttribute('href'));
-      target?.scrollIntoView({ behavior: 'smooth' });
+      const target = document.querySelector(anchor.getAttribute("href"));
+      target?.scrollIntoView({ behavior: "smooth" });
     });
   });
 }
@@ -51,7 +54,7 @@ function initModalGallery() {
 
   if (!modal) return;
 
-  document.body.addEventListener("click", e => {
+  document.body.addEventListener("click", (e) => {
     if (e.target.matches(".thumbnail-grid img")) {
       modal.style.display = "block";
       modalImg.src = e.target.src;
@@ -64,7 +67,6 @@ function initModalGallery() {
 
 // Initialize all features
 document.addEventListener("DOMContentLoaded", () => {
-  toggleMenu();
   highlightActiveNav();
   smoothScroll();
   initLazyAnimation();
@@ -81,82 +83,84 @@ function toggleMenu() {
 
 // Horizontal Scroll Functionality - FIXED VERSION
 function initializeHorizontalScroll() {
-  console.log('Initializing horizontal scroll...');
-  
+  console.log("Initializing horizontal scroll...");
+
   // Initialize Experience Section
-  const experienceScroll = document.getElementById('experience-scroll');
-  const experienceIndicators = document.getElementById('experience-indicators');
-  
+  const experienceScroll = document.getElementById("experience-scroll");
+  const experienceIndicators = document.getElementById("experience-indicators");
+
   if (experienceScroll && experienceIndicators) {
-    console.log('Found experience scroll elements');
+    console.log("Found experience scroll elements");
     setupScrollSection(experienceScroll, experienceIndicators);
   } else {
-    console.log('Experience scroll elements not found');
+    console.log("Experience scroll elements not found");
   }
-  
+
   // Initialize Projects Section
-  const projectsScroll = document.getElementById('projects-scroll');
-  const projectsIndicators = document.getElementById('projects-indicators');
-  
+  const projectsScroll = document.getElementById("projects-scroll");
+  const projectsIndicators = document.getElementById("projects-indicators");
+
   if (projectsScroll && projectsIndicators) {
-    console.log('Found projects scroll elements');
+    console.log("Found projects scroll elements");
     setupScrollSection(projectsScroll, projectsIndicators);
   } else {
-    console.log('Projects scroll elements not found');
+    console.log("Projects scroll elements not found");
   }
 }
 
 function setupScrollSection(scrollContainer, indicatorsContainer) {
   const items = scrollContainer.children;
   const indicators = indicatorsContainer.children;
-  
-  console.log(`Setting up scroll section with ${items.length} items and ${indicators.length} indicators`);
-  
+
+  console.log(
+    `Setting up scroll section with ${items.length} items and ${indicators.length} indicators`
+  );
+
   // Function to update active indicator
   const updateActiveIndicator = () => {
     const scrollLeft = scrollContainer.scrollLeft;
     const containerWidth = scrollContainer.offsetWidth;
     const itemWidth = items[0].offsetWidth + 24; // width + gap
-    
+
     const activeIndex = Math.min(
-      Math.round(scrollLeft / itemWidth), 
+      Math.round(scrollLeft / itemWidth),
       items.length - 1
     );
-    
+
     // Update all indicators
     Array.from(indicators).forEach((indicator, index) => {
-      indicator.classList.toggle('active', index === activeIndex);
+      indicator.classList.toggle("active", index === activeIndex);
     });
-    
+
     console.log(`Scroll position: ${scrollLeft}, Active index: ${activeIndex}`);
   };
-  
+
   // Update indicators on scroll
-  scrollContainer.addEventListener('scroll', updateActiveIndicator);
-  
+  scrollContainer.addEventListener("scroll", updateActiveIndicator);
+
   // Click indicator to scroll to specific item
   Array.from(indicators).forEach((indicator, index) => {
-    indicator.addEventListener('click', () => {
+    indicator.addEventListener("click", () => {
       const itemWidth = items[0].offsetWidth + 24;
       scrollContainer.scrollTo({
         left: index * itemWidth,
-        behavior: 'smooth'
+        behavior: "smooth",
       });
     });
   });
-  
+
   // Update on window resize
-  window.addEventListener('resize', updateActiveIndicator);
-  
+  window.addEventListener("resize", updateActiveIndicator);
+
   // Initial update
   updateActiveIndicator();
 }
 
 // Initialize when page loads
-document.addEventListener('DOMContentLoaded', function() {
-  console.log('DOM loaded, initializing scripts...');
+document.addEventListener("DOMContentLoaded", function () {
+  console.log("DOM loaded, initializing scripts...");
   initializeHorizontalScroll();
 });
 
 // Re-initialize on window resize
-window.addEventListener('resize', initializeHorizontalScroll);
+window.addEventListener("resize", initializeHorizontalScroll);

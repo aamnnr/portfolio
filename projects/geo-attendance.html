@@ -1,135 +1,193 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sistem Presensi Sekolah | Portfolio</title>
-  <link rel="stylesheet" href="../project-detail.css">
-  <link rel="icon" href="../assets/favicon.png" type="image/png">
-</head>
-<body>
-  <!-- Navbar sama seperti contoh sebelumnya -->
-  
-  <section id="project-details">
-    <div class="project-details-container">
-      <div class="project-header">
-        <h1 class="project-title">Sistem Presensi Sekolah Berbasis Web & Mobile</h1>
-        <div class="project-meta">
-          <span class="project-category">Web Development & Mobile</span>
-          <span class="project-date">Agustus 2025 - Proyek Sekolah</span>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sistem Presensi Sekolah | Portfolio</title>
+    <link rel="stylesheet" href="../project-detail.css" />
+    <link rel="icon" href="../assets/favicon.png" type="image/png" />
+  </head>
+  <body>
+    <!-- Navbar sama seperti contoh sebelumnya -->
+
+    <section id="project-details">
+      <div class="project-details-container">
+        <div class="project-header">
+          <h1 class="project-title">
+            Sistem Presensi Sekolah Berbasis Web & Mobile
+          </h1>
+          <div class="project-meta">
+            <span class="project-category">Web Development & Mobile</span>
+            <span class="project-date">Agustus 2025 - Proyek Sekolah</span>
+          </div>
+        </div>
+
+        <div class="project-content">
+          <div class="project-gallery">
+            <div class="main-image">
+              <img
+                src="../assets/project-presensi.png"
+                alt="Dashboard Sistem Presensi"
+              />
+            </div>
+            <div class="thumbnail-grid">
+              <img
+                src="../assets/projects/presensi-1.png"
+                alt="Dashboard Admin"
+              />
+              <img
+                src="../assets/projects/presensi-2.png"
+                alt="Halaman Presensi Siswa"
+              />
+              <img
+                src="../assets/projects/presensi-3.png"
+                alt="Mobile Interface"
+              />
+            </div>
+          </div>
+
+          <div class="project-info">
+            <div class="project-description-detail">
+              <h2>Deskripsi Proyek</h2>
+              <p>
+                Sistem presensi berbasis web dan mobile untuk sekolah yang
+                menggunakan teknologi geolokasi untuk memastikan siswa melakukan
+                presensi di lokasi yang benar. Sistem ini dibangun dengan
+                Laravel dan menyediakan antarmuka untuk admin dan siswa.
+              </p>
+              <p>
+                Sistem ini telah diimplementasikan di lingkungan sekolah dengan
+                validasi lokasi GPS untuk mencegah kecurangan dalam presensi.
+                Dilengkapi dengan dashboard admin yang komprehensif dan
+                antarmuka mobile yang responsif.
+              </p>
+            </div>
+
+            <div class="project-features">
+              <h2>Fitur Utama</h2>
+
+              <div class="feature-category">
+                <h3>👨‍💼 Fitur Admin</h3>
+                <ul>
+                  <li>
+                    Dashboard - Ringkasan data presensi, izin, dan statistik
+                    siswa
+                  </li>
+                  <li>Manajemen Siswa - Tambah, edit, hapus data siswa</li>
+                  <li>Manajemen Kelas - Kelola data kelas dan jurusan</li>
+                  <li>Manajemen Jadwal - Atur jadwal pelajaran per kelas</li>
+                  <li>
+                    Monitoring Presensi - Lihat rekap presensi harian/bulanan
+                  </li>
+                  <li>Manajemen Izin - Approve/reject permohonan izin siswa</li>
+                  <li>Ekspor Data - Export laporan presensi ke Excel/PDF</li>
+                  <li>
+                    Pengaturan Sistem - Konfigurasi lokasi sekolah dan radius
+                    presensi
+                  </li>
+                  <li>Log Aktivitas - Monitoring aktivitas sistem</li>
+                </ul>
+              </div>
+
+              <div class="feature-category">
+                <h3>👨‍🎓 Fitur Siswa</h3>
+                <ul>
+                  <li>
+                    Presensi Online - Check-in/check-out dengan validasi lokasi
+                    GPS
+                  </li>
+                  <li>Lihat Jadwal - Akses jadwal pelajaran kelas</li>
+                  <li>Rekap Presensi - Lihat riwayat presensi pribadi</li>
+                  <li>Pengajuan Izin - Ajukan izin dengan upload bukti</li>
+                  <li>Profile Management - Update data pribadi</li>
+                </ul>
+              </div>
+
+              <div class="feature-category">
+                <h3>📱 API Mobile</h3>
+                <ul>
+                  <li>RESTful API untuk integrasi aplikasi mobile</li>
+                  <li>Authentication dengan Laravel Sanctum</li>
+                  <li>Endpoint untuk presensi, jadwal, dan data siswa</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="project-tech">
+              <h2>Teknologi Digunakan</h2>
+              <div class="tech-stack">
+                <span class="tech-item">Laravel 12.0</span>
+                <span class="tech-item">MySQL</span>
+                <span class="tech-item">Bootstrap 5</span>
+                <span class="tech-item">Tailwind CSS</span>
+                <span class="tech-item">Laravel Sanctum</span>
+                <span class="tech-item">Laravel Excel</span>
+                <span class="tech-item">DomPDF</span>
+                <span class="tech-item">Vite</span>
+                <span class="tech-item">Axios</span>
+                <span class="tech-item">Geolocation API</span>
+              </div>
+            </div>
+
+            <div class="project-challenges">
+              <h2>Tantangan & Solusi</h2>
+              <div class="challenge-item">
+                <h3>Validasi Lokasi GPS yang Akurat</h3>
+                <p>
+                  Mengimplementasikan algoritma geofencing dengan radius yang
+                  dapat dikonfigurasi untuk memastikan siswa berada di lokasi
+                  sekolah saat melakukan presensi.
+                </p>
+              </div>
+              <div class="challenge-item">
+                <h3>Integrasi Mobile dan Web</h3>
+                <p>
+                  Membangun RESTful API yang aman dengan Laravel Sanctum untuk
+                  autentikasi dan mengelola data antara aplikasi web dan mobile.
+                </p>
+              </div>
+              <div class="challenge-item">
+                <h3>Performa dengan Banyak Pengguna</h3>
+                <p>
+                  Mengoptimalkan query database dan menerapkan Laravel Queue
+                  untuk menangani proses background seperti ekspor data dan
+                  notifikasi.
+                </p>
+              </div>
+            </div>
+
+            <div class="project-links">
+              <a
+                href="https://github.com/aamnnr/geo-attendance.git"
+                class="btn btn-color-2"
+                target="_blank"
+                >Kode Sumber</a
+              >
+              <a href="../index.html#projects" class="btn btn-color-2"
+                >Kembali ke Portfolio</a
+              >
+            </div>
+          </div>
         </div>
       </div>
+    </section>
 
-      <div class="project-content">
-        <div class="project-gallery">
-          <div class="main-image">
-            <img src="../assets/project-presensi.png" alt="Dashboard Sistem Presensi">
-          </div>
-          <div class="thumbnail-grid">
-            <img src="../assets/projects/presensi-1.png" alt="Dashboard Admin">
-            <img src="../assets/projects/presensi-2.png" alt="Halaman Presensi Siswa">
-            <img src="../assets/projects/presensi-3.png" alt="Mobile Interface">
-          </div>
-        </div>
-
-        <div class="project-info">
-          <div class="project-description-detail">
-            <h2>Deskripsi Proyek</h2>
-            <p>Sistem presensi berbasis web dan mobile untuk sekolah yang menggunakan teknologi geolokasi untuk memastikan siswa melakukan presensi di lokasi yang benar. Sistem ini dibangun dengan Laravel dan menyediakan antarmuka untuk admin dan siswa.</p>
-            <p>Sistem ini telah diimplementasikan di lingkungan sekolah dengan validasi lokasi GPS untuk mencegah kecurangan dalam presensi. Dilengkapi dengan dashboard admin yang komprehensif dan antarmuka mobile yang responsif.</p>
-          </div>
-
-          <div class="project-features">
-            <h2>Fitur Utama</h2>
-            
-            <div class="feature-category">
-              <h3>👨‍💼 Fitur Admin</h3>
-              <ul>
-                <li>Dashboard - Ringkasan data presensi, izin, dan statistik siswa</li>
-                <li>Manajemen Siswa - Tambah, edit, hapus data siswa</li>
-                <li>Manajemen Kelas - Kelola data kelas dan jurusan</li>
-                <li>Manajemen Jadwal - Atur jadwal pelajaran per kelas</li>
-                <li>Monitoring Presensi - Lihat rekap presensi harian/bulanan</li>
-                <li>Manajemen Izin - Approve/reject permohonan izin siswa</li>
-                <li>Ekspor Data - Export laporan presensi ke Excel/PDF</li>
-                <li>Pengaturan Sistem - Konfigurasi lokasi sekolah dan radius presensi</li>
-                <li>Log Aktivitas - Monitoring aktivitas sistem</li>
-              </ul>
-            </div>
-            
-            <div class="feature-category">
-              <h3>👨‍🎓 Fitur Siswa</h3>
-              <ul>
-                <li>Presensi Online - Check-in/check-out dengan validasi lokasi GPS</li>
-                <li>Lihat Jadwal - Akses jadwal pelajaran kelas</li>
-                <li>Rekap Presensi - Lihat riwayat presensi pribadi</li>
-                <li>Pengajuan Izin - Ajukan izin dengan upload bukti</li>
-                <li>Profile Management - Update data pribadi</li>
-              </ul>
-            </div>
-            
-            <div class="feature-category">
-              <h3>📱 API Mobile</h3>
-              <ul>
-                <li>RESTful API untuk integrasi aplikasi mobile</li>
-                <li>Authentication dengan Laravel Sanctum</li>
-                <li>Endpoint untuk presensi, jadwal, dan data siswa</li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="project-tech">
-            <h2>Teknologi Digunakan</h2>
-            <div class="tech-stack">
-              <span class="tech-item">Laravel 12.0</span>
-              <span class="tech-item">MySQL</span>
-              <span class="tech-item">Bootstrap 5</span>
-              <span class="tech-item">Tailwind CSS</span>
-              <span class="tech-item">Laravel Sanctum</span>
-              <span class="tech-item">Laravel Excel</span>
-              <span class="tech-item">DomPDF</span>
-              <span class="tech-item">Vite</span>
-              <span class="tech-item">Axios</span>
-              <span class="tech-item">Geolocation API</span>
-            </div>
-          </div>
-
-          <div class="project-challenges">
-            <h2>Tantangan & Solusi</h2>
-            <div class="challenge-item">
-              <h3>Validasi Lokasi GPS yang Akurat</h3>
-              <p>Mengimplementasikan algoritma geofencing dengan radius yang dapat dikonfigurasi untuk memastikan siswa berada di lokasi sekolah saat melakukan presensi.</p>
-            </div>
-            <div class="challenge-item">
-              <h3>Integrasi Mobile dan Web</h3>
-              <p>Membangun RESTful API yang aman dengan Laravel Sanctum untuk autentikasi dan mengelola data antara aplikasi web dan mobile.</p>
-            </div>
-            <div class="challenge-item">
-              <h3>Performa dengan Banyak Pengguna</h3>
-              <p>Mengoptimalkan query database dan menerapkan Laravel Queue untuk menangani proses background seperti ekspor data dan notifikasi.</p>
-            </div>
-          </div>
-
-          <div class="project-links">
-            <a href="https://github.com/aamnnr/geo-attendance.git" class="btn btn-color-2" target="_blank">Kode Sumber</a>
-            <a href="../index.html#projects" class="btn btn-color-2">Kembali ke Portfolio</a>
-          </div>
-        </div>
-      </div>
+    <!-- Modal/Popup untuk gambar -->
+    <div id="imageModal" class="modal">
+      <span class="close">&times;</span>
+      <img class="modal-content" id="modalImage" />
+      <div id="caption"></div>
     </div>
-  </section>
 
-  <!-- Modal/Popup untuk gambar -->
-  <div id="imageModal" class="modal">
-    <span class="close">&times;</span>
-    <img class="modal-content" id="modalImage">
-    <div id="caption"></div>
-  </div>
+    <footer>
+      <div class="footer-quote">
+        <p class="quote-text">"Do'akan usahamu, usahakan do'amu"</p>
+      </div>
+      <p class="footer-copyright">
+        &#169; <span id="year"></span> Nur Amin. All rights reserved.
+      </p>
+    </footer>
 
-  <footer>
-    <p>Watermark &copy; 2025 Portfolio.</p>
-  </footer>
-
-  <script src="../script.js"></script>
-</body>
+    <script src="../script.js"></script>
+  </body>
 </html>

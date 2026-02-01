@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Company Profile - PT Global Tani Solution | Nur Amin</title>
+    <link rel="stylesheet" href="../project-detail.css" />
+    <link rel="icon" href="../assets/favicon.png" type="image/png" />
+  </head>
+  <body>
+    <section id="project-details">
+      <div class="project-details-container">
+        <div class="project-header">
+          <h1 class="project-title">
+            Company Profile - PT Global Tani Solution
+          </h1>
+          <div class="project-meta">
+            <span class="project-category">Web Development</span>
+            <span class="project-date">Full Stack Next.js</span>
+          </div>
+        </div>
+
+        <div class="project-content">
+          <div class="project-gallery">
+            <div class="main-image">
+              <img
+                src="../assets/projects/company-profile-main.png"
+                alt="Company Profile PT Global Tani Solution"
+                style="width: 100%; object-fit: cover"
+              />
+            </div>
+            <div class="thumbnail-grid">
+              <img
+                src="../assets/projects/company-profile-1.png"
+                alt="Halaman Beranda"
+              />
+              <img
+                src="../assets/projects/company-profile-2.png"
+                alt="Panel Admin Manajemen Konten"
+              />
+              <img
+                src="../assets/projects/company-profile-3.png"
+                alt="Halaman Layanan dan Produk"
+              />
+            </div>
+          </div>
+
+          <div class="project-info">
+            <div class="project-description-detai">
+              <h2>Deskripsi Proyek</h2>
+              <p>
+                Website company profile resmi untuk PT Global Tani Solution,
+                sebuah perusahaan yang berfokus pada solusi pertanian modern dan
+                inovatif. Proyek ini adalah website responsif yang menampilkan
+                informasi perusahaan, layanan, berita, kolaborasi, dan fitur
+                admin untuk mengelola konten. Dibangun menggunakan Next.js
+                dengan App Router, Tailwind CSS untuk styling, dan integrasi
+                dengan database MySQL serta Cloudinary untuk manajemen gambar.
+              </p>
+            </div>
+
+            <div class="project-features">
+              <h2>Fitur Utama</h2>
+              <ul>
+                <li>
+                  <strong>Halaman Publik:</strong> Beranda, tentang perusahaan,
+                  layanan (EduSolusi, KreaSolusi, MiniLab, TeknoSolusi), berita,
+                  prestasi, kolaborasi, dan kontak
+                </li>
+                <li>
+                  <strong>Panel Admin:</strong> Sistem login untuk admin dengan
+                  manajemen berita, kolaborasi, partners, dan penghargaan
+                </li>
+                <li>
+                  <strong>API Routes:</strong> RESTful API untuk CRUD operations
+                  pada berita, kolaborasi, partners, dan achievements
+                </li>
+                <li>
+                  <strong>Responsive Design:</strong> Desain yang responsif
+                  untuk desktop dan mobile
+                </li>
+                <li>
+                  <strong>Animasi:</strong> Menggunakan Framer Motion untuk
+                  animasi halus dan interaktif
+                </li>
+                <li>
+                  <strong>Upload Gambar:</strong> Integrasi dengan Cloudinary
+                  untuk penyimpanan dan pengelolaan gambar
+                </li>
+                <li>
+                  <strong>Keamanan:</strong> Autentikasi menggunakan JWT dengan
+                  bcrypt untuk hashing password
+                </li>
+              </ul>
+            </div>
+
+            <div class="project-tech">
+              <h2>Teknologi Digunakan</h2>
+              <div class="tech-stack">
+                <span class="tech-item">Next.js 16</span>
+                <span class="tech-item">React 19</span>
+                <span class="tech-item">Tailwind CSS</span>
+                <span class="tech-item">MySQL</span>
+                <span class="tech-item">Cloudinary</span>
+                <span class="tech-item">JWT</span>
+                <span class="tech-item">Framer Motion</span>
+                <span class="tech-item">bcrypt</span>
+                <span class="tech-item">Font Awesome</span>
+                <span class="tech-item">ESLint</span>
+              </div>
+            </div>
+
+            <div class="project-challenges">
+              <h2>Tantangan & Solusi</h2>
+              <div class="challenge-item">
+                <h3>Manajemen State Kompleks</h3>
+                <p>
+                  Menggunakan Context API dan custom hooks untuk mengelola state
+                  aplikasi dengan efisien tanpa menambah bundle size
+                </p>
+              </div>
+              <div class="challenge-item">
+                <h3>Optimasi Performa Image</h3>
+                <p>
+                  Memanfaatkan Next.js Image component dan Cloudinary
+                  transformations untuk optimasi ukuran dan loading time gambar
+                </p>
+              </div>
+              <div class="challenge-item">
+                <h3>Autentikasi & Otorisasi</h3>
+                <p>
+                  Implementasi JWT token dengan refresh mechanism dan middleware
+                  untuk melindungi API routes yang sensitive
+                </p>
+              </div>
+              <div class="challenge-item">
+                <h3>Database Query Optimization</h3>
+                <p>
+                  Menggunakan connection pooling dan query optimization untuk
+                  menangani multiple concurrent requests
+                </p>
+              </div>
+            </div>
+
+            <div class="project-implementation">
+              <h2>Detail Implementasi</h2>
+              <div class="implementation-section">
+                <h3>Frontend Architecture</h3>
+                <p>
+                  Menggunakan Next.js App Router dengan folder structure yang
+                  terorganisir (auth, public, admin routes). Setiap halaman
+                  di-optimize dengan code splitting otomatis.
+                </p>
+              </div>
+              <div class="implementation-section">
+                <h3>Backend & Database</h3>
+                <p>
+                  API Routes untuk menangani CRUD operations. Database schema
+                  didesain untuk skalabilitas dengan indexing yang tepat pada
+                  kolom yang sering di-query.
+                </p>
+              </div>
+              <div class="implementation-section">
+                <h3>Image Management</h3>
+                <p>
+                  Integrasi Cloudinary untuk upload, storage, dan transformasi
+                  gambar. File upload divalidasi berdasarkan size dan format
+                  untuk keamanan.
+                </p>
+              </div>
+            </div>
+
+            <div class="project-links">
+              <a
+                href="https://tanisolution.id"
+                class="btn btn-color-2"
+                target="_blank"
+                >Website</a
+              >
+              <a href="../index.html#projects" class="btn btn-color-2"
+                >Kembali ke Portfolio</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Modal/Popup untuk gambar -->
+    <div id="imageModal" class="modal">
+      <span class="close">&times;</span>
+      <img class="modal-content" id="modalImage" />
+      <div id="caption"></div>
+    </div>
+
+    <footer>
+      <div class="footer-quote">
+        <p class="quote-text">"Do'akan usahamu, usahakan do'amu"</p>
+      </div>
+      <p class="footer-copyright">
+        &copy; <span id="year"></span> Nur Amin. All rights reserved.
+      </p>
+    </footer>
+
+    <script src="../script.js"></script>
+  </body>
+</html>

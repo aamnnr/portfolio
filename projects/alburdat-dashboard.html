@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Alburdat Dashboard - Sistem Pupuk Presisi IoT | Nur Amin</title>
+    <link rel="stylesheet" href="../project-detail.css" />
+    <link rel="icon" href="../assets/favicon.png" type="image/png" />
+  </head>
+  <body>
+    <section id="project-details">
+      <div class="project-details-container">
+        <div class="project-header">
+          <h1 class="project-title">Alburdat Dashboard - Sistem Pupuk Presisi IoT</h1>
+          <div class="project-meta">
+            <span class="project-category">IoT & Mobile Development</span>
+            <span class="project-date">Flutter | MQTT | ESP32</span>
+          </div>
+        </div>
+
+        <div class="project-content">
+          <div class="project-gallery">
+            <div class="main-image">
+              <img
+                src="../assets/projects/alburdat-main.png"
+                alt="Alburdat Dashboard - Halaman Utama"
+                style="width: 100%; object-fit: cover"
+              />
+            </div>
+            <div class="thumbnail-grid">
+              <img
+                src="../assets/projects/alburdat-1.png"
+                alt="Dashboard Monitoring Real-time"
+              />
+              <img
+                src="../assets/projects/alburdat-2.png"
+                alt="Rekomendasi Dosis Pupuk"
+              />
+              <img
+                src="../assets/projects/alburdat-3.png"
+                alt="Statistik dan Kontrol Manual"
+              />
+            </div>
+          </div>
+
+          <div class="project-info">
+            <div class="project-description-detai">
+              <h2>Deskripsi Proyek</h2>
+              <p>
+                <strong>Alburdat Presisi</strong> adalah aplikasi dashboard Flutter untuk mengontrol dan memonitor perangkat IoT pemberi pupuk presisi berbasis ESP32. Aplikasi ini terhubung via MQTT untuk kontrol real-time dosis pupuk, monitoring status alat, rekomendasi dosis berdasarkan expert system, dan manajemen statistik. Dengan antarmuka yang responsif, aplikasi dapat berjalan di berbagai platform (Android, iOS, Web, Desktop).
+              </p>
+            </div>
+
+            <div class="project-features">
+              <h2>Fitur Utama</h2>
+              <ul>
+                <li><strong>Monitoring Real-time:</strong> Status perangkat (dosis saat ini, total volume, rata-rata, jumlah sesi)</li>
+                <li><strong>Sistem Rekomendasi:</strong> Hitung dosis pupuk optimal berdasarkan komoditas tanaman dan umur (HST)</li>
+                <li><strong>Kontrol Manual:</strong> Atur dosis pupuk secara manual</li>
+                <li><strong>Statistik Lengkap:</strong> Lihat dan reset statistik aplikasi pupuk</li>
+                <li><strong>Manajemen WiFi:</strong> Reset koneksi WiFi perangkat untuk konfigurasi jaringan baru</li>
+                <li><strong>Multi-platform:</strong> Android, iOS, Web, Desktop (Windows, macOS, Linux)</li>
+              </ul>
+            </div>
+
+            <div class="project-tech">
+              <h2>Teknologi Digunakan</h2>
+              <div class="tech-stack">
+                <span class="tech-item">Flutter</span>
+                <span class="tech-item">Dart</span>
+                <span class="tech-item">MQTT</span>
+                <span class="tech-item">ESP32</span>
+                <span class="tech-item">Provider</span>
+                <span class="tech-item">fl_chart</span>
+                <span class="tech-item">Lottie</span>
+                <span class="tech-item">Google Fonts</span>
+              </div>
+            </div>
+
+            <div class="project-challenges">
+              <h2>Tantangan & Solusi</h2>
+              <div class="challenge-item">
+                <h3>Komunikasi Real-time dengan ESP32</h3>
+                <p>
+                  Menggunakan protokol MQTT dengan broker (Mosquitto/EMQX) untuk memastikan data sensor dan perintah kontrol sampai dengan latency rendah. Implementasi keep-alive dan reconnection logic untuk kestabilan.
+                </p>
+              </div>
+              <div class="challenge-item">
+                <h3>Expert System untuk Rekomendasi Dosis</h3>
+                <p>
+                  Membangun knowledge base berbasis aturan (rule-based) yang mempertimbangkan jenis tanaman, umur, dan kondisi lingkungan. Dosis dihitung berdasarkan data agronomi dan dapat dikustomisasi.
+                </p>
+              </div>
+              <div class="challenge-item">
+                <h3>State Management yang Efisien</h3>
+                <p>
+                  Menggunakan Provider untuk mengelola state aplikasi, termasuk status koneksi MQTT, data perangkat, dan rekomendasi, sehingga UI selalu sinkron.
+                </p>
+              </div>
+              <div class="challenge-item">
+                <h3>Multi-platform Support</h3>
+                <p>
+                  Memanfaatkan kemampuan Flutter untuk membangun aplikasi yang berjalan di Android, iOS, web, dan desktop dengan kode dasar yang sama. Menyesuaikan konfigurasi MQTT untuk setiap platform.
+                </p>
+              </div>
+            </div>
+
+            <div class="project-implementation">
+              <h2>Detail Implementasi</h2>
+              <div class="implementation-section">
+                <h3>Arsitektur Aplikasi</h3>
+                <p>
+                  Aplikasi dibangun dengan arsitektur layered: <strong>UI Layer</strong> (screens, widgets), <strong>Business Logic Layer</strong> (providers, services), dan <strong>Data Layer</strong> (models, MQTT client). Komunikasi dengan perangkat ESP32 dilakukan melalui MQTT broker dengan topik-topik yang telah ditentukan.
+                </p>
+              </div>
+              <div class="implementation-section">
+                <h3>Expert System</h3>
+                <p>
+                  Sistem rekomendasi dosis pupuk menggunakan rule-based approach dengan data komoditas dan umur tanaman (HST). Basis pengetahuan disimpan dalam format JSON yang dapat diperbarui tanpa perlu rebuild aplikasi.
+                </p>
+              </div>
+              <div class="implementation-section">
+                <h3>Grafik Statistik</h3>
+                <p>
+                  Menggunakan library <strong>fl_chart</strong> untuk menampilkan grafik statistik pemupukan, seperti total volume per hari, rata-rata dosis, dan jumlah sesi. Data diambil dari perangkat melalui MQTT dan disimpan sementara di memori.
+                </p>
+              </div>
+              <div class="implementation-section">
+                <h3>Keamanan</h3>
+                <p>
+                  Menerapkan autentikasi MQTT dengan username/password untuk menghindari akses tidak sah. Untuk reset WiFi, menggunakan mekanisme yang memerlukan konfirmasi pengguna.
+                </p>
+              </div>
+            </div>
+
+            <div class="project-links">
+              <a href="https://github.com/username/alburdat-dashboard" class="btn btn-color-2" target="_blank">GitHub</a>
+              <a href="../index.html#projects" class="btn btn-color-2">Kembali ke Portfolio</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Modal/Popup untuk gambar -->
+    <div id="imageModal" class="modal">
+      <span class="close">&times;</span>
+      <img class="modal-content" id="modalImage" />
+      <div id="caption"></div>
+    </div>
+
+    <footer>
+      <div class="footer-quote">
+        <p class="quote-text">"Do'akan usahamu, usahakan do'amu"</p>
+      </div>
+      <p class="footer-copyright">
+        &copy; <span id="year"></span> Nur Amin. All rights reserved.
+      </p>
+    </footer>
+
+    <script src="../script.js"></script>
+  </body>
+</html>

@@ -8,7 +8,7 @@ Dibangun dengan Astro + Tailwind CSS v4, dua bahasa (EN/ID) pada rute terpisah.
 
 ```bash
 npm install
-npm run dev      # http://localhost:4321/portfolio/
+npm run dev      # http://localhost:4321/
 npm run build    # keluaran statis di dist/
 npm run preview  # cek hasil build
 ```
@@ -122,23 +122,41 @@ punya `canonical` sendiri, dan saling menunjuk lewat `hreflang` (`en`, `id`,
 Tidak ada JavaScript yang dibutuhkan untuk membaca isi situs — skrip hanya menangani
 tema, menu mobile, dan animasi masuk. Fon IBM Plex di-host sendiri, bukan dari CDN.
 
-## Ganti domain
+## Domain & sub-folder
 
-Domain diatur di `astro.config.mjs`:
+Keduanya diatur di `astro.config.mjs`:
 
 ```js
-export const SITE = 'https://aamnnr.github.io';
-export const BASE = '/portfolio';
+export const SITE = 'https://nur-amin.vercel.app';
+export const BASE = '/';
 ```
 
-Untuk domain sendiri (mis. `nuramin.web.id`), set `SITE` ke domain tersebut dan
-`BASE` ke `'/'`. Perbarui juga baris `Sitemap:` pada `public/robots.txt`.
+`SITE` dipakai untuk `canonical`, `og:url`, dan sitemap. Ganti bila pindah ke
+domain sendiri, dan perbarui juga baris `Sitemap:` pada `public/robots.txt` —
+berkas itu statis dan tidak ikut berubah sendiri.
+
+> **`BASE` adalah bagian yang paling mudah menjatuhkan situs, dan gejalanya
+> menyesatkan.** Nilainya harus sama dengan sub-folder tempat situs disajikan.
+> Di akar domain (Vercel, Netlify, domain sendiri) nilainya `'/'`. Di GitHub
+> Pages jenis *project site* — `namauser.github.io/namarepo/` — nilainya harus
+> `'/namarepo'`.
+>
+> Kalau salah, halaman tetap terbuka dan teksnya tetap terbaca, tapi setiap CSS,
+> fon, dan tautan navigasi menunjuk folder yang tidak ada. Yang muncul adalah
+> tulisan polos tanpa gaya sama sekali — mudah dikira galat build, padahal
+> hanya satu baris ini.
 
 ## Deploy
 
-`.github/workflows/deploy.yml` sudah siap untuk GitHub Pages: dorong ke branch
-`main`, lalu di **Settings → Pages** pilih *Source: GitHub Actions*. Karena `BASE`
-bernilai `/portfolio`, repositorinya harus bernama `portfolio`.
+**Vercel** (yang dipakai sekarang): sambungkan repositorinya, biarkan setelan
+bawaannya — Vercel mengenali Astro sendiri. Perintah build `npm run build`,
+direktori keluaran `dist`. Sama untuk Netlify dan Cloudflare Pages.
 
-Untuk Vercel, Netlify, atau Cloudflare Pages: perintah build `npm run build`,
-direktori keluaran `dist`.
+Tidak ada berkas konfigurasi hosting di repositori ini — tidak diperlukan.
+Alur GitHub Pages yang dulu ada sudah dihapus: ia terpicu tiap kali `main`
+didorong dan akan menghasilkan situs rusak selama `BASE` bernilai `'/'`.
+
+Bila suatu saat ingin kembali ke GitHub Pages, kembalikan `BASE` ke
+`'/namarepo'` dan `SITE` ke `https://namauser.github.io`, lalu buat lagi
+workflow-nya. Satu nilai `BASE` hanya bisa melayani satu bentuk alamat, jadi
+akar domain dan sub-folder tidak bisa dilayani bersamaan.

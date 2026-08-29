@@ -3,9 +3,14 @@ import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 
-// Ganti ke domain final sebelum deploy (dipakai untuk sitemap, canonical & og:url).
-export const SITE = 'https://aamnnr.github.io';
-export const BASE = '/portfolio';
+// Dipakai untuk sitemap, canonical & og:url.
+export const SITE = 'https://nur-amin.vercel.app';
+
+// Situs disajikan di akar domain. Kalau suatu saat pindah ke hosting yang
+// menaruhnya di dalam subfolder (mis. GitHub Pages di /portfolio/), nilai ini
+// harus ikut berubah — kalau tidak, setiap CSS dan tautan menunjuk folder yang
+// tidak ada dan halaman tampil tanpa gaya sama sekali.
+export const BASE = '/';
 
 export default defineConfig({
   site: SITE,

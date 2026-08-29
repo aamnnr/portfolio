@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://aamnnr.github.io/portfolio/sitemap-index.xml
+Sitemap: https://nur-amin.vercel.app/sitemap-index.xml

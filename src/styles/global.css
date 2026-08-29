@@ -1,0 +1,159 @@
+@import 'tailwindcss';
+
+@import '@fontsource/ibm-plex-sans/400.css';
+@import '@fontsource/ibm-plex-sans/500.css';
+@import '@fontsource/ibm-plex-sans/600.css';
+@import '@fontsource/ibm-plex-mono/400.css';
+@import '@fontsource/ibm-plex-mono/500.css';
+
+/* ------------------------------------------------------------------ *
+ * Design tokens — "engineering datasheet"
+ * Terang seperti kertas teknis, bukan panel gelap berpendar.
+ * ------------------------------------------------------------------ */
+@theme {
+  --font-sans: 'IBM Plex Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, monospace;
+
+  --color-paper: #f2f0ea;
+  --color-panel: #fbfaf6;
+  --color-ink: #17191c;
+  --color-muted: #5b5f64;
+  --color-faint: #8a8d92;
+  --color-rule: #d7d3c6;
+  --color-rule-soft: #e5e1d6;
+  --color-oxide: #a8481c;
+  --color-blueprint: #2c5c78;
+
+  --spacing-gutter: 1.5rem;
+}
+
+/* Tema gelap: kertas kalkir di bawah lampu meja, bukan kaca hitam. */
+@custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));
+
+[data-theme='dark'] {
+  --color-paper: #0f1317;
+  --color-panel: #161b20;
+  --color-ink: #e7e5df;
+  --color-muted: #9ba1a7;
+  --color-faint: #6f767d;
+  --color-rule: #2a3138;
+  --color-rule-soft: #212830;
+  --color-oxide: #d97a4a;
+  --color-blueprint: #74a9c9;
+}
+
+@layer base {
+  :root {
+    color-scheme: light;
+    --grid-line: color-mix(in srgb, var(--color-rule) 55%, transparent);
+  }
+
+  [data-theme='dark'] {
+    color-scheme: dark;
+    --grid-line: color-mix(in srgb, var(--color-rule) 70%, transparent);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5.5rem;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background: var(--color-oxide);
+    color: var(--color-panel);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-oxide);
+    outline-offset: 3px;
+  }
+
+  a {
+    color: inherit;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  /* Kertas grid teknis. Halus — penanda, bukan tekstur dominan. */
+  .grid-paper {
+    background-image:
+      linear-gradient(var(--grid-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+    background-size: 28px 28px;
+    background-position: -1px -1px;
+  }
+
+  /* Label monospace kecil ala penomoran gambar teknik. */
+  .label {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-faint);
+  }
+
+  /* Garis ukur: strip pendek + rule, dipakai di kepala tiap section. */
+  .tick::before {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 1px;
+    background: var(--color-rule);
+  }
+
+  .link-underline {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-size: 100% 1px;
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+    transition: background-size 0.25s ease;
+  }
+
+  .link-underline:hover {
+    background-size: 0% 1px;
+    background-position: 100% 100%;
+  }
+
+  /* Fade-in halus saat section masuk viewport (dinyalakan oleh reveal.ts). */
+  .reveal {
+    opacity: 0;
+    transform: translateY(12px);
+    transition:
+      opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* Tanpa JS, konten harus tetap terlihat. */
+  .no-js .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}

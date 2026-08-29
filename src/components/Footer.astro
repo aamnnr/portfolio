@@ -1,0 +1,21 @@
+---
+import { site, type Lang } from '../data/site';
+import { ui } from '../data/content';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const year = new Date().getFullYear();
+---
+
+<footer class="border-t border-rule">
+  <div class="mx-auto max-w-6xl px-gutter py-8">
+    <div class="flex flex-wrap items-baseline gap-x-6 gap-y-3">
+      <p class="label">© {year} {site.name}. {ui.rights[lang]}</p>
+      <p class="label">{ui.updated[lang]} {site.updated}</p>
+      <p class="label hidden md:block">{ui.builtWith[lang]}</p>
+      <a href="#main" class="label ml-auto transition-colors hover:!text-oxide">{ui.backToTop[lang]} &uarr;</a>
+    </div>
+  </div>
+</footer>

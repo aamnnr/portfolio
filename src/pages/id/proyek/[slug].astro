@@ -1,0 +1,37 @@
+---
+import Base from '../../../layouts/Base.astro';
+import ProjectDetail from '../../../components/ProjectDetail.astro';
+import { projects } from '../../../data/projects';
+import { site } from '../../../data/site';
+import { projectPath, absolute } from '../../../i18n/utils';
+
+export function getStaticPaths() {
+  return projects.map((project) => ({ params: { slug: project.slug }, props: { project } }));
+}
+
+const { project } = Astro.props;
+
+const ld = {
+  '@context': 'https://schema.org',
+  '@type': 'CreativeWork',
+  name: project.title.id,
+  alternateName: project.codename,
+  description: project.summary.id,
+  dateCreated: project.year,
+  keywords: project.stack.join(', '),
+  author: { '@type': 'Person', name: site.name },
+  url: absolute(projectPath(project.slug, 'id'), Astro.site),
+  ...(project.repo ? { codeRepository: project.repo } : {}),
+};
+---
+
+<Base
+  lang="id"
+  title={`${project.title.id} — ${site.name}`}
+  description={project.summary.id}
+  pathEn={projectPath(project.slug, 'en')}
+  pathId={projectPath(project.slug, 'id')}
+  extraLd={ld}
+>
+  <ProjectDetail lang="id" project={project} />
+</Base>

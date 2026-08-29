@@ -1,0 +1,140 @@
+---
+import '../styles/global.css';
+import { site, type Lang } from '../data/site';
+import { meta } from '../data/content';
+import { services } from '../data/services';
+import { localePath, absolute } from '../i18n/utils';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  lang: Lang;
+  /** Judul & deskripsi khusus halaman; kosongkan untuk memakai meta beranda. */
+  title?: string;
+  description?: string;
+  /** Pasangan URL untuk canonical dan hreflang; kosongkan untuk beranda. */
+  pathEn?: string;
+  pathId?: string;
+  /** Data terstruktur tambahan, mis. CreativeWork pada halaman proyek. */
+  extraLd?: Record<string, unknown>;
+}
+
+const { lang, title, description, pathEn = localePath('en'), pathId = localePath('id'), extraLd } = Astro.props;
+const m = {
+  title: title ?? meta[lang].title,
+  description: description ?? meta[lang].description,
+};
+const canonical = absolute(lang === 'en' ? pathEn : pathId, Astro.site);
+const altEn = absolute(pathEn, Astro.site);
+const altId = absolute(pathId, Astro.site);
+
+// Data terstruktur — membantu mesin telusur memahami halaman sebagai profil orang.
+const personLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: site.name,
+  alternateName: site.handle,
+  jobTitle: site.role[lang],
+  description: m.description,
+  email: `mailto:${site.email}`,
+  telephone: site.phoneHref,
+  url: canonical,
+  address: { '@type': 'PostalAddress', addressLocality: 'Klaten', addressRegion: 'Central Java', addressCountry: 'ID' },
+  alumniOf: { '@type': 'CollegeOrUniversity', name: 'Universitas Teknologi Yogyakarta' },
+  worksFor: { '@type': 'Organization', name: 'PT Global Tani Solution' },
+  knowsAbout: [
+    'Web development',
+    'Laravel',
+    'Next.js',
+    'Flutter',
+    'Mobile app development',
+    'Internet of Things',
+    'Embedded systems',
+    'ESP32',
+    'MQTT',
+    'Machine learning',
+  ],
+  sameAs: site.socials.map((s) => s.url),
+  // Layanan yang ditawarkan, agar halaman juga terbaca sebagai penawaran jasa.
+  makesOffer: services.map((service) => ({
+    '@type': 'Offer',
+    itemOffered: {
+      '@type': 'Service',
+      name: service.title[lang],
+      description: service.summary[lang],
+      serviceType: service.title.en,
+      provider: { '@type': 'Person', name: site.name },
+      areaServed: { '@type': 'Country', name: 'Indonesia' },
+    },
+  })),
+};
+---
+
+<!doctype html>
+<html lang={lang} data-theme="light" class="no-js">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{m.title}</title>
+    <meta name="description" content={m.description} />
+    <meta name="author" content={site.name} />
+    <meta name="theme-color" content="#f2f0ea" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0f1317" media="(prefers-color-scheme: dark)" />
+
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang="en" href={altEn} />
+    <link rel="alternate" hreflang="id" href={altId} />
+    <link rel="alternate" hreflang="x-default" href={altEn} />
+    <link rel="icon" type="image/svg+xml" href={`${import.meta.env.BASE_URL}favicon.svg`} />
+    <link rel="sitemap" href={`${import.meta.env.BASE_URL}sitemap-index.xml`} />
+
+    <meta property="og:type" content="profile" />
+    <meta property="og:title" content={m.title} />
+    <meta property="og:description" content={m.description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content={lang === 'en' ? 'en_US' : 'id_ID'} />
+    <meta property="og:locale:alternate" content={lang === 'en' ? 'id_ID' : 'en_US'} />
+    <meta property="og:site_name" content={site.name} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={m.title} />
+    <meta name="twitter:description" content={m.description} />
+
+    <script is:inline>
+      // Pilih tema sebelum paint pertama supaya tidak ada kedipan putih/hitam.
+      (function () {
+        var root = document.documentElement;
+        root.classList.remove('no-js');
+        var saved = null;
+        try {
+          saved = localStorage.getItem('theme');
+        } catch (e) {}
+        var dark = saved ? saved === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
+        root.setAttribute('data-theme', dark ? 'dark' : 'light');
+      })();
+    </script>
+
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(personLd)} />
+    {extraLd && <script type="application/ld+json" is:inline set:html={JSON.stringify(extraLd)} />}
+  </head>
+
+  <body class="bg-paper text-ink antialiased">
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:bg-panel focus:px-4 focus:py-2 focus:border focus:border-ink"
+    >
+      {lang === 'en' ? 'Skip to content' : 'Lewati ke konten'}
+    </a>
+
+    <Header lang={lang} switchHref={lang === 'en' ? pathId : pathEn} />
+
+    <main id="main">
+      <slot />
+    </main>
+
+    <Footer lang={lang} />
+
+    <script>
+      import '../scripts/reveal';
+    </script>
+  </body>
+</html>

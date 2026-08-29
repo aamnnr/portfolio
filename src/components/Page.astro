@@ -1,0 +1,25 @@
+---
+import type { Lang } from '../data/site';
+import Hero from './Hero.astro';
+import About from './About.astro';
+import Services from './Services.astro';
+import Capabilities from './Capabilities.astro';
+import Projects from './Projects.astro';
+import Experience from './Experience.astro';
+import Credentials from './Credentials.astro';
+import Contact from './Contact.astro';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+---
+
+<Hero lang={lang} />
+<About lang={lang} />
+<Services lang={lang} />
+<Capabilities lang={lang} />
+<Projects lang={lang} />
+<Experience lang={lang} />
+<Credentials lang={lang} />
+<Contact lang={lang} />

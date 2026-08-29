@@ -1,0 +1,32 @@
+---
+import type { Lang } from '../data/site';
+import { about, quote, sectionTitles } from '../data/content';
+import Section from './Section.astro';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+---
+
+<Section id="about" num="01" title={sectionTitles.about[lang]}>
+  <div class="reveal max-w-2xl space-y-6 text-lg leading-relaxed text-pretty">
+    {about.body[lang].map((p) => <p>{p}</p>)}
+  </div>
+
+  <dl class="reveal mt-12 grid gap-px border border-rule bg-rule sm:grid-cols-2">
+    {
+      about.facts.map((fact, i) => (
+        // Jumlah baris ganjil: entri terakhir melebar agar tidak ada sel kosong.
+        <div class:list={['bg-panel px-4 py-3', i === about.facts.length - 1 && 'sm:col-span-2']}>
+          <dt class="label">{fact.k[lang]}</dt>
+          <dd class="mt-1 text-sm">{fact.v[lang]}</dd>
+        </div>
+      ))
+    }
+  </dl>
+
+  <blockquote class="reveal mt-12 border-l-2 border-oxide pl-5 font-mono text-sm leading-relaxed text-muted">
+    {quote[lang]}
+  </blockquote>
+</Section>

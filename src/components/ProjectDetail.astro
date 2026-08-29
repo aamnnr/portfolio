@@ -1,0 +1,178 @@
+---
+import type { Lang } from '../data/site';
+import { ui } from '../data/content';
+import { categories, projectIndex, projects, type Project } from '../data/projects';
+import { localePath, projectPath } from '../i18n/utils';
+
+interface Props {
+  lang: Lang;
+  project: Project;
+}
+const { lang, project } = Astro.props;
+
+const position = projects.findIndex((p) => p.slug === project.slug);
+const prev = projects[position - 1];
+const next = projects[position + 1];
+
+const meta = [
+  { k: ui.yearLabel[lang], v: project.year },
+  { k: ui.roleLabel[lang], v: project.role[lang] },
+  { k: ui.fieldLabel[lang], v: project.categories.map((c) => categories.find((x) => x.key === c)!.label[lang]).join(', ') },
+];
+---
+
+<article>
+  <!-- Kepala lembar: identitas dokumen sebelum isinya -->
+  <header class="border-b border-rule">
+    <div class="mx-auto max-w-6xl px-gutter pt-24 pb-12 md:pt-32">
+      <a href={`${localePath(lang)}#projects`} class="link-underline label inline-block">
+        &larr; {ui.backToIndex[lang]}
+      </a>
+
+      <div class="mt-8 flex flex-wrap items-baseline gap-x-4 gap-y-2 border-b border-rule pb-4">
+        <span class="font-mono text-xs text-oxide">{projectIndex(project.slug)}</span>
+        {project.codename && <span class="label">{project.codename}</span>}
+        <span class="label ml-auto tabular-nums">{project.year}</span>
+      </div>
+
+      <h1 class="mt-6 max-w-4xl text-[clamp(1.75rem,4.2vw,3rem)] leading-[1.1] font-semibold tracking-[-0.02em] text-balance">
+        {project.title[lang]}
+      </h1>
+
+      <p class="mt-5 max-w-2xl text-lg leading-relaxed text-muted text-pretty">{project.summary[lang]}</p>
+
+      <dl class="mt-9 grid gap-px border border-rule bg-rule sm:grid-cols-3">
+        {
+          meta.map((row) => (
+            <div class="bg-panel p-4">
+              <dt class="label">{row.k}</dt>
+              <dd class="mt-1 text-sm">{row.v}</dd>
+            </div>
+          ))
+        }
+      </dl>
+
+      <div class="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2">
+        <span class="label">{ui.stack[lang]}</span>
+        <ul class="flex flex-wrap gap-x-3 gap-y-1 font-mono text-xs text-muted">
+          {
+            project.stack.map((tech) => (
+              <li class="before:mr-3 before:text-faint before:content-['/'] first:before:content-none">{tech}</li>
+            ))
+          }
+        </ul>
+        {
+          project.repo && (
+            <a
+              href={project.repo}
+              rel="noopener noreferrer"
+              target="_blank"
+              class="link-underline ml-auto font-mono text-xs text-oxide"
+            >
+              {ui.repo[lang]} &nearr;
+            </a>
+          )
+        }
+      </div>
+    </div>
+  </header>
+
+  <!-- Tinjauan -->
+  <section class="border-b border-rule">
+    <div class="mx-auto max-w-6xl px-gutter">
+      <div class="grid gap-8 py-14 md:grid-cols-[14rem_1fr] md:gap-12">
+        <h2 class="label md:sticky md:top-24 md:self-start">{ui.overview[lang]}</h2>
+        <div class="max-w-2xl space-y-5 text-lg leading-relaxed text-pretty">
+          {project.overview[lang].map((p) => <p>{p}</p>)}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Fungsi: masukan, proses, keluaran -->
+  <section class="border-b border-rule">
+    <div class="mx-auto max-w-6xl px-gutter">
+      <div class="grid gap-8 py-14 md:grid-cols-[14rem_1fr] md:gap-12">
+        <h2 class="label md:sticky md:top-24 md:self-start">{ui.functionBlock[lang]}</h2>
+        <dl class="grid gap-px border border-rule bg-rule md:grid-cols-3">
+          {
+            project.spec.map((row) => (
+              <div class="bg-panel p-4">
+                <dt class="label">{row.k[lang]}</dt>
+                <dd class="mt-1.5 text-sm leading-relaxed">{row.v[lang]}</dd>
+              </div>
+            ))
+          }
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <!-- Daftar kemampuan -->
+  <section class="border-b border-rule">
+    <div class="mx-auto max-w-6xl px-gutter">
+      <div class="grid gap-8 py-14 md:grid-cols-[14rem_1fr] md:gap-12">
+        <h2 class="label md:sticky md:top-24 md:self-start">{ui.featuresBlock[lang]}</h2>
+        <ol class="max-w-2xl divide-y divide-rule-soft border-y border-rule-soft">
+          {
+            project.features[lang].map((feature, i) => (
+              <li class="flex gap-4 py-3">
+                <span class="mt-0.5 font-mono text-xs text-faint tabular-nums">
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+                <span class="text-sm leading-relaxed">{feature}</span>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- Catatan teknis: hanya jika ada angka yang layak dicatat -->
+  {
+    project.notes && (
+      <section class="border-b border-rule">
+        <div class="mx-auto max-w-6xl px-gutter">
+          <div class="grid gap-8 py-14 md:grid-cols-[14rem_1fr] md:gap-12">
+            <h2 class="label md:sticky md:top-24 md:self-start">{ui.notesBlock[lang]}</h2>
+            <dl class="max-w-3xl divide-y divide-rule-soft border border-rule bg-panel">
+              {project.notes.map((row) => (
+                <div class="grid gap-1 p-4 sm:grid-cols-[10rem_1fr] sm:gap-4">
+                  <dt class="label">{row.k[lang]}</dt>
+                  <dd class="font-mono text-sm break-words">{row.v[lang]}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  <!-- Navigasi antar lembar -->
+  <nav class="mx-auto max-w-6xl px-gutter py-12">
+    <div class="grid gap-px border border-rule bg-rule sm:grid-cols-2">
+      {
+        prev ? (
+          <a href={projectPath(prev.slug, lang)} class="group bg-panel p-5">
+            <span class="label">&larr; {ui.prevProject[lang]}</span>
+            <p class="mt-1.5 font-medium transition-colors group-hover:text-oxide">{prev.title[lang]}</p>
+          </a>
+        ) : (
+          <span class="bg-panel p-5" />
+        )
+      }
+      {
+        next ? (
+          <a href={projectPath(next.slug, lang)} class="group bg-panel p-5 sm:text-right">
+            <span class="label">{ui.nextProject[lang]} &rarr;</span>
+            <p class="mt-1.5 font-medium transition-colors group-hover:text-oxide">{next.title[lang]}</p>
+          </a>
+        ) : (
+          <span class="bg-panel p-5" />
+        )
+      }
+    </div>
+  </nav>
+</article>

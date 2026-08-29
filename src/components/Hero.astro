@@ -1,0 +1,108 @@
+---
+import { site, type Lang } from '../data/site';
+import { hero, layers, ui } from '../data/content';
+import { projects } from '../data/projects';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+---
+
+<section class="relative overflow-hidden">
+  <!-- Kertas grid teknis, memudar ke bawah supaya tidak mengganggu teks -->
+  <div
+    class="grid-paper pointer-events-none absolute inset-0 opacity-[0.55] [mask-image:linear-gradient(to_bottom,black,transparent_92%)]"
+    aria-hidden="true"
+  >
+  </div>
+
+  <div class="relative mx-auto max-w-6xl px-gutter pt-24 pb-16 md:pt-32 md:pb-24">
+    <!-- Baris identitas dokumen -->
+    <div class="flex flex-wrap items-center gap-x-6 gap-y-2 border-b border-rule pb-4">
+      <span class="label">{site.name}</span>
+      <span class="label">{ui.revision[lang]} {site.revision}</span>
+      <span class="label hidden sm:inline">{site.location[lang]}</span>
+      <span class="ml-auto flex items-center gap-2">
+        <span class="relative flex size-1.5">
+          <span class="absolute inline-flex size-full animate-ping rounded-full bg-oxide opacity-60"></span>
+          <span class="relative inline-flex size-1.5 rounded-full bg-oxide"></span>
+        </span>
+        <span class="label !text-oxide">{hero.status[lang]}</span>
+      </span>
+    </div>
+
+    <div class="grid gap-10 pt-10 md:grid-cols-[1fr_18rem] md:gap-16 md:pt-14">
+      <div>
+        <p class="label mb-5">{site.role[lang]}</p>
+
+        <h1 class="max-w-3xl text-[clamp(2rem,5.4vw,3.75rem)] leading-[1.06] font-semibold tracking-[-0.025em] text-balance">
+          {hero.statement[lang]}
+        </h1>
+
+        <p class="mt-7 max-w-2xl text-lg leading-relaxed text-muted text-pretty">
+          {hero.sub[lang]}
+        </p>
+
+        <div class="mt-9 flex flex-wrap items-center gap-3">
+          <a
+            href="#projects"
+            class="group inline-flex items-center gap-2.5 border border-ink bg-ink px-5 py-2.5 text-sm font-medium text-paper transition-colors hover:bg-oxide hover:border-oxide"
+          >
+            {hero.ctaWork[lang]}
+            <span class="font-mono transition-transform group-hover:translate-x-0.5">&rarr;</span>
+          </a>
+          <a
+            href="#services"
+            class="inline-flex items-center gap-2.5 border border-rule px-5 py-2.5 text-sm font-medium transition-colors hover:border-ink"
+          >
+            {hero.ctaServices[lang]}
+          </a>
+        </div>
+      </div>
+
+      <!-- Blok judul ala gambar teknik: ringkasan angka -->
+      <aside class="self-end border border-rule bg-panel">
+        <p class="label border-b border-rule px-4 py-2">{lang === 'en' ? 'Summary' : 'Ringkasan'}</p>
+        <dl class="divide-y divide-rule-soft">
+          {
+            [
+              { k: lang === 'en' ? 'Systems shipped' : 'Sistem selesai', v: String(projects.length).padStart(2, '0') },
+              { k: lang === 'en' ? 'Services offered' : 'Layanan ditawarkan', v: '04' },
+              { k: lang === 'en' ? 'Building since' : 'Membangun sejak', v: '2024' },
+              { k: lang === 'en' ? 'Base' : 'Domisili', v: 'Klaten, ID' },
+            ].map((row) => (
+              <div class="flex items-baseline justify-between gap-4 px-4 py-2.5">
+                <dt class="text-sm text-muted">{row.k}</dt>
+                <dd class="font-mono text-sm tabular-nums">{row.v}</dd>
+              </div>
+            ))
+          }
+        </dl>
+      </aside>
+    </div>
+
+    <!-- Diagram lapisan sistem -->
+    <figure class="mt-16 border-t border-rule pt-6 md:mt-24">
+      <figcaption class="label mb-6">{hero.figure[lang]}</figcaption>
+
+      <ol class="grid gap-px bg-rule sm:grid-cols-2 lg:grid-cols-5">
+        {
+          layers.map((step, i) => (
+            <li class="relative bg-paper p-4 lg:p-5">
+              <span class="font-mono text-[0.625rem] text-oxide">{String(i + 1).padStart(2, '0')}</span>
+              <p class="mt-1 font-medium">{step.node[lang]}</p>
+              <p class="mt-1 font-mono text-xs leading-relaxed text-muted">{step.note[lang]}</p>
+              {i < layers.length - 1 && (
+                <span
+                  aria-hidden="true"
+                  class="absolute top-1/2 -right-px z-10 hidden size-1.5 -translate-y-1/2 translate-x-1/2 rotate-45 border-t border-r border-faint bg-paper lg:block"
+                />
+              )}
+            </li>
+          ))
+        }
+      </ol>
+    </figure>
+  </div>
+</section>

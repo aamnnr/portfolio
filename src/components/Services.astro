@@ -1,0 +1,118 @@
+---
+import type { Lang } from '../data/site';
+import { sectionTitles, ui } from '../data/content';
+import { services, workflow, servicesNote } from '../data/services';
+import { projectBySlug, projectIndex } from '../data/projects';
+import { projectPath } from '../i18n/utils';
+import Section from './Section.astro';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+
+const note = {
+  en: 'Work I take on for clients. Each one is written as an order sheet: what is inside the scope, what you receive at the end, and where I have done it before.',
+  id: 'Pekerjaan yang saya terima dari klien. Masing-masing ditulis sebagai lembar pesanan: apa yang ada di dalam lingkup, apa yang Anda terima di akhir, dan di mana saya pernah mengerjakannya.',
+}[lang];
+---
+
+<Section id="services" num="02" title={sectionTitles.services[lang]} note={note}>
+  <ol class="space-y-px bg-rule">
+    {
+      services.map((service) => (
+        <li class="reveal bg-paper">
+          <article class="border border-rule">
+            <!-- Kepala pesanan -->
+            <header class="flex flex-wrap items-baseline gap-x-4 gap-y-1 border-b border-rule bg-panel px-5 py-3">
+              <span class="font-mono text-xs text-oxide">{service.code}</span>
+              <h3 class="text-lg font-semibold tracking-tight">{service.title[lang]}</h3>
+              <span class="label ml-auto">{service.timeline[lang]}</span>
+            </header>
+
+            <div class="px-5 py-5">
+              <p class="max-w-2xl text-muted text-pretty">{service.summary[lang]}</p>
+
+              <div class="mt-6 grid gap-px bg-rule md:grid-cols-2">
+                <div class="bg-paper pt-4 md:pt-0 md:pr-5">
+                  <h4 class="label">{ui.scopeBlock[lang]}</h4>
+                  <ul class="mt-2.5 space-y-1.5">
+                    {service.scope[lang].map((entry) => (
+                      <li class="flex gap-3 text-sm leading-relaxed">
+                        <span class="mt-2 size-1 shrink-0 bg-faint" aria-hidden="true" />
+                        <span>{entry}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div class="bg-paper pt-4 md:pt-0 md:pl-5">
+                  <h4 class="label">{ui.deliverablesBlock[lang]}</h4>
+                  <ul class="mt-2.5 space-y-1.5">
+                    {service.deliverables[lang].map((entry) => (
+                      <li class="flex gap-3 text-sm leading-relaxed">
+                        <span class="mt-1.5 font-mono text-[0.625rem] text-oxide" aria-hidden="true">
+                          &#10003;
+                        </span>
+                        <span>{entry}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+
+              <!-- Batas jujur: kapan sebaiknya mencari orang lain -->
+              <p class="mt-6 border-l-2 border-rule pl-4 text-sm leading-relaxed text-muted">
+                {service.notFor[lang]}
+              </p>
+
+              <!-- Bukti: entri proyek yang mendukung klaim di atas -->
+              <div class="mt-5 flex flex-wrap items-center gap-x-3 gap-y-2 border-t border-rule-soft pt-4">
+                <span class="label">{ui.proof[lang]}</span>
+                {service.proof.map((slug) => {
+                  const project = projectBySlug(slug);
+                  return project ? (
+                    <a
+                      href={projectPath(slug, lang)}
+                      class="group inline-flex items-baseline gap-2 border border-rule px-2.5 py-1 text-xs transition-colors hover:border-ink"
+                    >
+                      <span class="font-mono text-[0.625rem] text-oxide">{projectIndex(slug)}</span>
+                      <span>{project.title[lang]}</span>
+                    </a>
+                  ) : null;
+                })}
+              </div>
+            </div>
+          </article>
+        </li>
+      ))
+    }
+  </ol>
+
+  <!-- Cara kerja: satu alur untuk semua layanan -->
+  <div class="reveal mt-12 border-t border-rule pt-6">
+    <p class="label mb-6">{ui.howItWorks[lang]}</p>
+    <ol class="grid gap-px bg-rule sm:grid-cols-2 lg:grid-cols-4">
+      {
+        workflow.map((phase, i) => (
+          <li class="bg-paper p-4">
+            <span class="font-mono text-[0.625rem] text-oxide">{String(i + 1).padStart(2, '0')}</span>
+            <p class="mt-1 font-medium">{phase.step[lang]}</p>
+            <p class="mt-1 text-sm leading-relaxed text-muted">{phase.detail[lang]}</p>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+
+  <div class="reveal mt-8 flex flex-wrap items-center gap-x-6 gap-y-4 border border-rule bg-panel p-5">
+    <p class="max-w-xl text-sm leading-relaxed text-muted text-pretty">{servicesNote[lang]}</p>
+    <a
+      href="#contact"
+      class="ml-auto inline-flex items-center gap-2.5 border border-ink bg-ink px-5 py-2.5 text-sm font-medium text-paper transition-colors hover:border-oxide hover:bg-oxide"
+    >
+      {ui.startBrief[lang]}
+      <span class="font-mono">&rarr;</span>
+    </a>
+  </div>
+</Section>

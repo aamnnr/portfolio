@@ -18,7 +18,10 @@ if (reduceMotion || !('IntersectionObserver' in window)) {
         observer.unobserve(entry.target);
       }
     },
-    { rootMargin: '0px 0px -12% 0px', threshold: 0.08 },
+    // threshold 0: elemen yang lebih tinggi dari viewport (mis. daftar proyek di
+    // layar ponsel) tidak akan pernah mencapai rasio irisan > 0, jadi rasio apa
+    // pun selain 0 membuatnya terkunci pada opacity 0.
+    { rootMargin: '0px 0px -12% 0px', threshold: 0 },
   );
   revealables.forEach((el) => observer.observe(el));
 }

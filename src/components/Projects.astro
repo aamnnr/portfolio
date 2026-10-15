@@ -1,7 +1,7 @@
 ---
 import type { Lang } from '../data/site';
 import { sectionTitles, ui } from '../data/content';
-import { categories, projects, projectIndex } from '../data/projects';
+import { categories, hostOf, projects, projectIndex } from '../data/projects';
 import { projectPath } from '../i18n/utils';
 import Section from './Section.astro';
 
@@ -69,6 +69,11 @@ const countOf = (key: string) => projects.filter((p) => p.categories.includes(ke
                 {project.categories.map((c) => categories.find((x) => x.key === c)!.code).join(' · ')}
               </span>
               {project.codename && <span class="label hidden sm:inline">{project.codename}</span>}
+              {project.live && (
+                <span class="border border-oxide px-1.5 font-mono text-[0.625rem] uppercase tracking-wider text-oxide">
+                  {ui.live[lang]}
+                </span>
+              )}
               <span class="label ml-auto tabular-nums">{project.year}</span>
             </div>
 
@@ -97,13 +102,20 @@ const countOf = (key: string) => projects.filter((p) => p.categories.includes(ke
                 ))}
               </ul>
 
-              <a
-                href={projectPath(project.slug, lang)}
-                class="link-underline ml-auto font-mono text-xs text-oxide"
-                aria-label={`${ui.readEntry[lang]}: ${project.title[lang]}`}
-              >
-                {ui.readEntry[lang]} &rarr;
-              </a>
+              <div class="ml-auto flex flex-wrap items-center gap-x-5 gap-y-1 font-mono text-xs">
+                {project.live && (
+                  <a href={project.live} rel="noopener noreferrer" target="_blank" class="link-underline text-oxide">
+                    {hostOf(project.live)} &nearr;
+                  </a>
+                )}
+                <a
+                  href={projectPath(project.slug, lang)}
+                  class="link-underline text-oxide"
+                  aria-label={`${ui.readEntry[lang]}: ${project.title[lang]}`}
+                >
+                  {ui.readEntry[lang]} &rarr;
+                </a>
+              </div>
             </div>
           </li>
         ))

@@ -22,6 +22,7 @@ const ld = {
   author: { '@type': 'Person', name: site.name },
   url: absolute(projectPath(project.slug, 'id'), Astro.site),
   ...(project.repo ? { codeRepository: project.repo } : {}),
+  ...(project.live ? { sameAs: project.live } : {}),
 };
 ---
 
@@ -32,6 +33,7 @@ const ld = {
   pathEn={projectPath(project.slug, 'en')}
   pathId={projectPath(project.slug, 'id')}
   extraLd={ld}
+  image={project.media?.[0] && { src: project.media[0].src, alt: project.media[0].alt.id }}
 >
   <ProjectDetail lang="id" project={project} />
 </Base>

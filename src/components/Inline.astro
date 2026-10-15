@@ -1,0 +1,16 @@
+---
+/**
+ * Teks data dengan satu-satunya markup yang diizinkan: `kode` di antara backtick.
+ * Bagian berindeks ganjil hasil split adalah isi di dalam backtick.
+ */
+interface Props {
+  text: string;
+}
+const parts = Astro.props.text.split('`');
+---
+
+{
+  parts.map((part, i) =>
+    i % 2 === 1 ? <code class="font-mono text-[0.9em] text-oxide">{part}</code> : part,
+  )
+}

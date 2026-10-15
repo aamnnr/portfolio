@@ -68,12 +68,21 @@ export type Project = {
   spec: { k: T; v: T }[];
   stack: string[];
   repo?: string;
+  /** Situs produksi yang bisa dikunjungi publik. */
+  live?: string;
+  /** Kode sumber milik klien dan tidak dibuka — ditampilkan sebagai keterangan, bukan tautan. */
+  privateSource?: boolean;
   /** Paragraf pembuka pada halaman detail. */
   overview: TL;
   /** Daftar kemampuan yang benar-benar ada di dalam sistem. */
   features: TL;
   /** Catatan teknis: angka, topik, protokol — bagian yang biasanya hilang. */
   notes?: { k: T; v: T }[];
+  /**
+   * Tangkapan layar, foto perangkat, atau diagram. `src` relatif terhadap `public/`
+   * (mis. `projects/ferticore/dashboard.png`); gambar pertama juga dipakai sebagai og:image.
+   */
+  media?: { src: string; alt: T; caption?: T; width: number; height: number }[];
 };
 
 export const projects: Project[] = [
@@ -98,6 +107,8 @@ export const projects: Project[] = [
       { k: { en: 'Recruitment', id: 'Rekrutmen' }, v: { en: 'Applications tracked through six selection stages, CVs on a private disk', id: 'Lamaran dilacak lewat enam tahap seleksi, CV di disk privat' } },
     ],
     stack: ['Laravel', 'Filament', 'Nuxt 3', 'Vue', 'Tailwind CSS', 'MySQL', 'Spatie Media Library'],
+    live: 'https://kembarfutagroup.co.id/karir',
+    privateSource: true,
     overview: {
       en: [
         'Kembar Futagroup is seven business units under one roof — manufacturing, construction, technology — and a group site has to speak for all of them without becoming seven sites. The public pages are Nuxt, rendered on the server; every string, image and meta tag they show comes from Laravel over an API. Nothing is hard-coded in the frontend, so the marketing team can change the group profile without a deploy.',
@@ -160,6 +171,8 @@ export const projects: Project[] = [
       { k: { en: 'Tests', id: 'Test' }, v: { en: '93 backend tests, run on MySQL rather than SQLite', id: '93 test backend, dijalankan di MySQL bukan SQLite' } },
     ],
     stack: ['Laravel', 'Filament', 'Nuxt 4', 'Vue', 'Tailwind CSS', 'MySQL', 'Vitest'],
+    live: 'https://jasacorlogam.co.id',
+    privateSource: true,
     overview: {
       en: [
         'A foundry in Klaten needed a site that ranks for the work it does. That makes SEO the specification rather than a finishing touch, and the interesting decision was to stop treating it as discipline. Meta title, description, canonical, robots, Open Graph and JSON-LD all come from the database and are rendered on the server; when a field is left empty its value is derived from the content, so it is never simply missing.',
@@ -654,6 +667,7 @@ export const projects: Project[] = [
     ],
     stack: ['Next.js', 'JavaScript', 'Tailwind CSS', 'Cloudinary'],
     repo: 'https://github.com/aamnnr/tanisolution_web',
+    live: 'https://www.tanisolution.id',
     overview: {
       en: [
         'Most company sites die the same way: the launch looks good, then nobody can change a sentence without asking a developer, and within a year the news page still says 2023. The brief here was to prevent exactly that, so the content model came first and the layout followed it.',
@@ -827,5 +841,8 @@ export const projects: Project[] = [
 /** Nomor urut dokumen: P-01, P-02, … mengikuti urutan tampil. */
 export const projectIndex = (slug: string): string =>
   `P-${String(projects.findIndex((p) => p.slug === slug) + 1).padStart(2, '0')}`;
+
+/** Nama domain tanpa `www.`, untuk label tautan situs daring. */
+export const hostOf = (url: string): string => new URL(url).host.replace(/^www\./, '');
 
 export const projectBySlug = (slug: string): Project | undefined => projects.find((p) => p.slug === slug);

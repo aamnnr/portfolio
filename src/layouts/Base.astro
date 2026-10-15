@@ -17,9 +17,12 @@ interface Props {
   pathId?: string;
   /** Data terstruktur tambahan, mis. CreativeWork pada halaman proyek. */
   extraLd?: Record<string, unknown>;
+  /** Gambar pratinjau tautan; `src` relatif terhadap `public/`. */
+  image?: { src: string; alt?: string };
 }
 
-const { lang, title, description, pathEn = localePath('en'), pathId = localePath('id'), extraLd } = Astro.props;
+const { lang, title, description, pathEn = localePath('en'), pathId = localePath('id'), extraLd, image } = Astro.props;
+const ogImage = image ? absolute(`${import.meta.env.BASE_URL}${image.src}`, Astro.site) : undefined;
 const m = {
   title: title ?? meta[lang].title,
   description: description ?? meta[lang].description,
@@ -95,9 +98,13 @@ const personLd = {
     <meta property="og:locale" content={lang === 'en' ? 'en_US' : 'id_ID'} />
     <meta property="og:locale:alternate" content={lang === 'en' ? 'id_ID' : 'en_US'} />
     <meta property="og:site_name" content={site.name} />
-    <meta name="twitter:card" content="summary_large_image" />
+    {ogImage && <meta property="og:image" content={ogImage} />}
+    {ogImage && image?.alt && <meta property="og:image:alt" content={image.alt} />}
+    <!-- Kartu besar hanya bila memang ada gambar; tanpa gambar, kartu ringkas. -->
+    <meta name="twitter:card" content={ogImage ? 'summary_large_image' : 'summary'} />
     <meta name="twitter:title" content={m.title} />
     <meta name="twitter:description" content={m.description} />
+    {ogImage && <meta name="twitter:image" content={ogImage} />}
 
     <script is:inline>
       // Pilih tema sebelum paint pertama supaya tidak ada kedipan putih/hitam.

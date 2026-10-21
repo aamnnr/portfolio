@@ -43,8 +43,8 @@ export const categories: { key: Category; code: string; label: T; blurb: T }[] =
     code: 'APP',
     label: { en: 'Mobile Apps', id: 'Aplikasi Mobile' },
     blurb: {
-      en: 'Flutter clients that put device control in an operator’s hand.',
-      id: 'Klien Flutter yang menaruh kendali perangkat di tangan operator.',
+      en: 'Flutter and native Kotlin apps that put control and records in someone’s hand.',
+      id: 'Aplikasi Flutter dan Kotlin native yang menaruh kendali dan catatan di tangan pengguna.',
     },
   },
 ];
@@ -211,6 +211,131 @@ export const projects: Project[] = [
       { k: { en: 'Indexability', id: 'Indeksabilitas' }, v: { en: 'Decided at build time; a wrong build warns at the end of the process', id: 'Ditentukan saat build; build yang keliru memberi peringatan di akhir proses' } },
       { k: { en: 'API addresses', id: 'Alamat API' }, v: { en: 'Browser and Nuxt-server base URLs kept separate on purpose', id: 'URL basis untuk browser dan untuk server Nuxt sengaja dipisah' } },
       { k: { en: 'Dependencies', id: 'Dependency' }, v: { en: 'All free and open source — MIT and SIL OFL, no paid packages', id: 'Seluruhnya gratis dan open source — MIT dan SIL OFL, tanpa paket berbayar' } },
+    ],
+  },
+
+  /* ---------------------------------------------------------------- */
+  {
+    slug: 'generus',
+    codename: 'Generus',
+    categories: ['web'],
+    year: '2026',
+    title: { en: 'Generus — Youth Attendance & Curriculum Tracking', id: 'Generus — Pemantauan Presensi & Kurikulum Generus' },
+    summary: {
+      en: 'A PWA for a three-level youth programme — district, village, group — covering attendance, monthly curriculum targets and reading progress, with access scoped in the database itself.',
+      id: 'PWA untuk pembinaan generus tiga tingkat — daerah, desa, kelompok — mencakup presensi, target kurikulum bulanan, dan progres kitab, dengan hak akses yang ditegakkan langsung di database.',
+    },
+    role: { en: 'Sole developer — product spec, data model, app and deployment.', id: 'Pengembang tunggal — spesifikasi produk, model data, aplikasi, dan deployment.' },
+    spec: [
+      { k: { en: 'Scale', id: 'Skala' }, v: { en: '1 district, 10 villages, 60 groups, ~5,000 members', id: '1 daerah, 10 desa, 60 kelompok, ± 5.000 generus' } },
+      { k: { en: 'Attendance', id: 'Presensi' }, v: { en: 'Checklist for small sessions, multi-officer QR scanning for large ones', id: 'Checklist untuk pengajian kecil, scan QR banyak petugas untuk yang besar' } },
+      { k: { en: 'Access', id: 'Akses' }, v: { en: 'Postgres RLS over an ltree unit hierarchy, six roles', id: 'RLS Postgres di atas hierarki unit ltree, enam peran' } },
+    ],
+    stack: ['Next.js', 'TypeScript', 'PostgreSQL', 'Supabase', 'Drizzle ORM', 'Dexie', 'Tailwind CSS', 'Vitest'],
+    repo: 'https://github.com/aamnnr/generus',
+    live: 'https://generus-two.vercel.app',
+    overview: {
+      en: [
+        'Attendance, monthly curriculum targets and Qur’an reading progress used to live in notebooks, spreadsheets and group chats, so nobody above group level could see what was happening below them. Generus puts all three in one installable web app, used by admins on phones and by the curriculum team on laptops.',
+        'The hard requirement was the 300-person village gathering. Members carry a printed QR card; three or four officers scan at the door with their own phones, each scan confirmed locally in under a second and queued in IndexedDB. Duplicates are dropped, lateness is derived from the agenda’s cut-off, and the queue syncs idempotently when the signal returns.',
+        'Who sees what is enforced in Postgres, not just in the UI. Every unit carries an ltree path, so “this unit and everything under it” is one indexed condition, and row-level security applies it to every table. The curriculum team gets aggregate achievement figures through security-definer functions without ever reading an individual member’s row.',
+      ],
+      id: [
+        'Presensi, target kurikulum bulanan, dan progres bacaan Al-Qur’an dulu tersebar di buku, spreadsheet, dan grup chat, sehingga pengurus di atas tingkat kelompok tidak bisa melihat kondisi di bawahnya. Generus menyatukan ketiganya dalam satu aplikasi web yang bisa dipasang, dipakai admin di HP dan tim kurikulum di laptop.',
+        'Kebutuhan terberatnya adalah pengajian desa dengan 300 peserta. Generus membawa kartu QR cetak; tiga atau empat petugas memindai di pintu dengan HP masing-masing, setiap scan dikonfirmasi lokal dalam kurang dari satu detik dan diantrikan di IndexedDB. Duplikasi diabaikan, keterlambatan dihitung dari batas waktu agenda, dan antrean disinkronkan secara idempoten begitu sinyal kembali.',
+        'Siapa melihat apa ditegakkan di Postgres, bukan hanya di UI. Setiap unit punya path ltree, sehingga “unit ini dan semua turunannya” cukup satu kondisi ber-indeks, dan row-level security menerapkannya di setiap tabel. Tim kurikulum mendapat angka capaian agregat lewat fungsi security-definer tanpa pernah membaca baris data generus satu per satu.',
+      ],
+    },
+    features: {
+      en: [
+        'Region tree, accounts and six roles — from superadmin to read-only kyai — each bound to one unit and everything below it.',
+        'Member records with Excel import, bulk level promotion, and status changes that keep history intact.',
+        'Printable portrait ID cards carrying a random QR token rather than personal data.',
+        'One-off and weekly agendas that cascade to the units beneath them.',
+        'Offline-first QR scanning with several officers per agenda, plus name search as a fallback.',
+        'Delegated completion window for group admins, then automatic locking via pg_cron.',
+        'Curriculum library, period targets copied forward each month, and kitab progress tracked by verse or page.',
+        'Cross-unit achievement recap, dashboard and monthly report.',
+        'Curriculum modules switchable per deployment for a staged rollout.',
+      ],
+      id: [
+        'Pohon wilayah, akun, dan enam peran — dari superadmin hingga kyai yang hanya melihat — masing-masing terikat pada satu unit dan seluruh turunannya.',
+        'Data generus dengan import Excel, kenaikan jenjang massal, dan perubahan status yang tetap menyimpan riwayat.',
+        'Kartu ID potret siap cetak berisi token QR acak, bukan data pribadi.',
+        'Agenda sekali atau mingguan yang otomatis tampil di unit-unit di bawahnya.',
+        'Scan QR offline-first dengan banyak petugas per agenda, plus pencarian nama sebagai cadangan.',
+        'Jendela delegasi untuk admin kelompok, lalu penguncian otomatis lewat pg_cron.',
+        'Pustaka materi, target periode yang disalin dari bulan sebelumnya, dan progres kitab per ayat atau halaman.',
+        'Rekap capaian lintas unit, dasbor, dan laporan bulanan.',
+        'Modul kurikulum yang bisa dinyalakan per server untuk penerapan bertahap.',
+      ],
+    },
+    notes: [
+      { k: { en: 'Platform choice', id: 'Pilihan platform' }, v: { en: 'PWA over native — iPhone users and laptop dashboards on one codebase', id: 'PWA, bukan native — pengguna iPhone dan dasbor laptop dalam satu codebase' } },
+      { k: { en: 'QR on iOS', id: 'QR di iOS' }, v: { en: 'BarcodeDetector with a zxing WASM fallback', id: 'BarcodeDetector dengan cadangan WASM zxing' } },
+      { k: { en: 'Tests', id: 'Pengujian' }, v: { en: '137 tests; migrations and RLS run against PGlite, no Docker', id: '137 test; migrasi dan RLS diuji dengan PGlite, tanpa Docker' } },
+    ],
+  },
+
+  /* ---------------------------------------------------------------- */
+  {
+    slug: 'duitku-finance',
+    codename: 'ngatur-duit',
+    categories: ['mobile'],
+    year: '2026',
+    title: { en: 'Duitku — Offline-First Money Tracker', id: 'Duitku — Pencatat Keuangan Offline-First' },
+    summary: {
+      en: 'A native Android finance app where logging takes three taps or one chat message — bank notifications, receipt photos and a Telegram bot all turn into drafts to approve.',
+      id: 'Aplikasi keuangan Android native di mana mencatat cukup tiga ketukan atau satu pesan chat — notifikasi bank, foto struk, dan bot Telegram semuanya menjadi draf untuk disetujui.',
+    },
+    role: { en: 'Sole developer — Android app, Supabase backend and edge functions.', id: 'Pengembang tunggal — aplikasi Android, backend Supabase, dan edge function.' },
+    spec: [
+      { k: { en: 'Storage', id: 'Penyimpanan' }, v: { en: 'Room on the phone is the source of truth; cloud is optional', id: 'Room di HP adalah sumber utama; cloud bersifat opsional' } },
+      { k: { en: 'Capture', id: 'Pencatatan' }, v: { en: 'Notification auto-import, receipt scan, voice, AI chat, Telegram', id: 'Auto-import notifikasi, scan struk, suara, chat AI, Telegram' } },
+      { k: { en: 'Running cost', id: 'Biaya operasional' }, v: { en: 'Zero — Supabase, Gemini and Telegram free tiers', id: 'Nol — paket gratis Supabase, Gemini, dan Telegram' } },
+    ],
+    stack: ['Kotlin', 'Jetpack Compose', 'Room', 'Supabase', 'Edge Functions', 'Gemini API', 'Telegram Bot API', 'Glance'],
+    repo: 'https://github.com/aamnnr/ngatur-duit',
+    overview: {
+      en: [
+        'People stop tracking money when every entry takes a form. Duitku keeps the form to three taps — amount, category, save — and offers shortcuts around it: bank and e-wallet notifications are parsed into drafts, a photo of a receipt is read by Gemini, and a message like “bakso 25rb gopay” sent to a Telegram bot lands in the same inbox for approval.',
+        'Everything works with no network. Room holds the data; wallet balances are computed from transactions rather than stored, so a transfer or adjustment can never leave them out of step. Deletes are soft and every row carries an updated_at, which is what lets a push-then-pull sync to the user’s own Supabase project stay simple.',
+        'Secrets never ship in the APK. The Gemini key and bot token live only as Supabase secrets behind edge functions, the app holds just the public key, and row-level security keeps each user’s rows to themselves.',
+      ],
+      id: [
+        'Orang berhenti mencatat keuangan saat setiap entri butuh form. Duitku menjaga form tetap tiga ketukan — nominal, kategori, simpan — dan menyediakan jalan pintas di sekitarnya: notifikasi bank dan e-wallet diurai menjadi draf, foto struk dibaca Gemini, dan pesan seperti “bakso 25rb gopay” ke bot Telegram masuk ke inbox yang sama untuk disetujui.',
+        'Semuanya jalan tanpa jaringan. Room menyimpan data; saldo dompet dihitung dari transaksi, bukan disimpan, sehingga transfer atau penyesuaian tidak pernah membuatnya selisih. Penghapusan bersifat soft delete dan setiap baris membawa updated_at, yang membuat sinkron push-lalu-pull ke project Supabase milik pengguna sendiri tetap sederhana.',
+        'Kunci rahasia tidak pernah masuk APK. Kunci Gemini dan token bot hanya disimpan sebagai secret Supabase di balik edge function, aplikasi hanya membawa kunci publik, dan row-level security menjaga baris tiap pengguna tetap miliknya sendiri.',
+      ],
+    },
+    features: {
+      en: [
+        'Transactions, transfers as paired entries, balance adjustments, and unlimited wallets.',
+        'Separate personal and business profiles, each with its own wallets and default categories.',
+        'Auto-import from notifications of major Indonesian banks and e-wallets — BCA, BRI, Mandiri, GoPay, DANA, OVO and more.',
+        'Receipt scanning and a chat assistant through Gemini, returning structured JSON as reviewable drafts.',
+        'Telegram bot paired with a six-digit code, accepting text and receipt photos.',
+        'Monthly limits, category budgets, savings goals, recurring bills and a “reality” calculator.',
+        'Insight screen, projections, and CSV/PDF export.',
+        'Email OTP login, Supabase sync, PIN and fingerprint lock, JSON backup and restore.',
+        'Home-screen widget, daily reminders and budget alerts.',
+      ],
+      id: [
+        'Transaksi, transfer sebagai entri berpasangan, penyesuaian saldo, dan dompet tanpa batas.',
+        'Profil pribadi dan usaha yang terpisah, masing-masing dengan dompet dan kategori bawaan.',
+        'Auto-import dari notifikasi bank dan e-wallet utama Indonesia — BCA, BRI, Mandiri, GoPay, DANA, OVO, dan lainnya.',
+        'Scan struk dan asisten chat lewat Gemini, mengembalikan JSON terstruktur sebagai draf yang bisa ditinjau.',
+        'Bot Telegram yang dipasangkan dengan kode enam digit, menerima teks dan foto struk.',
+        'Batas bulanan, anggaran per kategori, target tabungan, tagihan rutin, dan kalkulator realita.',
+        'Layar Insight, proyeksi, dan ekspor CSV/PDF.',
+        'Login email OTP, sinkron Supabase, kunci PIN dan sidik jari, backup dan restore JSON.',
+        'Widget layar utama, pengingat harian, dan peringatan anggaran.',
+      ],
+    },
+    notes: [
+      { k: { en: 'Amounts', id: 'Nominal' }, v: { en: 'Stored as Long whole rupiah — no floating point', id: 'Disimpan sebagai Long rupiah penuh — tanpa floating point' } },
+      { k: { en: 'Target', id: 'Target' }, v: { en: 'minSdk 26, targetSdk 36, Kotlin 2.1', id: 'minSdk 26, targetSdk 36, Kotlin 2.1' } },
+      { k: { en: 'AI model', id: 'Model AI' }, v: { en: 'Read from a secret, swappable without an app update', id: 'Dibaca dari secret, bisa diganti tanpa update aplikasi' } },
     ],
   },
 

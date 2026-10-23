@@ -21,8 +21,8 @@ export const site = {
     { label: 'Instagram', handle: '@aamnnr', url: 'https://instagram.com/aamnnr' },
   ],
   // Dokumen revisi — dipakai di header sebagai penanda versi dokumen.
-  revision: '01',
-  updated: '2026-08',
+  revision: '02',
+  updated: '2026-10',
 } as const;
 
 export type Lang = 'en' | 'id';

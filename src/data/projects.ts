@@ -400,59 +400,6 @@ export const projects: Project[] = [
 
   /* ---------------------------------------------------------------- */
   {
-    slug: 'ferticore-admin',
-    codename: 'FertiCore Admin Central Console',
-    categories: ['web', 'iot'],
-    year: '2026',
-    title: { en: 'FertiCore Admin Console', id: 'Konsol Admin FertiCore' },
-    summary: {
-      en: 'The operator’s view of the whole fleet: which farmers are registered, which devices are alive, and which ones need their access cut.',
-      id: 'Pandangan operator atas seluruh armada: petani mana yang terdaftar, perangkat mana yang hidup, dan mana yang aksesnya perlu diputus.',
-    },
-    role: { en: 'Sole developer.', id: 'Pengembang tunggal.' },
-    spec: [
-      { k: { en: 'Scope', id: 'Cakupan' }, v: { en: 'Central console over the whole precision-agriculture fleet', id: 'Konsol terpusat atas seluruh armada pertanian presisi' } },
-      { k: { en: 'Data', id: 'Data' }, v: { en: 'Supabase, accessed with a service role that bypasses RLS', id: 'Supabase, diakses dengan service role yang melewati RLS' } },
-      { k: { en: 'Actions', id: 'Aksi' }, v: { en: 'Next.js Server Actions for revoking devices and accounts', id: 'Server Action Next.js untuk mencabut perangkat dan akun' } },
-    ],
-    stack: ['Next.js', 'Supabase', 'Tailwind CSS', 'Server Actions', 'Lucide'],
-    repo: 'https://github.com/aamnnr/ferticore-admin',
-    overview: {
-      en: [
-        'Once more than a handful of devices are in the field, the interesting question stops being “what is this sensor reading” and becomes “which of the forty units has stopped reporting, and who owns it”. This console answers the second question.',
-        'It reads the same Supabase database the devices write to, but through a superadmin path that deliberately bypasses row-level security — the whole point of the console is to see across tenants rather than inside one. Destructive actions run as Next.js Server Actions, so revoking a device is one round trip and the page state refreshes from the source rather than from an optimistic guess.',
-      ],
-      id: [
-        'Begitu perangkat di lapangan lebih dari segelintir, pertanyaan yang menarik berhenti menjadi "berapa bacaan sensor ini" dan berubah menjadi "unit mana dari empat puluh yang berhenti melapor, dan siapa pemiliknya". Konsol ini menjawab pertanyaan kedua.',
-        'Konsol membaca basis data Supabase yang sama dengan yang ditulis perangkat, tetapi lewat jalur superadmin yang sengaja melewati row-level security — justru tujuannya melihat lintas tenant, bukan ke dalam satu tenant. Aksi destruktif berjalan sebagai Server Action Next.js, sehingga mencabut sebuah perangkat cukup satu perjalanan dan status halaman disegarkan dari sumbernya, bukan dari tebakan optimistis.',
-      ],
-    },
-    features: {
-      en: [
-        'Real-time totals for registered farmers and active sensor units.',
-        'Live indicator for MQTT broker and database health.',
-        'Operational-days counter derived from the first registration date.',
-        'Device inventory listing name, MAC address, owner and registration date.',
-        'One-click device revocation via a Server Action.',
-        'Farmer and partner directory with contact details, plot location and device count.',
-      ],
-      id: [
-        'Total waktu nyata untuk petani terdaftar dan unit sensor aktif.',
-        'Indikator langsung untuk kesehatan broker MQTT dan basis data.',
-        'Penghitung hari operasional yang diturunkan dari tanggal registrasi pertama.',
-        'Inventaris perangkat berisi nama, MAC address, pemilik, dan tanggal registrasi.',
-        'Pencabutan akses perangkat satu klik lewat Server Action.',
-        'Direktori petani dan mitra dengan kontak, lokasi kebun, dan jumlah alat.',
-      ],
-    },
-    notes: [
-      { k: { en: 'Auth model', id: 'Model auth' }, v: { en: 'Superadmin client, RLS bypassed by design', id: 'Klien superadmin, RLS dilewati secara sengaja' } },
-      { k: { en: 'Language', id: 'Bahasa' }, v: { en: 'Plain JavaScript (ESNext), App Router', id: 'JavaScript murni (ESNext), App Router' } },
-    ],
-  },
-
-  /* ---------------------------------------------------------------- */
-  {
     slug: 'pestzone-spray',
     codename: 'Pestzone Spray',
     categories: ['mobile', 'iot'],
@@ -817,55 +764,6 @@ export const projects: Project[] = [
         'Entri kolaborasi dan mitra.',
         'Unggah dan pengiriman gambar melalui Cloudinary.',
         'Tata letak responsif di berbagai perangkat.',
-      ],
-    },
-  },
-
-  /* ---------------------------------------------------------------- */
-  {
-    slug: 'futsal-booking',
-    codename: 'FutsalBooking',
-    categories: ['web'],
-    year: '2025',
-    title: { en: 'Futsal Court Booking', id: 'Sistem Booking Lapangan Futsal' },
-    summary: {
-      en: 'A full-stack booking system where the hard part is not the form — it is making sure two people cannot hold the same slot.',
-      id: 'Sistem booking full-stack yang bagian sulitnya bukan formulir, melainkan memastikan dua orang tidak memegang slot yang sama.',
-    },
-    role: { en: 'Full stack — Express API and React client.', id: 'Full stack — API Express dan klien React.' },
-    spec: [
-      { k: { en: 'Auth', id: 'Autentikasi' }, v: { en: 'Registration and login issuing JWT tokens', id: 'Registrasi dan login yang menerbitkan token JWT' } },
-      { k: { en: 'Booking', id: 'Pemesanan' }, v: { en: 'Slot availability checked before a reservation is written', id: 'Ketersediaan slot diperiksa sebelum reservasi ditulis' } },
-      { k: { en: 'Stack', id: 'Tumpukan' }, v: { en: 'Express + MongoDB back end, React 19 + Vite front end', id: 'Back end Express + MongoDB, front end React 19 + Vite' } },
-    ],
-    stack: ['Node.js', 'Express', 'MongoDB', 'React 19', 'Vite', 'JWT', 'Tailwind CSS'],
-    repo: 'https://github.com/aamnnr/court-booking',
-    overview: {
-      en: [
-        'This was where I learned that a booking system is a concurrency problem dressed as a CRUD app. Showing a list of courts is trivial; guaranteeing that the slot a user sees as free is still free by the time their reservation is written is not.',
-        'The build gave me the pieces of a conventional web stack in one place — token authentication with JWT, password hashing with bcrypt, protected routes on the client, and a REST API sitting over MongoDB — which is exactly why I keep it in the portfolio rather than the two attendance systems’ third variation.',
-      ],
-      id: [
-        'Di sinilah saya belajar bahwa sistem pemesanan adalah persoalan konkurensi yang menyamar sebagai aplikasi CRUD. Menampilkan daftar lapangan itu sepele; menjamin bahwa slot yang dilihat pengguna sebagai kosong masih kosong saat reservasinya ditulis, tidak sepele.',
-        'Proyek ini memberi saya potongan-potongan tumpukan web konvensional dalam satu tempat — autentikasi token dengan JWT, hashing kata sandi dengan bcrypt, rute terproteksi di sisi klien, dan REST API di atas MongoDB — dan justru karena itu ia saya simpan di portofolio, bukan variasi ketiga dari sistem presensi.',
-      ],
-    },
-    features: {
-      en: [
-        'Registration, login and logout with JWT tokens.',
-        'Court listings with full details.',
-        'Real-time slot availability checking during booking.',
-        'Booking history on the user profile.',
-        'Protected routes for authenticated users.',
-        'Toast notifications for immediate feedback.',
-      ],
-      id: [
-        'Registrasi, login, dan logout dengan token JWT.',
-        'Daftar lapangan beserta detail lengkap.',
-        'Pemeriksaan ketersediaan slot secara waktu nyata saat memesan.',
-        'Riwayat pemesanan di halaman profil pengguna.',
-        'Rute terproteksi untuk pengguna terautentikasi.',
-        'Notifikasi toast untuk umpan balik langsung.',
       ],
     },
   },

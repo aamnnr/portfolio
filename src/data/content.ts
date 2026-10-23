@@ -31,7 +31,7 @@ export const hero: {
     id: 'Saya membangun sistem yang utuh, bukan satu lapisannya saja — web, mobile, dan perangkat yang memasok datanya.',
   },
   sub: {
-    en: 'Sixteen systems shipped end to end — web applications, Flutter and Kotlin apps, IoT devices, and a couple of machine-learning models. Computer Engineering graduate, now a Web Developer at Kembar Futa Group, taking on client projects of my own. Firmware, protocol, database, interface: I have written every layer at least once.',
+    en: 'Fourteen systems shipped end to end — web applications, Flutter and Kotlin apps, IoT devices, and a couple of machine-learning models. Computer Engineering graduate, now a Web Developer at Kembar Futa Group, taking on client projects of my own. Firmware, protocol, database, interface: I have written every layer at least once.',
     id: 'Enam belas sistem selesai dari hulu ke hilir — aplikasi web, aplikasi Flutter dan Kotlin, perangkat IoT, dan beberapa model pembelajaran mesin. Sarjana Teknik Komputer, kini Web Developer di Kembar Futa Group, sekaligus menerima proyek klien sendiri. Firmware, protokol, basis data, antarmuka: setiap lapisan pernah saya tulis sendiri.',
   },
   ctaWork: { en: 'Read the projects', id: 'Lihat proyeknya' },

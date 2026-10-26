@@ -161,7 +161,7 @@ export const services: Service[] = [
       en: 'Not the right fit for games or anything needing heavy native platform code.',
       id: 'Kurang cocok untuk gim atau apa pun yang menuntut banyak kode native platform.',
     },
-    proof: ['pestzone-spray', 'pestmist-control', 'ferticore-presisi'],
+    proof: ['pestzone-spray', 'duitku-finance', 'ferticore-presisi'],
   },
 
   {

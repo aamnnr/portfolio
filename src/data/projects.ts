@@ -95,59 +95,90 @@ export const projects: Project[] = [
     year: '2026',
     title: { en: 'Kembar Futagroup Group Site', id: 'Situs Grup Kembar Futagroup' },
     summary: {
-      en: 'A headless corporate site for a seven-unit group: Laravel and Filament hold every word, Nuxt renders it server-side, and the recruitment pipeline runs inside the same panel.',
-      id: 'Situs korporat headless untuk grup dengan tujuh unit bisnis: Laravel dan Filament menyimpan seluruh isinya, Nuxt merendernya di server, dan alur rekrutmen berjalan di panel yang sama.',
+      en: 'A headless corporate site for an eight-unit group: Laravel and Filament hold every word, Nuxt renders it server-side, and the careers page runs on Odoo’s recruitment API.',
+      id: 'Situs korporat headless untuk grup dengan delapan unit bisnis: Laravel dan Filament menyimpan seluruh isinya, Nuxt merendernya di server, dan halaman karir berjalan di atas API rekrutmen Odoo.',
     },
     role: {
-      en: 'Sole developer — backend, admin panel, frontend, and SEO layer.',
-      id: 'Pengembang tunggal — backend, panel admin, frontend, dan lapisan SEO.',
+      en: 'Sole developer — backend, admin panel, frontend, SEO layer and the Odoo integration.',
+      id: 'Pengembang tunggal — backend, panel admin, frontend, lapisan SEO, dan integrasi Odoo.',
     },
     spec: [
       { k: { en: 'Shape', id: 'Bentuk' }, v: { en: 'Laravel 13 API-only + Filament 5 admin, Nuxt 3 SSR in front', id: 'Laravel 13 API-only + admin Filament 5, Nuxt 3 SSR di depan' } },
-      { k: { en: 'Content', id: 'Konten' }, v: { en: 'Pages, articles, business units, leadership, gallery, vacancies — all editable', id: 'Halaman, artikel, unit bisnis, kepemimpinan, galeri, lowongan — semuanya bisa disunting' } },
-      { k: { en: 'Recruitment', id: 'Rekrutmen' }, v: { en: 'Applications tracked through six selection stages, CVs on a private disk', id: 'Lamaran dilacak lewat enam tahap seleksi, CV di disk privat' } },
+      { k: { en: 'Content', id: 'Konten' }, v: { en: 'Pages, articles, business units, leadership, gallery — all editable', id: 'Halaman, artikel, unit bisnis, kepemimpinan, galeri — semuanya bisa disunting' } },
+      { k: { en: 'Careers', id: 'Karir' }, v: { en: 'Vacancies synced from Odoo; applications forwarded to Odoo', id: 'Lowongan disinkron dari Odoo; lamaran diteruskan ke Odoo' } },
     ],
-    stack: ['Laravel', 'Filament', 'Nuxt 3', 'Vue', 'Tailwind CSS', 'MySQL', 'Spatie Media Library'],
+    stack: ['Laravel', 'Filament', 'Nuxt 3', 'Vue', 'Tailwind CSS', 'MySQL', 'Spatie Media Library', 'Odoo API'],
     live: 'https://kembarfutagroup.co.id/karir',
     privateSource: true,
     overview: {
       en: [
-        'Kembar Futagroup is seven business units under one roof — manufacturing, construction, technology — and a group site has to speak for all of them without becoming seven sites. The public pages are Nuxt, rendered on the server; every string, image and meta tag they show comes from Laravel over an API. Nothing is hard-coded in the frontend, so the marketing team can change the group profile without a deploy.',
-        'The half nobody sees is the bigger half. Filament runs the whole content model: page blocks that can be reordered, articles, milestones, partners, leadership profiles, photo albums, and the job vacancies each unit posts. Alongside it sit the operational tools — 301 redirects, a 404 log, a link checker that rebuilds its report from scratch on every run, and a Search Console sync that pulls daily metrics into the panel so the client sees traffic where they already work.',
-        'Recruitment turned out to be the part that needed the most care. Applications arrive through the vacancy form and land straight in the first selection stage; the stage change is timestamped separately from `updated_at`, because HR adding a note should not make an application that has been stuck for two weeks look freshly handled. CVs contain personal data, so they are stored on a private disk and never reachable by guessing a URL.',
+        'Kembar Futagroup is eight business units under one roof — foundry, construction, stone, agribusiness and more — and a group site has to speak for all of them without becoming eight sites. The public pages are Nuxt, rendered on the server; every string, image and meta tag they show comes from Laravel over an API. Nothing is hard-coded in the frontend, so the marketing team can change the group profile without a deploy.',
+        'The half nobody sees is the bigger half. Filament runs the whole content model: page blocks that can be reordered, articles, milestones, partners, leadership profiles and photo albums. Alongside it sit the operational tools — 301 redirects, a 404 log, a link checker that rebuilds its report from scratch on every run, and a Search Console sync that pulls daily metrics into the panel so the client sees traffic where they already work.',
+        'Recruitment started inside the panel and later moved to Odoo, where HR already worked. Vacancies are now pulled from Odoo every ten minutes into a shadow table, and every application is forwarded to an Odoo applicant card; the site keeps only a technical trace with a hashed email. The page renders from the copy, so Odoo being down stops updates, not the careers page. Odoo gives a reopened position a new id, so vacancies are matched on a hash of title, department and company instead — the URL already shared in WhatsApp groups stays alive.',
+        'Careers launched first, on the main domain, while the rest of the site waits for approval: nginx answers 503 everywhere except /karir. A subdomain would have been simpler on day one and would have moved every vacancy URL on launch day.',
       ],
       id: [
-        'Kembar Futagroup adalah tujuh unit bisnis di bawah satu atap — manufaktur, konstruksi, teknologi — dan situs grup harus mewakili semuanya tanpa berubah menjadi tujuh situs. Halaman publiknya adalah Nuxt yang dirender di server; setiap teks, gambar, dan meta tag yang tampil berasal dari Laravel lewat API. Tidak ada yang ditulis mati di frontend, sehingga tim pemasaran bisa mengubah profil grup tanpa deploy.',
-        'Bagian yang tidak terlihat justru yang lebih besar. Filament menjalankan seluruh model kontennya: blok halaman yang bisa diurutkan ulang, artikel, tonggak sejarah, mitra, profil kepemimpinan, album foto, dan lowongan yang dibuka tiap unit. Di sampingnya ada perkakas operasional — pengalihan 301, log 404, pemeriksa tautan yang menyusun ulang laporannya dari nol setiap kali berjalan, dan sinkronisasi Search Console yang menarik metrik harian ke dalam panel supaya klien melihat trafiknya di tempat mereka sudah bekerja.',
-        'Rekrutmen ternyata bagian yang paling butuh kehati-hatian. Lamaran masuk lewat form lowongan dan langsung mendarat di tahap seleksi pertama; perpindahan tahap dicatat waktunya terpisah dari `updated_at`, karena HRD yang sekadar menambah catatan tidak boleh membuat lamaran yang dua minggu mangkrak tampak baru saja ditangani. Berkas CV berisi data pribadi, jadi disimpan di disk privat dan tidak bisa diambil dengan menebak URL.',
+        'Kembar Futagroup adalah delapan unit bisnis di bawah satu atap — pengecoran, konstruksi, batu, agribisnis, dan lainnya — dan situs grup harus mewakili semuanya tanpa berubah menjadi delapan situs. Halaman publiknya adalah Nuxt yang dirender di server; setiap teks, gambar, dan meta tag yang tampil berasal dari Laravel lewat API. Tidak ada yang ditulis mati di frontend, sehingga tim pemasaran bisa mengubah profil grup tanpa deploy.',
+        'Bagian yang tidak terlihat justru yang lebih besar. Filament menjalankan seluruh model kontennya: blok halaman yang bisa diurutkan ulang, artikel, tonggak sejarah, mitra, profil kepemimpinan, dan album foto. Di sampingnya ada perkakas operasional — pengalihan 301, log 404, pemeriksa tautan yang menyusun ulang laporannya dari nol setiap kali berjalan, dan sinkronisasi Search Console yang menarik metrik harian ke dalam panel supaya klien melihat trafiknya di tempat mereka sudah bekerja.',
+        'Rekrutmen awalnya berjalan di panel, lalu dipindahkan ke Odoo, tempat HRD memang sudah bekerja. Lowongan kini ditarik dari Odoo setiap sepuluh menit ke tabel bayangan, dan setiap lamaran diteruskan menjadi kartu pelamar di Odoo; situs hanya menyimpan jejak teknis dengan email yang di-hash. Halamannya dirender dari salinan, sehingga Odoo yang mati hanya menghentikan pembaruan, bukan halaman karirnya. Odoo memberi id baru pada posisi yang dibuka ulang, jadi lowongan dicocokkan lewat hash judul, departemen, dan perusahaan — URL yang sudah tersebar di grup WhatsApp tetap hidup.',
+        'Karir diluncurkan lebih dulu, di domain utama, sementara sisa situs menunggu persetujuan: nginx menjawab 503 di semua alamat kecuali /karir. Subdomain memang lebih mudah di hari pertama, tetapi akan memindahkan setiap URL lowongan pada hari peluncuran.',
       ],
     },
     features: {
       en: [
         'Page content assembled from reorderable blocks, edited entirely from the admin panel.',
         'Business units, leadership profiles, milestones, partners and company statistics as first-class content.',
-        'Job vacancies per business unit, with an application form that feeds a six-stage selection pipeline.',
-        'Applicant CVs kept on a private disk, downloadable only through an authenticated panel route.',
+        'Careers page fed by Odoo: vacancies synced every ten minutes, applications and CVs forwarded straight to Odoo.',
+        'Stable vacancy URLs across Odoo reopenings, with slug and SEO meta owned by the site.',
+        'Application form options read from Odoo, with each Odoo error mapped to a message the applicant can act on.',
         'Photo albums and a news section, both server-rendered for indexing.',
         'SEO metadata, redirects, a 404 log and a broken-link scanner, all managed in-panel.',
         'Google Search Console credentials, verification and daily metrics surfaced inside the admin dashboard.',
-        'Forty backend tests covering the API, admin panel, content model and SEO rules.',
+        'Over 360 backend tests covering the API, admin panel, content model, SEO rules and the Odoo contract.',
       ],
       id: [
         'Isi halaman disusun dari blok yang bisa diurutkan ulang, seluruhnya disunting dari panel admin.',
         'Unit bisnis, profil kepemimpinan, tonggak sejarah, mitra, dan statistik perusahaan sebagai konten kelas satu.',
-        'Lowongan kerja per unit bisnis, dengan form lamaran yang mengalir ke alur seleksi enam tahap.',
-        'CV pelamar disimpan di disk privat, hanya bisa diunduh lewat rute panel yang terautentikasi.',
+        'Halaman karir yang bersumber dari Odoo: lowongan disinkron tiap sepuluh menit, lamaran dan CV diteruskan langsung ke Odoo.',
+        'URL lowongan tetap meski posisinya dibuka ulang di Odoo, dengan slug dan meta SEO milik situs.',
+        'Pilihan form lamaran dibaca dari Odoo, dan setiap galat Odoo diterjemahkan menjadi pesan yang bisa ditindaklanjuti pelamar.',
         'Album foto dan kanal berita, keduanya dirender di server agar terindeks.',
         'Metadata SEO, pengalihan, log 404, dan pemindai tautan rusak, semuanya dikelola dari panel.',
         'Kredensial, verifikasi, dan metrik harian Google Search Console tampil di dasbor admin.',
-        'Empat puluh test backend yang menutup API, panel admin, model konten, dan aturan SEO.',
+        'Lebih dari 360 test backend yang menutup API, panel admin, model konten, aturan SEO, dan kontrak dengan Odoo.',
       ],
     },
     notes: [
       { k: { en: 'Rendering', id: 'Rendering' }, v: { en: 'Nuxt SSR; Laravel serves JSON only, never HTML', id: 'Nuxt SSR; Laravel hanya menyajikan JSON, tidak pernah HTML' } },
-      { k: { en: 'Media', id: 'Media' }, v: { en: 'Spatie Media Library for images; a separate private disk for CVs', id: 'Spatie Media Library untuk gambar; disk privat terpisah untuk CV' } },
+      { k: { en: 'Personal data', id: 'Data pribadi' }, v: { en: 'None kept for new applications — only a hashed email and send status', id: 'Tidak disimpan untuk lamaran baru — hanya hash email dan status kirim' } },
       { k: { en: 'URL mapping', id: 'Pemetaan URL' }, v: { en: 'Pages resolved by public path in Laravel, so routing has one source', id: 'Halaman dicari berdasarkan path publik di Laravel, sehingga routing bersumber tunggal' } },
+    ],
+    media: [
+      {
+        src: { en: 'projects/kfg/en/01-cover.png', id: 'projects/kfg/id/01-cover.png' }, width: 1600, height: 900,
+        alt: { en: 'Kembar Futa Group title card with a desktop mockup of the home page hero and a phone showing open vacancies.', id: 'Kartu judul Kembar Futa Group dengan mockup desktop hero beranda dan ponsel berisi lowongan terbuka.' },
+        caption: { en: 'Forest, saffron and cream with Plus Jakarta Sans. Mockups redrawn from the site with sample data; the site itself is in Indonesian.', id: 'Forest, saffron, dan cream dengan Plus Jakarta Sans. Mockup digambar ulang dari situs dengan data contoh.' },
+      },
+      {
+        src: { en: 'projects/kfg/en/02-headless.png', id: 'projects/kfg/id/02-headless.png' }, width: 1200, height: 1200,
+        alt: { en: 'Diagram: the Filament panel saves to a Laravel API, which serves JSON to Nuxt, which renders HTML for visitors and search engines; operational tools and MySQL sit beside it.', id: 'Diagram: panel Filament menyimpan ke API Laravel, yang menyajikan JSON ke Nuxt, yang merender HTML untuk pengunjung dan mesin pencari; perkakas operasional dan MySQL berada di sampingnya.' },
+        caption: { en: 'Every word comes from the panel; the frontend holds layout, not content.', id: 'Setiap kata datang dari panel; frontend hanya memegang tata letak, bukan isi.' },
+      },
+      {
+        src: { en: 'projects/kfg/en/03-careers-odoo.png', id: 'projects/kfg/id/03-careers-odoo.png' }, width: 1200, height: 1200,
+        alt: { en: 'Diagram: Odoo vacancies sync every ten minutes into a shadow table, Nuxt renders /karir from it, and applications are forwarded back to Odoo.', id: 'Diagram: lowongan Odoo disinkron tiap sepuluh menit ke tabel bayangan, Nuxt merender /karir darinya, dan lamaran diteruskan kembali ke Odoo.' },
+        caption: { en: 'Odoo owns hiring; the site keeps stable vacancy URLs through an identity key.', id: 'Odoo memegang rekrutmen; situs menjaga URL lowongan tetap lewat identity key.' },
+      },
+      {
+        src: { en: 'projects/kfg/en/04-admin-dashboard.png', id: 'projects/kfg/id/04-admin-dashboard.png' }, width: 1200, height: 1200,
+        alt: { en: 'Filament admin dashboard with form submissions, site status, action items, SEO health gauges and recent submissions.', id: 'Dasbor admin Filament dengan kiriman form, status situs, hal yang perlu ditindak, gauge kesehatan SEO, dan kiriman terbaru.' },
+        caption: { en: 'One card, one question: colour appears only for status.', id: 'Satu kartu, satu pertanyaan: warna hanya muncul untuk status.' },
+      },
+      {
+        src: { en: 'projects/kfg/en/05-mobile.png', id: 'projects/kfg/id/05-mobile.png' }, width: 1200, height: 1200,
+        alt: { en: 'Three phone screens: the home hero with business units, the open vacancies list, and the application form.', id: 'Tiga layar ponsel: hero beranda dengan unit bisnis, daftar lowongan terbuka, dan form lamaran.' },
+        caption: { en: 'Home, careers and the application form on a phone.', id: 'Beranda, karir, dan form lamaran di ponsel.' },
+      },
     ],
   },
 
@@ -213,6 +244,33 @@ export const projects: Project[] = [
       { k: { en: 'API addresses', id: 'Alamat API' }, v: { en: 'Browser and Nuxt-server base URLs kept separate on purpose', id: 'URL basis untuk browser dan untuk server Nuxt sengaja dipisah' } },
       { k: { en: 'Dependencies', id: 'Dependency' }, v: { en: 'All free and open source — MIT and SIL OFL, no paid packages', id: 'Seluruhnya gratis dan open source — MIT dan SIL OFL, tanpa paket berbayar' } },
     ],
+    media: [
+      {
+        src: { en: 'projects/jasa-cor-logam/en/01-cover.png', id: 'projects/jasa-cor-logam/id/01-cover.png' }, width: 1600, height: 900,
+        alt: { en: 'Jasa Cor Logam title card with a desktop mockup of the navy-and-orange home page hero and a phone showing the casting process steps.', id: 'Kartu judul Jasa Cor Logam dengan mockup desktop hero beranda bernuansa navy dan oranye, serta ponsel berisi tahapan pengecoran.' },
+        caption: { en: 'Navy and orange with Be Vietnam Pro. Mockups redrawn from the site with sample data; the site itself is in Indonesian.', id: 'Navy dan oranye dengan Be Vietnam Pro. Mockup digambar ulang dari situs dengan data contoh.' },
+      },
+      {
+        src: { en: 'projects/jasa-cor-logam/en/02-seo-fallback.png', id: 'projects/jasa-cor-logam/id/02-seo-fallback.png' }, width: 1200, height: 1200,
+        alt: { en: 'Fallback chain for meta title, description, OG image and canonical, above a Google result preview and the server-rendered head tags.', id: 'Rantai fallback untuk meta title, deskripsi, gambar OG, dan canonical, di atas pratinjau hasil Google dan tag head yang dirender server.' },
+        caption: { en: 'Every meta field falls back to the next source, so the frontend never receives null.', id: 'Setiap field meta jatuh ke sumber berikutnya, sehingga frontend tidak pernah menerima null.' },
+      },
+      {
+        src: { en: 'projects/jasa-cor-logam/en/03-save-rules.png', id: 'projects/jasa-cor-logam/id/03-save-rules.png' }, width: 1200, height: 1200,
+        alt: { en: 'Six rules enforced on save: required alt text, measured image dimensions, automatic 301 on slug change, refused redirect loops, 410 for deleted articles, and a 404 log with suggested redirects.', id: 'Enam aturan yang ditegakkan saat menyimpan: alt text wajib, dimensi gambar terukur, 301 otomatis saat slug berubah, lingkaran pengalihan ditolak, 410 untuk artikel terhapus, dan log 404 dengan saran pengalihan.' },
+        caption: { en: 'Rules checked on save rather than written in a style guide.', id: 'Aturan diperiksa saat menyimpan, bukan ditulis di panduan.' },
+      },
+      {
+        src: { en: 'projects/jasa-cor-logam/en/04-admin-editor.png', id: 'projects/jasa-cor-logam/id/04-admin-editor.png' }, width: 1200, height: 1200,
+        alt: { en: 'Filament article editor with a focus keyword, snippet preview, and a content analysis panel listing passed and failed checks.', id: 'Editor artikel Filament dengan focus keyword, pratinjau snippet, dan panel analisis konten berisi pemeriksaan yang lolos dan gagal.' },
+        caption: { en: 'A self-written content analyser in the panel instead of a paid SEO plugin.', id: 'Penganalisis konten buatan sendiri di panel, bukan plugin SEO berbayar.' },
+      },
+      {
+        src: { en: 'projects/jasa-cor-logam/en/05-build-indexing.png', id: 'projects/jasa-cor-logam/id/05-build-indexing.png' }, width: 1200, height: 1200,
+        alt: { en: 'A staging build printing a not-indexable warning next to a production build, their robots.txt files, and a sitemap table with reasons for excluded URLs.', id: 'Build staging yang mencetak peringatan tidak terindeks di samping build produksi, robots.txt keduanya, dan tabel sitemap beserta alasan URL yang tidak masuk.' },
+        caption: { en: 'Indexability is fixed at build time, so the wrong build announces itself.', id: 'Indeksabilitas ditentukan saat build, jadi build yang keliru memberi tahu dirinya sendiri.' },
+      },
+    ],
   },
 
   /* ---------------------------------------------------------------- */
@@ -272,9 +330,125 @@ export const projects: Project[] = [
       ],
     },
     notes: [
-      { k: { en: 'Platform choice', id: 'Pilihan platform' }, v: { en: 'PWA over native — iPhone users and laptop dashboards on one codebase', id: 'PWA, bukan native — pengguna iPhone dan dasbor laptop dalam satu codebase' } },
+      { k: { en: 'Platform choice', id: 'Pilihan platform' }, v: { en: 'PWA first — iPhone users and laptop dashboards on one codebase; a native Android app came later', id: 'PWA lebih dulu — pengguna iPhone dan dasbor laptop dalam satu codebase; aplikasi Android native menyusul' } },
       { k: { en: 'QR on iOS', id: 'QR di iOS' }, v: { en: 'BarcodeDetector with a zxing WASM fallback', id: 'BarcodeDetector dengan cadangan WASM zxing' } },
       { k: { en: 'Tests', id: 'Pengujian' }, v: { en: '137 tests; migrations and RLS run against PGlite, no Docker', id: '137 test; migrasi dan RLS diuji dengan PGlite, tanpa Docker' } },
+    ],
+    media: [
+      {
+        src: { en: 'projects/generus/en/01-cover.png', id: 'projects/generus/id/01-cover.png' }, width: 1600, height: 900,
+        alt: { en: 'Generus logo with the desktop home page in a browser and the same page on a phone, showing an ongoing gathering with 142 of 528 recorded.', id: 'Logo Generus dengan beranda versi desktop di browser dan versi ponsel, menampilkan pengajian yang sedang berlangsung dengan 142 dari 528 tercatat.' },
+        caption: { en: 'One app for phones and laptops: sidebar on desktop, bottom tabs on mobile. Mockups redrawn with sample data; the app UI is in Indonesian.', id: 'Satu aplikasi untuk HP dan laptop: menu samping di desktop, tab bawah di HP. Mockup digambar ulang dengan data contoh.' },
+      },
+      {
+        src: { en: 'projects/generus/en/02-offline-scan.png', id: 'projects/generus/id/02-offline-scan.png' }, width: 1200, height: 1200,
+        alt: { en: 'Three phones scanning QR cards for the same gathering — recorded, already recorded, and late — above a four-step flow from reading the card to syncing with ON CONFLICT DO NOTHING.', id: 'Tiga ponsel memindai kartu QR untuk pengajian yang sama — tercatat, sudah tercatat, dan terlambat — di atas alur empat langkah dari membaca kartu hingga sinkron dengan ON CONFLICT DO NOTHING.' },
+        caption: { en: 'Several officers, no signal needed: scans are matched on the device and the first record wins.', id: 'Banyak petugas, tanpa perlu sinyal: scan dicocokkan di perangkat dan catatan pertama yang menang.' },
+      },
+      {
+        src: { en: 'projects/generus/en/03-access-rls.png', id: 'projects/generus/id/03-access-rls.png' }, width: 1200, height: 1200,
+        alt: { en: 'A unit tree with ltree paths where a village and its four groups are highlighted, next to the generus_select RLS policy, an aggregate recap for the curriculum team, and six role cards.', id: 'Pohon unit dengan path ltree yang menyorot satu desa dan empat kelompoknya, di samping kebijakan RLS generus_select, rekap agregat untuk tim kurikulum, dan enam kartu peran.' },
+        caption: { en: 'Who sees what is one indexed ltree condition, enforced by row-level security on every table.', id: 'Siapa melihat apa cukup satu kondisi ltree ber-indeks, ditegakkan row-level security di setiap tabel.' },
+      },
+      {
+        src: { en: 'projects/generus/en/04-attendance.png', id: 'projects/generus/id/04-attendance.png' }, width: 1200, height: 1200,
+        alt: { en: 'Desktop attendance page for a village gathering: status totals, a checklist with H/T/I/S/A buttons per person, and side panels for per-group progress, scan officers, the delegation window and automatic locking.', id: 'Halaman presensi desktop untuk pengajian desa: total per status, checklist dengan tombol H/T/I/S/A per orang, serta panel progres per kelompok, petugas scan, jendela delegasi, dan kunci otomatis.' },
+        caption: { en: 'Checklist attendance, a delegated window for group admins, then automatic locking via pg_cron.', id: 'Presensi checklist, jendela delegasi untuk admin kelompok, lalu penguncian otomatis lewat pg_cron.' },
+      },
+      {
+        src: { en: 'projects/generus/en/05-curriculum.png', id: 'projects/generus/id/05-curriculum.png' }, width: 1200, height: 1200,
+        alt: { en: 'The October 2026 curriculum period with Qur’an and kitab targets and a memorisation item in Arabic, next to per-member reading progress by verse and a materials checklist.', id: 'Periode kurikulum Oktober 2026 dengan target Al-Qur’an dan kitab serta hafalan berteks Arab, di samping progres bacaan per generus per ayat dan checklist materi.' },
+        caption: { en: 'Monthly targets per level, with reading progress tracked to the verse or page.', id: 'Target bulanan per jenjang, dengan progres bacaan dipantau per ayat atau halaman.' },
+      },
+    ],
+  },
+
+  /* ---------------------------------------------------------------- */
+  {
+    slug: 'generus-mobile',
+    codename: 'generus-mobile',
+    categories: ['mobile'],
+    year: '2026',
+    title: { en: 'Generus Android — Native Companion App', id: 'Generus Android — Aplikasi Pendamping Native' },
+    summary: {
+      en: 'A native Kotlin version of the Generus PWA on the same Supabase project — offline attendance that still gets sent after the app is closed, an on-device QR scanner, and ID cards drawn on the phone.',
+      id: 'Versi Kotlin native dari PWA Generus di project Supabase yang sama — presensi offline yang tetap terkirim setelah aplikasi ditutup, pemindai QR di perangkat, dan kartu ID yang digambar di HP.',
+    },
+    role: { en: 'Sole developer — Android app and the database API it uses.', id: 'Pengembang tunggal — aplikasi Android dan API database yang dipakainya.' },
+    spec: [
+      { k: { en: 'Backend', id: 'Backend' }, v: { en: 'None new — same Supabase project, RLS and triggers as the PWA', id: 'Tidak ada yang baru — project Supabase, RLS, dan trigger yang sama dengan PWA' } },
+      { k: { en: 'Offline', id: 'Offline' }, v: { en: 'Room queue, sent by WorkManager even after the app is closed', id: 'Antrean Room, dikirim WorkManager walau aplikasi sudah ditutup' } },
+      { k: { en: 'Scanner', id: 'Pemindai' }, v: { en: 'CameraX + ML Kit on the device, with sound and vibration', id: 'CameraX + ML Kit di perangkat, dengan bunyi dan getar' } },
+    ],
+    stack: ['Kotlin', 'Jetpack Compose', 'Room', 'WorkManager', 'Supabase', 'PostgreSQL', 'CameraX', 'ML Kit'],
+    repo: 'https://github.com/aamnnr/generus-mobile',
+    overview: {
+      en: [
+        'Generus started as a PWA so iPhone users and laptop dashboards could share one codebase. Its weak spot was background work: on iOS a PWA can only send queued attendance while it is open. An officer who closes the app in a hall with no signal leaves records stranded until the next time they open it.',
+        'The Android app covers the same ground as the PWA, on the same Supabase project. There is no new backend. Simple writes go straight to tables through PostgREST, and the joined queries that live in the PWA’s TypeScript became 41 SQL functions that run as the caller, so the same row-level security still decides what each account can see.',
+        'Attendance taps and scans land in a Room queue first, keyed by agenda and member so the latest tap wins. The queue is sent when a status is tapped, when the network returns, every 20 seconds while the app is open, and by WorkManager once the app is closed. The scanner reads cards with ML Kit on the device and matches a SHA-256 hash of the QR content against a local roster, so it works with no signal.',
+      ],
+      id: [
+        'Generus dimulai sebagai PWA agar pengguna iPhone dan dasbor laptop memakai satu codebase. Kelemahannya ada di pekerjaan latar: di iOS, PWA hanya bisa mengirim antrean presensi selama dibuka. Petugas yang menutup aplikasi di aula tanpa sinyal membuat catatan tertahan sampai aplikasi dibuka lagi.',
+        'Aplikasi Android mencakup fitur yang sama dengan PWA, di project Supabase yang sama. Tidak ada backend baru. Tulis sederhana langsung ke tabel lewat PostgREST, dan query gabungan yang di PWA ada di TypeScript dijadikan 41 fungsi SQL yang berjalan sebagai pemanggil, sehingga row-level security yang sama tetap menentukan apa yang dilihat tiap akun.',
+        'Ketukan presensi dan hasil scan masuk antrean Room lebih dulu, berkunci agenda dan generus sehingga ketukan terakhir yang berlaku. Antrean dikirim saat status diketuk, saat jaringan kembali, setiap 20 detik selama aplikasi terbuka, dan oleh WorkManager setelah aplikasi ditutup. Pemindai membaca kartu dengan ML Kit di perangkat dan mencocokkan hash SHA-256 isi QR ke roster lokal, jadi tetap jalan tanpa sinyal.',
+      ],
+    },
+    features: {
+      en: [
+        'Home with the ongoing or next gathering, quick actions, monthly attendance and a three-absences-in-a-row warning.',
+        'Agendas — one-off or weekly — with cancel, lock, and scan officers.',
+        'Offline checklist with H/T/I/S/A, mark-all-present, and delegated completion for group admins.',
+        'QR scanner with CameraX and ML Kit, sound and vibration per result, and name search as a fallback.',
+        'Member records with filters, status changes, transfers, card reissue and bulk level promotion.',
+        'ID cards drawn on the device and exported as an A4 PDF, nine per sheet, ready to print or share.',
+        'Excel import validated on the phone, and monthly reports exported to Excel.',
+        'Curriculum periods, targets and a materials library with Arabic text; achievement checklists and bulk kitab progress.',
+        'Region and account admin through an Edge Function that holds the service role, plus forced password change on first login.',
+      ],
+      id: [
+        'Beranda dengan pengajian yang sedang berlangsung atau berikutnya, aksi cepat, kehadiran bulanan, dan peringatan alpa tiga kali berturut-turut.',
+        'Agenda — sekali atau mingguan — dengan batal, kunci, dan petugas scan.',
+        'Checklist offline H/T/I/S/A, hadirkan semua, dan delegasi untuk admin kelompok.',
+        'Pemindai QR dengan CameraX dan ML Kit, bunyi dan getar per hasil, dan cari nama sebagai cadangan.',
+        'Data generus dengan filter, perubahan status, mutasi, terbitkan ulang kartu, dan kenaikan jenjang massal.',
+        'Kartu ID yang digambar di perangkat lalu diekspor ke PDF A4, sembilan kartu per lembar, siap dicetak atau dibagikan.',
+        'Import Excel yang divalidasi di HP, dan ekspor laporan bulanan ke Excel.',
+        'Periode kurikulum, target, dan pustaka materi berteks Arab; checklist capaian dan progres kitab massal.',
+        'Admin wilayah dan akun lewat Edge Function yang memegang service role, serta wajib ganti password saat login pertama.',
+      ],
+    },
+    notes: [
+      { k: { en: 'Builds', id: 'Build' }, v: { en: 'Two flavors — test and official server — installable side by side', id: 'Dua flavor — server uji dan resmi — bisa terpasang berdampingan' } },
+      { k: { en: 'Target', id: 'Target' }, v: { en: 'minSdk 26, targetSdk 36, JDK 17', id: 'minSdk 26, targetSdk 36, JDK 17' } },
+      { k: { en: 'Secrets', id: 'Kunci rahasia' }, v: { en: 'Only the URL and publishable key ship in the APK', id: 'APK hanya membawa URL dan publishable key' } },
+    ],
+    media: [
+      {
+        src: { en: 'projects/generus-mobile/en/01-cover.png', id: 'projects/generus-mobile/id/01-cover.png' }, width: 1600, height: 900,
+        alt: { en: 'Generus Android title with three Android phones: the home screen, an attendance checklist, and the QR scanner.', id: 'Judul Generus Android dengan tiga ponsel Android: beranda, checklist presensi, dan pemindai QR.' },
+        caption: { en: 'Home, checklist and scanner in the native app. Mockups redrawn with sample data; the app UI is in Indonesian.', id: 'Beranda, checklist, dan pemindai di aplikasi native. Mockup digambar ulang dengan data contoh.' },
+      },
+      {
+        src: { en: 'projects/generus-mobile/en/02-architecture.png', id: 'projects/generus-mobile/id/02-architecture.png' }, width: 1200, height: 1200,
+        alt: { en: 'Diagram: the Android app and the PWA both connect to one Supabase project — Auth, PostgREST, 41 mobile_* RPC functions, unchanged RLS, and an admin Edge Function — with test and official build flavors below.', id: 'Diagram: aplikasi Android dan PWA sama-sama terhubung ke satu project Supabase — Auth, PostgREST, 41 fungsi RPC mobile_*, RLS yang tidak berubah, dan Edge Function admin — dengan flavor uji dan resmi di bawahnya.' },
+        caption: { en: 'A second client with no new backend: the same rules guard both apps.', id: 'Klien kedua tanpa backend baru: aturan yang sama menjaga kedua aplikasi.' },
+      },
+      {
+        src: { en: 'projects/generus-mobile/en/03-offline-queue.png', id: 'projects/generus-mobile/id/03-offline-queue.png' }, width: 1200, height: 1200,
+        alt: { en: 'An Android attendance checklist with two items waiting to send, next to the four triggers that flush the Room queue and a comparison with the PWA on iOS.', id: 'Checklist presensi Android dengan dua item menunggu kirim, di samping empat pemicu pengiriman antrean Room dan perbandingan dengan PWA di iOS.' },
+        caption: { en: 'Taps are saved on the phone first; WorkManager sends them even after the app is closed.', id: 'Ketukan disimpan di HP lebih dulu; WorkManager mengirimnya walau aplikasi sudah ditutup.' },
+      },
+      {
+        src: { en: 'projects/generus-mobile/en/04-scanner.png', id: 'projects/generus-mobile/id/04-scanner.png' }, width: 1200, height: 1200,
+        alt: { en: 'Three Android scanner screens — recorded in green, already recorded in amber, rejected in red — above the flow from CameraX and ML Kit to a hashed roster lookup.', id: 'Tiga layar pemindai Android — tercatat hijau, sudah tercatat kuning, ditolak merah — di atas alur dari CameraX dan ML Kit hingga pencocokan roster ber-hash.' },
+        caption: { en: 'Three clear answers, each with its own sound and vibration.', id: 'Tiga jawaban jelas, masing-masing dengan bunyi dan getarnya sendiri.' },
+      },
+      {
+        src: { en: 'projects/generus-mobile/en/05-id-cards.png', id: 'projects/generus-mobile/id/05-id-cards.png' }, width: 1200, height: 1200,
+        alt: { en: 'A portrait Generus ID card with a QR code, next to an A4 PDF page of nine cards and cards for Excel import and report export.', id: 'Kartu ID Generus potret dengan kode QR, di samping halaman PDF A4 berisi sembilan kartu serta kartu import Excel dan ekspor laporan.' },
+        caption: { en: 'ID cards drawn on the phone and exported nine to an A4 page; long names are shortened to an initial.', id: 'Kartu ID digambar di HP dan diekspor sembilan per halaman A4; nama panjang disingkat jadi huruf awal.' },
+      },
     ],
   },
 
@@ -403,7 +577,7 @@ export const projects: Project[] = [
     },
     features: {
       en: [
-        'Dose recommendation per commodity, applied as a timed motor run.',
+        'Rule-based dose recommendation for 13 crops by days after planting, for NPK or Urea, with the plant count estimated from field area and spacing.',
         'Live device status: motor state, current dose, and accumulated statistics.',
         'Manual override, so the operator can always overrule the recommendation.',
         'On-device OLED readout for when the phone is not to hand.',
@@ -411,7 +585,7 @@ export const projects: Project[] = [
         'One Flutter codebase serving Android, iOS, web and desktop.',
       ],
       id: [
-        'Rekomendasi dosis per komoditas, diterapkan sebagai putaran motor berdurasi.',
+        'Rekomendasi dosis berbasis aturan untuk 13 komoditas menurut HST, untuk NPK atau Urea, dengan jumlah tanaman diperkirakan dari luas lahan dan jarak tanam.',
         'Status perangkat langsung: keadaan motor, dosis berjalan, dan statistik terkumpul.',
         'Kendali manual, sehingga operator selalu bisa menolak rekomendasi.',
         'Tampilan OLED di perangkat untuk saat ponsel tidak di tangan.',
@@ -423,6 +597,33 @@ export const projects: Project[] = [
       { k: { en: 'Broker', id: 'Broker' }, v: { en: 'Public MQTT broker on port 1883 (EMQX / Mosquitto)', id: 'Broker MQTT publik pada port 1883 (EMQX / Mosquitto)' } },
       { k: { en: 'State', id: 'Status' }, v: { en: 'Provider for app state; EEPROM for device statistics', id: 'Provider untuk status aplikasi; EEPROM untuk statistik perangkat' } },
       { k: { en: 'Back end', id: 'Back end' }, v: { en: 'None — app and device are MQTT peers', id: 'Tidak ada — aplikasi dan perangkat adalah peer MQTT' } },
+    ],
+    media: [
+      {
+        src: { en: 'projects/ferticore/en/01-cover.png', id: 'projects/ferticore/id/01-cover.png' }, width: 1600, height: 900,
+        alt: { en: 'FertiCore title with the dashboard on a phone and in a desktop browser, showing a 2.90 g dose and usage statistics.', id: 'Judul FertiCore dengan dasbor di ponsel dan browser desktop, menampilkan dosis 2,90 g dan statistik pemakaian.' },
+        caption: { en: 'One Flutter codebase on phone, web and desktop. Mockups redrawn from the app with sample values; the app UI is in Indonesian.', id: 'Satu basis kode Flutter di ponsel, web, dan desktop. Mockup digambar ulang dari aplikasi dengan nilai contoh.' },
+      },
+      {
+        src: { en: 'projects/ferticore/en/02-recommendation.png', id: 'projects/ferticore/id/02-recommendation.png' }, width: 1200, height: 1200,
+        alt: { en: 'The recommendation screen for maize, NPK, 1,000 m² and 25 days after planting, next to four steps: plant count, dose band, fertiliser factor, and the MQTT command.', id: 'Layar rekomendasi untuk jagung, NPK, 1.000 m², dan 25 HST, di samping empat langkah: jumlah tanaman, rentang dosis, faktor pupuk, dan perintah MQTT.' },
+        caption: { en: 'From crop and age to grams per plant, worked through with the app’s own numbers.', id: 'Dari tanaman dan umur ke gram per tanaman, dihitung dengan angka dari aplikasi.' },
+      },
+      {
+        src: { en: 'projects/ferticore/en/03-knowledge-base.png', id: 'projects/ferticore/id/03-knowledge-base.png' }, width: 1200, height: 1200,
+        alt: { en: 'Table of 13 crops with planting spacing and dose bands by days after planting, from maize to sugarcane.', id: 'Tabel 13 komoditas dengan jarak tanam dan rentang dosis menurut HST, dari jagung hingga tebu.' },
+        caption: { en: 'The full knowledge base: one row per crop, one band per growth stage.', id: 'Knowledge base lengkap: satu baris per komoditas, satu rentang per tahap tumbuh.' },
+      },
+      {
+        src: { en: 'projects/ferticore/en/04-mqtt.png', id: 'projects/ferticore/id/04-mqtt.png' }, width: 1200, height: 1200,
+        alt: { en: 'Diagram: Flutter app, public MQTT broker and ESP32 as peers, with the status payload, the three commands, and the three connection states.', id: 'Diagram: aplikasi Flutter, broker MQTT publik, dan ESP32 sebagai peer, dengan payload status, tiga perintah, dan tiga status koneksi.' },
+        caption: { en: 'No server in the middle — and a clear difference between “broker reachable” and “device online”.', id: 'Tanpa server di tengah — dan beda yang jelas antara “broker terjangkau” dan “alat online”.' },
+      },
+      {
+        src: { en: 'projects/ferticore/en/05-screens.png', id: 'projects/ferticore/id/05-screens.png' }, width: 1200, height: 1200,
+        alt: { en: 'Three phone screens: the dashboard with dose and statistics, manual dosing, and the Wi-Fi reset steps.', id: 'Tiga layar ponsel: dasbor dengan dosis dan statistik, dosis manual, dan langkah reset Wi-Fi.' },
+        caption: { en: 'Monitor, override with a manual dose, or send the device back to Wi-Fi setup.', id: 'Pantau, ambil alih dengan dosis manual, atau kembalikan alat ke setup Wi-Fi.' },
+      },
     ],
   },
 
@@ -443,32 +644,34 @@ export const projects: Project[] = [
       { k: { en: 'Telemetry', id: 'Telemetri' }, v: { en: 'Battery, network and operational health per device', id: 'Baterai, jaringan, dan kesehatan operasional tiap perangkat' } },
       { k: { en: 'Resilience', id: 'Ketahanan' }, v: { en: 'Commands queued offline and flushed on reconnect', id: 'Perintah diantrikan saat luring dan dikirim saat tersambung' } },
     ],
-    stack: ['Flutter', 'Dart', 'MQTT', 'fl_chart', 'BLE provisioning'],
+    stack: ['Flutter', 'Dart', 'MQTT', 'Provider', 'fl_chart', 'SharedPreferences'],
     repo: 'https://github.com/aamnnr/pestzone-spray-app',
     overview: {
       en: [
-        'Greenhouses and open plots are exactly the places where mobile signal is worst, which is inconvenient for an app whose entire job is sending commands. Rather than failing the tap, the app queues it: the instruction is held locally and flushed the moment the broker is reachable again. The operator presses the button once, not five times.',
-        'Setting a device up has the same problem in a different form — a device with no Wi-Fi credentials cannot be configured over Wi-Fi. The app provisions it over Bluetooth instead, pushing SSID and password to the ESP32 while it sits in setup mode.',
+        'Greenhouses and open plots are exactly the places where mobile signal is worst, which is inconvenient for an app whose entire job is sending commands. Rather than failing the tap, the app queues it: the instruction is saved on the phone — on disk, so it survives the app being closed — and flushed in order the moment the broker is reachable again. The operator presses the button once, not five times.',
+        'Devices are never registered by hand. The app listens on a wildcard telemetry topic, so any unit that reports in appears with its battery, day/night state and switch positions. When a unit needs a new network, the app sends it a reset; it restarts as its own setup access point, and the Wi-Fi is chosen from a browser at 192.168.4.1.',
       ],
       id: [
         'Rumah kaca dan lahan terbuka justru tempat dengan sinyal seluler terburuk, dan itu merepotkan bagi aplikasi yang seluruh tugasnya mengirim perintah. Alih-alih menggagalkan ketukan, aplikasi mengantrikannya: instruksi disimpan lokal dan dikirim begitu broker kembali terjangkau. Operator menekan tombol sekali, bukan lima kali.',
-        'Menyiapkan perangkat punya persoalan sama dalam bentuk lain — perangkat tanpa kredensial Wi-Fi tidak bisa dikonfigurasi lewat Wi-Fi. Karena itu aplikasi menyiapkannya lewat Bluetooth, mengirim SSID dan kata sandi ke ESP32 selagi perangkat berada di mode setup.',
+        'Perangkat tidak pernah didaftarkan manual. Aplikasi mendengarkan topik telemetri wildcard, sehingga unit apa pun yang melapor langsung muncul beserta baterai, status siang/malam, dan posisi sakelarnya. Saat unit perlu jaringan baru, aplikasi mengirim perintah reset; unit restart sebagai access point setup, lalu Wi-Fi dipilih lewat browser di 192.168.4.1.',
       ],
     },
     features: {
       en: [
         'Real-time battery level, network status and device health.',
         'Manual toggles for UV attraction lights and the water pump.',
-        'Historical charts and activity logs drawn with fl_chart.',
-        'Wi-Fi provisioning and device reset through a setup wizard.',
+        'One-off watering by duration, plus daily schedules for the UV light and the pump.',
+        'Battery trend chart (fl_chart) and an activity log per device, kept on the phone.',
+        'Wi-Fi reset that sends a unit back to its setup access point.',
         'Offline command queue that flushes on reconnect.',
         'Light and dark themes.',
       ],
       id: [
         'Level baterai, status jaringan, dan kesehatan perangkat secara waktu nyata.',
         'Sakelar manual untuk lampu penarik hama UV dan pompa air.',
-        'Grafik historis dan log aktivitas digambar dengan fl_chart.',
-        'Penyiapan Wi-Fi dan reset perangkat lewat wizard setup.',
+        'Penyiraman khusus berdasarkan durasi, serta jadwal harian untuk lampu UV dan pompa.',
+        'Grafik tren baterai (fl_chart) dan log aktivitas per perangkat, tersimpan di HP.',
+        'Reset Wi-Fi yang mengembalikan unit ke access point setup.',
         'Antrean perintah luring yang dikirim ulang saat tersambung.',
         'Tema terang dan gelap.',
       ],
@@ -478,63 +681,32 @@ export const projects: Project[] = [
       { k: { en: 'Command topic', id: 'Topik perintah' }, v: { en: 'tanisolution/{device_id}/command', id: 'tanisolution/{device_id}/command' } },
       { k: { en: 'Payload', id: 'Muatan' }, v: { en: 'JSON — e.g. {"bat":85,"is_night":true,"uv":1,"pump":0}', id: 'JSON — mis. {"bat":85,"is_night":true,"uv":1,"pump":0}' } },
     ],
-  },
-
-  /* ---------------------------------------------------------------- */
-  {
-    slug: 'pestmist-control',
-    codename: 'PestMist Control',
-    categories: ['mobile', 'iot'],
-    year: '2026',
-    title: { en: 'PestMist Control', id: 'PestMist Control' },
-    summary: {
-      en: 'Multi-device control for ESP32 misting units — timed pump bursts, a daily UV schedule, and alerts when a unit goes quiet.',
-      id: 'Kendali multi-perangkat untuk unit pengabut ESP32 — semprotan pompa berdurasi, jadwal UV harian, dan peringatan saat unit berhenti melapor.',
-    },
-    role: { en: 'Sole developer.', id: 'Pengembang tunggal.' },
-    spec: [
-      { k: { en: 'Dosing', id: 'Takaran' }, v: { en: 'Pump bursts of 5, 10 or 15 seconds', id: 'Semprotan pompa 5, 10, atau 15 detik' } },
-      { k: { en: 'Schedule', id: 'Jadwal' }, v: { en: 'Daily UV lamp schedule held per device', id: 'Jadwal lampu UV harian per perangkat' } },
-      { k: { en: 'Trust', id: 'Kepercayaan' }, v: { en: '“Last seen” indicator plus low-battery and offline alerts', id: 'Indikator "terakhir terlihat" plus peringatan baterai lemah dan luring' } },
-    ],
-    stack: ['Flutter', 'Dart', 'MQTT', 'BLE'],
-    repo: 'https://github.com/aamnnr/pest-watering-control-app',
-    overview: {
-      en: [
-        'A control app for equipment you cannot see has one obligation above the others: it must never imply a device is fine when it has actually stopped answering. PestMist makes staleness explicit — every device carries a last-seen timestamp, and going quiet raises a notification rather than leaving a stale reading on screen looking healthy.',
-        'History is kept per device rather than pooled, so switching between units does not blend two machines’ telemetry into one misleading chart.',
-      ],
-      id: [
-        'Aplikasi kendali untuk peralatan yang tak terlihat punya satu kewajiban di atas yang lain: ia tidak boleh membuat seolah perangkat baik-baik saja padahal sudah berhenti menjawab. PestMist membuat keusangan itu eksplisit — setiap perangkat membawa penanda waktu terakhir terlihat, dan berhentinya laporan memunculkan notifikasi alih-alih meninggalkan bacaan basi di layar yang tampak sehat.',
-        'Riwayat disimpan per perangkat, bukan digabung, sehingga berpindah unit tidak mencampur telemetri dua mesin menjadi satu grafik yang menyesatkan.',
-      ],
-    },
-    features: {
-      en: [
-        'UV lamp status read from device telemetry.',
-        'Pump spray commands with fixed 5 / 10 / 15 second durations.',
-        'Battery capacity monitoring with a low-battery notification.',
-        'Daily UV scheduling.',
-        '“Last seen” sync indicator and an offline-device alert.',
-        'Activity log and historical battery chart, stored per device.',
-        'Multiple saved devices with quick switching between them.',
-        'Wi-Fi provisioning over BLE while the ESP32 is in setup mode.',
-      ],
-      id: [
-        'Status lampu UV dibaca dari telemetri perangkat.',
-        'Perintah semprot pompa dengan durasi tetap 5 / 10 / 15 detik.',
-        'Pemantauan kapasitas baterai dengan notifikasi baterai lemah.',
-        'Penjadwalan UV harian.',
-        'Indikator sinkronisasi "terakhir terlihat" dan peringatan perangkat luring.',
-        'Log aktivitas dan grafik historis baterai, disimpan per perangkat.',
-        'Banyak perangkat tersimpan dengan pergantian cepat antar unit.',
-        'Penyiapan Wi-Fi lewat BLE saat ESP32 berada di mode setup.',
-      ],
-    },
-    notes: [
-      { k: { en: 'Telemetry topic', id: 'Topik telemetri' }, v: { en: 'tanisolution/{deviceId}/telemetry', id: 'tanisolution/{deviceId}/telemetry' } },
-      { k: { en: 'Command topic', id: 'Topik perintah' }, v: { en: 'tanisolution/{deviceId}/command', id: 'tanisolution/{deviceId}/command' } },
-      { k: { en: 'BLE setup name', id: 'Nama setup BLE' }, v: { en: 'Alburdat_Setup_{deviceId}', id: 'Alburdat_Setup_{deviceId}' } },
+    media: [
+      {
+        src: { en: 'projects/pestzone-spray/en/01-cover.png', id: 'projects/pestzone-spray/id/01-cover.png' }, width: 1600, height: 900,
+        alt: { en: 'Pestzone Spray title with three phones: the home screen in light and dark mode, and the control screen.', id: 'Judul Pestzone Spray dengan tiga ponsel: beranda mode terang dan gelap, serta layar kontrol.' },
+        caption: { en: 'Device list with battery and switches, in light and dark themes. Mockups redrawn with sample devices; the app UI is in Indonesian.', id: 'Daftar perangkat dengan baterai dan sakelar, dalam tema terang dan gelap. Mockup digambar ulang dengan perangkat contoh.' },
+      },
+      {
+        src: { en: 'projects/pestzone-spray/en/02-offline-queue.png', id: 'projects/pestzone-spray/id/02-offline-queue.png' }, width: 1200, height: 1200,
+        alt: { en: 'The home screen with the broker disconnected and a “will be processed when the device is active” message, next to the four steps of the offline command queue.', id: 'Beranda dengan broker terputus dan pesan “akan diproses saat alat aktif”, di samping empat langkah antrean perintah luring.' },
+        caption: { en: 'A tap with no signal is saved to disk and sent in order on reconnect.', id: 'Ketukan tanpa sinyal disimpan ke disk dan dikirim berurutan saat tersambung lagi.' },
+      },
+      {
+        src: { en: 'projects/pestzone-spray/en/03-control.png', id: 'projects/pestzone-spray/id/03-control.png' }, width: 1200, height: 1200,
+        alt: { en: 'The control and scheduling screen next to the five JSON commands it sends: UV and pump switches, one-off watering, a UV schedule and a watering schedule.', id: 'Layar kontrol dan penjadwalan di samping lima perintah JSON yang dikirimnya: sakelar UV dan pompa, penyiraman khusus, jadwal UV, dan jadwal penyiraman.' },
+        caption: { en: 'Every control is one small JSON command on the device’s own topic.', id: 'Setiap kontrol adalah satu perintah JSON kecil di topik milik perangkat.' },
+      },
+      {
+        src: { en: 'projects/pestzone-spray/en/04-log.png', id: 'projects/pestzone-spray/id/04-log.png' }, width: 1200, height: 1200,
+        alt: { en: 'The log screen with a battery trend chart and activity history, next to notes on wildcard telemetry, local storage, battery colours and online status.', id: 'Layar log dengan grafik tren baterai dan riwayat aktivitas, di samping catatan tentang telemetri wildcard, penyimpanan lokal, warna baterai, dan status online.' },
+        caption: { en: 'Telemetry and events in one log, stored on the phone.', id: 'Telemetri dan event dalam satu log, tersimpan di HP.' },
+      },
+      {
+        src: { en: 'projects/pestzone-spray/en/05-wifi-reset.png', id: 'projects/pestzone-spray/id/05-wifi-reset.png' }, width: 1200, height: 1200,
+        alt: { en: 'The Wi-Fi reset screen with its confirmation dialog, next to four steps from automatic discovery to reconfiguring the device at 192.168.4.1.', id: 'Layar reset Wi-Fi dengan dialog konfirmasinya, di samping empat langkah dari penemuan otomatis hingga konfigurasi ulang perangkat di 192.168.4.1.' },
+        caption: { en: 'Devices appear on their own; a Wi-Fi reset sends them back to setup mode.', id: 'Perangkat muncul sendiri; reset Wi-Fi mengembalikannya ke mode setup.' },
+      },
     ],
   },
 
@@ -766,7 +938,7 @@ export const projects: Project[] = [
       { k: { en: 'Layout', id: 'Tata letak' }, v: { en: 'Responsive across phone, tablet and desktop', id: 'Responsif di ponsel, tablet, dan desktop' } },
     ],
     stack: ['Next.js', 'JavaScript', 'Tailwind CSS', 'Cloudinary'],
-    repo: 'https://github.com/aamnnr/tanisolution_web',
+    repo: 'https://github.com/aamiin-workspace/profile-tanisolution',
     live: 'https://www.tanisolution.id',
     overview: {
       en: [
@@ -794,6 +966,33 @@ export const projects: Project[] = [
         'Tata letak responsif di berbagai perangkat.',
       ],
     },
+    media: [
+      {
+        src: { en: 'projects/tani-solution/en/01-cover.png', id: 'projects/tani-solution/id/01-cover.png' }, width: 1600, height: 900,
+        alt: { en: 'Tani Solution title card with a desktop mockup of the home page and its news slider, and a phone in dark mode.', id: 'Kartu judul Tani Solution dengan mockup desktop beranda beserta slider beritanya, dan ponsel dalam mode gelap.' },
+        caption: { en: 'Green #388E3C with Inter, in light and dark mode. Mockups redrawn from the site; the site itself is in Indonesian.', id: 'Hijau #388E3C dengan Inter, dalam mode terang dan gelap. Mockup digambar ulang dari situs.' },
+      },
+      {
+        src: { en: 'projects/tani-solution/en/02-content-flow.png', id: 'projects/tani-solution/id/02-content-flow.png' }, width: 1200, height: 1200,
+        alt: { en: 'Diagram: the admin panel posts to Next.js API routes guarded by JWT middleware, images go to Cloudinary, rows to MySQL, and public pages revalidate every 60 seconds.', id: 'Diagram: panel admin mengirim ke API route Next.js yang dijaga middleware JWT, gambar ke Cloudinary, baris ke MySQL, dan halaman publik diperbarui tiap 60 detik.' },
+        caption: { en: 'One admin form reaches the home page, the news index and the sitemap.', id: 'Satu form admin sampai ke beranda, daftar berita, dan sitemap.' },
+      },
+      {
+        src: { en: 'projects/tani-solution/en/03-admin.png', id: 'projects/tani-solution/id/03-admin.png' }, width: 1200, height: 1200,
+        alt: { en: 'Admin dashboard with content counts, and the Add News form with a photo ready to upload.', id: 'Dasbor admin dengan jumlah konten, dan form Tambah Berita dengan foto yang siap diunggah.' },
+        caption: { en: 'The admin panel: counts at a glance and a news form that uploads the photo on save.', id: 'Panel admin: jumlah konten sekilas pandang dan form berita yang mengunggah foto saat disimpan.' },
+      },
+      {
+        src: { en: 'projects/tani-solution/en/04-divisions.png', id: 'projects/tani-solution/id/04-divisions.png' }, width: 1200, height: 1200,
+        alt: { en: 'Six page headers: Teknosolusi, Edusolusi, Studio KreaSolusi, Mini Lab Teknologi, Pusat Kolaborasi, and Prestasi & Riset, each with its own accent colour.', id: 'Enam header halaman: Teknosolusi, Edusolusi, Studio KreaSolusi, Mini Lab Teknologi, Pusat Kolaborasi, dan Prestasi & Riset, masing-masing dengan warna aksennya.' },
+        caption: { en: 'Each division keeps its own accent colour inside one layout.', id: 'Setiap divisi punya warna aksennya sendiri di dalam satu tata letak.' },
+      },
+      {
+        src: { en: 'projects/tani-solution/en/05-theme-maintenance.png', id: 'projects/tani-solution/id/05-theme-maintenance.png' }, width: 1200, height: 1200,
+        alt: { en: 'The home page on two phones in light and dark mode, next to the maintenance-mode flow with its one-hour bypass cookie.', id: 'Beranda di dua ponsel dalam mode terang dan gelap, di samping alur mode maintenance dengan cookie bypass satu jam.' },
+        caption: { en: 'A remembered dark-mode toggle, and a maintenance switch the team can still see past.', id: 'Sakelar mode gelap yang diingat, dan mode maintenance yang tetap bisa dilewati tim.' },
+      },
+    ],
   },
 
   /* ---------------------------------------------------------------- */

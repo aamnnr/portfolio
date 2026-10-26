@@ -1,7 +1,7 @@
 ---
 import Base from '../../../layouts/Base.astro';
 import ProjectDetail from '../../../components/ProjectDetail.astro';
-import { projects } from '../../../data/projects';
+import { mediaSrc, projects } from '../../../data/projects';
 import { site } from '../../../data/site';
 import { projectPath, absolute } from '../../../i18n/utils';
 
@@ -33,7 +33,7 @@ const ld = {
   pathEn={projectPath(project.slug, 'en')}
   pathId={projectPath(project.slug, 'id')}
   extraLd={ld}
-  image={project.media?.[0] && { src: project.media[0].src, alt: project.media[0].alt.id }}
+  image={project.media?.[0] && { src: mediaSrc(project.media[0].src, 'id'), alt: project.media[0].alt.id }}
 >
   <ProjectDetail lang="id" project={project} />
 </Base>

@@ -81,8 +81,9 @@ export type Project = {
   /**
    * Tangkapan layar, foto perangkat, atau diagram. `src` relatif terhadap `public/`
    * (mis. `projects/ferticore/dashboard.png`); gambar pertama juga dipakai sebagai og:image.
+   * Bila gambar memuat teks, `src` boleh berupa `{ en, id }` agar tiap bahasa mendapat versinya sendiri.
    */
-  media?: { src: string; alt: T; caption?: T; width: number; height: number }[];
+  media?: { src: string | T; alt: T; caption?: T; width: number; height: number }[];
 };
 
 export const projects: Project[] = [
@@ -336,6 +337,33 @@ export const projects: Project[] = [
       { k: { en: 'Amounts', id: 'Nominal' }, v: { en: 'Stored as Long whole rupiah — no floating point', id: 'Disimpan sebagai Long rupiah penuh — tanpa floating point' } },
       { k: { en: 'Target', id: 'Target' }, v: { en: 'minSdk 26, targetSdk 36, Kotlin 2.1', id: 'minSdk 26, targetSdk 36, Kotlin 2.1' } },
       { k: { en: 'AI model', id: 'Model AI' }, v: { en: 'Read from a secret, swappable without an app update', id: 'Dibaca dari secret, bisa diganti tanpa update aplikasi' } },
+    ],
+    media: [
+      {
+        src: { en: 'projects/duitku/en/01-cover.png', id: 'projects/duitku/id/01-cover.png' }, width: 1600, height: 900,
+        alt: { en: 'Duitku app icon and three phone mockups: Home in light mode, Wallets in dark mode, and Insight.', id: 'Ikon aplikasi Duitku dan tiga mockup ponsel: Beranda mode terang, Dompet mode gelap, dan Insight.' },
+        caption: { en: 'Neutral “liquid glass” design with the Koko mascot. Mockups redrawn from the app with sample data; the app UI itself is in Indonesian.', id: 'Desain netral “liquid glass” dengan maskot Koko. Mockup digambar ulang dari aplikasi dengan data contoh.' },
+      },
+      {
+        src: { en: 'projects/duitku/en/02-capture-flow.png', id: 'projects/duitku/id/02-capture-flow.png' }, width: 1200, height: 1200,
+        alt: { en: 'Diagram: bank notifications, receipt photos, AI chat, Telegram and voice become drafts, then Room on the phone, optionally synced to Supabase.', id: 'Diagram: notifikasi bank, foto struk, chat AI, Telegram, dan suara menjadi draf, lalu Room di HP, opsional disinkron ke Supabase.' },
+        caption: { en: 'Five capture paths, each reviewed as a draft before it is saved.', id: 'Lima jalan masuk, masing-masing ditinjau sebagai draf sebelum disimpan.' },
+      },
+      {
+        src: { en: 'projects/duitku/en/03-light-dark.png', id: 'projects/duitku/id/03-light-dark.png' }, width: 1200, height: 1200,
+        alt: { en: 'The Home screen side by side in light and dark mode.', id: 'Layar Beranda berdampingan dalam mode terang dan gelap.' },
+        caption: { en: 'Home in light and dark mode: balance, wallet card, monthly limit and Koko.', id: 'Beranda mode terang dan gelap: saldo, kartu dompet, batas bulanan, dan Koko.' },
+      },
+      {
+        src: { en: 'projects/duitku/en/04-insight-plan.png', id: 'projects/duitku/id/04-insight-plan.png' }, width: 1200, height: 1200,
+        alt: { en: 'Insight screen with a spending trend and category breakdown, next to the Plan screen with category budgets.', id: 'Layar Insight dengan tren pengeluaran dan rincian kategori, di samping layar Rencana dengan anggaran per kategori.' },
+        caption: { en: 'Insight and Plan: swipeable sub-tabs, budgets that warn before the limit.', id: 'Insight dan Rencana: submenu yang bisa diusap, anggaran yang memberi peringatan sebelum batas.' },
+      },
+      {
+        src: { en: 'projects/duitku/en/05-koko-widget.png', id: 'projects/duitku/id/05-koko-widget.png' }, width: 1200, height: 1200,
+        alt: { en: 'Five Koko mascot expressions above two home-screen widgets and the launcher icon.', id: 'Lima ekspresi maskot Koko di atas dua widget layar utama dan ikon launcher.' },
+        caption: { en: 'Koko’s moods follow the budget; spending and balance widgets for the home screen.', id: 'Ekspresi Koko mengikuti anggaran; widget pengeluaran dan saldo untuk layar utama.' },
+      },
     ],
   },
 
@@ -867,5 +895,8 @@ export const projectIndex = (slug: string): string =>
 
 /** Nama domain tanpa `www.`, untuk label tautan situs daring. */
 export const hostOf = (url: string): string => new URL(url).host.replace(/^www\./, '');
+
+/** Alamat gambar untuk bahasa tertentu (mendukung `src` tunggal maupun per bahasa). */
+export const mediaSrc = (src: string | T, lang: Lang): string => (typeof src === 'string' ? src : src[lang]);
 
 export const projectBySlug = (slug: string): Project | undefined => projects.find((p) => p.slug === slug);

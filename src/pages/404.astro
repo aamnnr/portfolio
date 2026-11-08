@@ -1,0 +1,36 @@
+---
+import Base from '../layouts/Base.astro';
+import { localePath } from '../i18n/utils';
+
+// Satu halaman untuk kedua bahasa: Vercel menyajikan 404.html untuk semua path yang tidak ada.
+---
+
+<Base lang="en" title="Page not found — Nur Amin" description="This page does not exist. / Halaman ini tidak ada." noindex>
+  <section class="relative overflow-hidden">
+    <div
+      class="grid-paper pointer-events-none absolute inset-0 opacity-[0.55] [mask-image:linear-gradient(to_bottom,black,transparent_92%)]"
+      aria-hidden="true"
+    >
+    </div>
+    <div class="relative mx-auto max-w-6xl px-gutter pt-24 pb-24 md:pt-32 md:pb-32">
+      <div class="flex flex-wrap items-baseline gap-x-4 border-b border-rule pb-4">
+        <span class="font-mono text-xs text-oxide">ERR-404</span>
+        <span class="label">Not found / Tidak ditemukan</span>
+      </div>
+
+      <h1 class="mt-10 max-w-3xl text-[clamp(2rem,5.4vw,3.75rem)] leading-[1.06] font-semibold tracking-[-0.025em] text-balance">
+        This page is not in the document.
+      </h1>
+      <p class="mt-4 max-w-2xl text-lg leading-relaxed text-muted" lang="id">Halaman ini tidak ada di dokumen.</p>
+
+      <p class="mt-6 max-w-2xl leading-relaxed text-muted text-pretty">
+        The link may be old or mistyped. Every project is listed on the index.
+      </p>
+
+      <div class="mt-10 flex flex-wrap gap-x-8 gap-y-3 font-mono text-sm">
+        <a href={`${localePath('en')}#projects`} class="link-underline text-oxide">&larr; Back to the index</a>
+        <a href={`${localePath('id')}#projects`} class="link-underline text-oxide" lang="id">&larr; Kembali ke indeks</a>
+      </div>
+    </div>
+  </section>
+</Base>

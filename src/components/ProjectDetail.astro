@@ -3,6 +3,8 @@ import type { Lang } from '../data/site';
 import { ui } from '../data/content';
 import { categories, hostOf, mediaSrc, projectIndex, projects, type Project } from '../data/projects';
 import { localePath, projectPath } from '../i18n/utils';
+import { Picture } from 'astro:assets';
+import { projectImage } from '../data/media';
 import Inline from './Inline.astro';
 
 interface Props {
@@ -110,12 +112,20 @@ const specCols = ['', '', 'md:grid-cols-2', 'md:grid-cols-3', 'md:grid-cols-2 lg
             <div class={`grid gap-6 ${project.media.length > 1 ? 'sm:grid-cols-2' : ''}`}>
               {project.media.map((item, i, all) => (
                 <figure class={all.length > 1 && all.length % 2 === 1 && i === 0 ? 'sm:col-span-2' : ''}>
-                  <img
-                    src={`${import.meta.env.BASE_URL}${mediaSrc(item.src, lang)}`}
+                  <Picture
+                    src={projectImage(mediaSrc(item.src, lang))}
+                    formats={['avif', 'webp']}
+                    widths={[480, 800, 1200, 1600]}
+                    sizes={
+                      all.length === 1 || (all.length % 2 === 1 && i === 0)
+                        ? '(min-width: 1152px) 830px, (min-width: 768px) calc(100vw - 20rem), 100vw'
+                        : '(min-width: 1152px) 410px, (min-width: 640px) calc(50vw - 3rem), 100vw'
+                    }
                     alt={item.alt[lang]}
                     width={item.width}
                     height={item.height}
                     loading={i === 0 ? 'eager' : 'lazy'}
+                    fetchpriority={i === 0 ? 'high' : 'auto'}
                     decoding="async"
                     class="h-auto w-full border border-rule bg-panel"
                   />

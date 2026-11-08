@@ -79,7 +79,7 @@ export type Project = {
   /** Catatan teknis: angka, topik, protokol — bagian yang biasanya hilang. */
   notes?: { k: T; v: T }[];
   /**
-   * Tangkapan layar, foto perangkat, atau diagram. `src` relatif terhadap `public/`
+   * Tangkapan layar, foto perangkat, atau diagram. `src` relatif terhadap `src/assets/`
    * (mis. `projects/ferticore/dashboard.png`); gambar pertama juga dipakai sebagai og:image.
    * Bila gambar memuat teks, `src` boleh berupa `{ en, id }` agar tiap bahasa mendapat versinya sendiri.
    */

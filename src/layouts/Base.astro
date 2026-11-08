@@ -3,7 +3,7 @@ import '../styles/global.css';
 import { site, type Lang } from '../data/site';
 import { meta } from '../data/content';
 import { services } from '../data/services';
-import { localePath, absolute } from '../i18n/utils';
+import { localePath, absolute, clampDescription, personId } from '../i18n/utils';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 
@@ -15,33 +15,58 @@ interface Props {
   /** Pasangan URL untuk canonical dan hreflang; kosongkan untuk beranda. */
   pathEn?: string;
   pathId?: string;
-  /** Data terstruktur tambahan, mis. CreativeWork pada halaman proyek. */
-  extraLd?: Record<string, unknown>;
-  /** Gambar pratinjau tautan; `src` relatif terhadap `public/`. */
-  image?: { src: string; alt?: string };
+  /** Node JSON-LD tambahan (tanpa `@context`), digabung ke dalam satu `@graph`. */
+  extraLd?: Record<string, unknown>[];
+  /** Gambar pratinjau tautan; `src` berupa path situs (mis. hasil `getImage`). Default: kartu OG umum. */
+  image?: { src: string; alt?: string; width?: number; height?: number };
+  /** `profile` untuk beranda, `article` untuk halaman proyek. */
+  ogType?: 'profile' | 'article' | 'website';
+  /** Halaman yang tidak perlu diindeks (mis. 404): tanpa canonical & hreflang. */
+  noindex?: boolean;
 }
 
-const { lang, title, description, pathEn = localePath('en'), pathId = localePath('id'), extraLd, image } = Astro.props;
-const ogImage = image ? absolute(`${import.meta.env.BASE_URL}${image.src}`, Astro.site) : undefined;
+const {
+  lang,
+  title,
+  description,
+  pathEn = localePath('en'),
+  pathId = localePath('id'),
+  extraLd = [],
+  image,
+  ogType = 'website',
+  noindex = false,
+} = Astro.props;
+
+const base = import.meta.env.BASE_URL;
+const og = image ?? {
+  src: `${base}og-default.jpg`,
+  alt: lang === 'en' ? `${site.name} — ${site.role.en}` : `${site.name} — ${site.role.id}`,
+  width: 1200,
+  height: 630,
+};
+const ogImage = absolute(og.src, Astro.site);
 const m = {
   title: title ?? meta[lang].title,
-  description: description ?? meta[lang].description,
+  description: clampDescription(description ?? meta[lang].description),
 };
 const canonical = absolute(lang === 'en' ? pathEn : pathId, Astro.site);
 const altEn = absolute(pathEn, Astro.site);
 const altId = absolute(pathId, Astro.site);
+const home = absolute(localePath('en'), Astro.site);
 
-// Data terstruktur — membantu mesin telusur memahami halaman sebagai profil orang.
+// Data terstruktur dalam satu @graph: Person & WebSite punya @id tetap (URL beranda),
+// sehingga node lain — mis. CreativeWork di halaman proyek — cukup merujuk @id-nya.
 const personLd = {
-  '@context': 'https://schema.org',
   '@type': 'Person',
+  '@id': personId(Astro.site),
   name: site.name,
   alternateName: site.handle,
   jobTitle: site.role[lang],
-  description: m.description,
+  description: meta[lang].description,
+  image: absolute(`${base}icon-512.png`, Astro.site),
   email: `mailto:${site.email}`,
   telephone: site.phoneHref,
-  url: canonical,
+  url: home,
   address: { '@type': 'PostalAddress', addressLocality: 'Klaten', addressRegion: 'Central Java', addressCountry: 'ID' },
   alumniOf: { '@type': 'CollegeOrUniversity', name: 'Universitas Teknologi Yogyakarta' },
   worksFor: { '@type': 'Organization', name: 'PT Global Tani Solution' },
@@ -66,11 +91,22 @@ const personLd = {
       name: service.title[lang],
       description: service.summary[lang],
       serviceType: service.title.en,
-      provider: { '@type': 'Person', name: site.name },
+      provider: { '@id': personId(Astro.site) },
       areaServed: { '@type': 'Country', name: 'Indonesia' },
     },
   })),
 };
+
+const websiteLd = {
+  '@type': 'WebSite',
+  '@id': `${home}#website`,
+  url: home,
+  name: site.name,
+  inLanguage: ['en', 'id'],
+  publisher: { '@id': personId(Astro.site) },
+};
+
+const ld = { '@context': 'https://schema.org', '@graph': [personLd, websiteLd, ...extraLd] };
 ---
 
 <!doctype html>
@@ -84,27 +120,49 @@ const personLd = {
     <meta name="theme-color" content="#f2f0ea" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#0f1317" media="(prefers-color-scheme: dark)" />
 
-    <link rel="canonical" href={canonical} />
-    <link rel="alternate" hreflang="en" href={altEn} />
-    <link rel="alternate" hreflang="id" href={altId} />
-    <link rel="alternate" hreflang="x-default" href={altEn} />
-    <link rel="icon" type="image/svg+xml" href={`${import.meta.env.BASE_URL}favicon.svg`} />
-    <link rel="sitemap" href={`${import.meta.env.BASE_URL}sitemap-index.xml`} />
+    {noindex && <meta name="robots" content="noindex, follow" />}
+    {
+      !noindex && (
+        <>
+          <link rel="canonical" href={canonical} />
+          <link rel="alternate" hreflang="en" href={altEn} />
+          <link rel="alternate" hreflang="id" href={altId} />
+          <link rel="alternate" hreflang="x-default" href={altEn} />
+        </>
+      )
+    }
+    <link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`} />
+    <link rel="icon" type="image/png" sizes="48x48" href={`${base}favicon-48.png`} />
+    <link rel="apple-touch-icon" href={`${base}apple-touch-icon.png`} />
+    <link rel="manifest" href={`${base}site.webmanifest`} />
+    <link rel="sitemap" href={`${base}sitemap-index.xml`} />
 
-    <meta property="og:type" content="profile" />
+    <meta property="og:type" content={ogType} />
+    {
+      ogType === 'profile' && (
+        <>
+          <meta property="profile:first_name" content="Nur" />
+          <meta property="profile:last_name" content="Amin" />
+          <meta property="profile:username" content={site.handle} />
+        </>
+      )
+    }
+    {ogType === 'article' && <meta property="article:author" content={home} />}
     <meta property="og:title" content={m.title} />
     <meta property="og:description" content={m.description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:locale" content={lang === 'en' ? 'en_US' : 'id_ID'} />
     <meta property="og:locale:alternate" content={lang === 'en' ? 'id_ID' : 'en_US'} />
     <meta property="og:site_name" content={site.name} />
-    {ogImage && <meta property="og:image" content={ogImage} />}
-    {ogImage && image?.alt && <meta property="og:image:alt" content={image.alt} />}
-    <!-- Kartu besar hanya bila memang ada gambar; tanpa gambar, kartu ringkas. -->
-    <meta name="twitter:card" content={ogImage ? 'summary_large_image' : 'summary'} />
+    <meta property="og:image" content={ogImage} />
+    {og.width && <meta property="og:image:width" content={String(og.width)} />}
+    {og.height && <meta property="og:image:height" content={String(og.height)} />}
+    {og.alt && <meta property="og:image:alt" content={og.alt} />}
+    <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={m.title} />
     <meta name="twitter:description" content={m.description} />
-    {ogImage && <meta name="twitter:image" content={ogImage} />}
+    <meta name="twitter:image" content={ogImage} />
+    {og.alt && <meta name="twitter:image:alt" content={og.alt} />}
 
     <script is:inline>
       // Pilih tema sebelum paint pertama supaya tidak ada kedipan putih/hitam.
@@ -120,8 +178,7 @@ const personLd = {
       })();
     </script>
 
-    <script type="application/ld+json" is:inline set:html={JSON.stringify(personLd)} />
-    {extraLd && <script type="application/ld+json" is:inline set:html={JSON.stringify(extraLd)} />}
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(ld)} />
   </head>
 
   <body class="bg-paper text-ink antialiased">

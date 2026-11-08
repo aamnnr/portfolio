@@ -7,33 +7,49 @@ interface Props {
   lang: Lang;
 }
 const { lang } = Astro.props;
+
+// Pekerjaan dan organisasi ditampilkan sebagai dua garis waktu terpisah.
+const groups = [
+  { key: 'work', title: sectionTitles.experienceWork[lang], items: experience.filter((e) => e.kind === 'work') },
+  { key: 'organization', title: sectionTitles.experienceOrg[lang], items: experience.filter((e) => e.kind === 'organization') },
+].filter((group) => group.items.length > 0);
 ---
 
 <Section id="experience" num="05" title={sectionTitles.experience[lang]}>
-  <ol class="relative border-l border-rule pl-6 md:pl-8">
+  <div class="space-y-14">
     {
-      experience.map((job) => (
-        <li class="reveal relative pb-10 last:pb-0">
-          {/* Penanda pada garis waktu */}
-          <span
-            class={`absolute top-2 -left-[calc(1.5rem+3.5px)] size-1.5 rounded-full md:-left-[calc(2rem+3.5px)] ${
-              job.current ? 'bg-oxide' : 'bg-rule ring-2 ring-paper'
-            }`}
-            aria-hidden="true"
-          />
-          <p class="label tabular-nums">{job.period[lang]}</p>
-          <h3 class="mt-1.5 text-lg font-semibold tracking-tight">{job.role[lang]}</h3>
-          <p class="text-sm text-blueprint">{job.org}</p>
-          <ul class="mt-3 max-w-2xl space-y-1.5 text-sm leading-relaxed text-muted">
-            {job.points[lang].map((point) => (
-              <li class="flex gap-3">
-                <span class="mt-2 size-1 shrink-0 bg-faint" aria-hidden="true" />
-                <span>{point}</span>
+      groups.map((group) => (
+        <div>
+          <h3 class="label mb-6 flex items-baseline gap-3 border-b border-rule pb-3">
+            <span>{group.title}</span>
+            <span class="font-mono text-faint tabular-nums">{String(group.items.length).padStart(2, '0')}</span>
+          </h3>
+          <ol class="relative border-l border-rule pl-6 md:pl-8">
+            {group.items.map((job) => (
+              <li class="reveal relative pb-10 last:pb-0">
+                {/* Penanda pada garis waktu */}
+                <span
+                  class={`absolute top-2 -left-[calc(1.5rem+3.5px)] size-1.5 rounded-full md:-left-[calc(2rem+3.5px)] ${
+                    job.current ? 'bg-oxide' : 'bg-rule ring-2 ring-paper'
+                  }`}
+                  aria-hidden="true"
+                />
+                <p class="label tabular-nums">{job.period[lang]}</p>
+                <h4 class="mt-1.5 text-lg font-semibold tracking-tight">{job.role[lang]}</h4>
+                <p class="text-sm text-blueprint">{job.org}</p>
+                <ul class="mt-3 max-w-2xl space-y-1.5 text-sm leading-relaxed text-muted">
+                  {job.points[lang].map((point) => (
+                    <li class="flex gap-3">
+                      <span class="mt-2 size-1 shrink-0 bg-faint" aria-hidden="true" />
+                      <span>{point}</span>
+                    </li>
+                  ))}
+                </ul>
               </li>
             ))}
-          </ul>
-        </li>
+          </ol>
+        </div>
       ))
     }
-  </ol>
+  </div>
 </Section>

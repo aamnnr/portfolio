@@ -10,12 +10,12 @@ export const meta: Record<Lang, { title: string; description: string }> = {
   en: {
     title: 'Nur Amin — Software Engineer: Web, Mobile & IoT',
     description:
-      'Software engineer in Klaten, Central Java. I build systems end to end across web, mobile and connected devices — Laravel and Next.js applications, Flutter apps, ESP32 firmware, and the occasional machine-learning model. Portfolio, services and contact.',
+      'Software engineer in Klaten, Central Java, building web apps (Laravel, Next.js), Flutter mobile apps and ESP32 IoT systems end to end. Portfolio and services.',
   },
   id: {
     title: 'Nur Amin — Software Engineer: Web, Mobile & IoT',
     description:
-      'Jasa pembuatan aplikasi web, aplikasi mobile, dan sistem IoT di Klaten, Jawa Tengah. Laravel, Next.js, Flutter, firmware ESP32, hingga model pembelajaran mesin — dikerjakan utuh dari data sampai antarmuka. Portofolio, layanan, dan kontak.',
+      'Jasa pembuatan aplikasi web, aplikasi mobile, dan sistem IoT di Klaten, Jawa Tengah: Laravel, Next.js, Flutter, ESP32. Lihat portofolio, layanan, dan kontak.',
   },
 };
 
@@ -151,9 +151,11 @@ export const capabilities: { group: T; items: { name: string; level: Level }[] }
  * 05 — EXPERIENCE
  * ------------------------------------------------------------------ */
 export const experience: {
-  role: T; org: string; period: T; current?: boolean; points: TL;
+  /** `work` = pekerjaan, `organization` = organisasi kampus/kemahasiswaan. */
+  kind: 'work' | 'organization'; role: T; org: string; period: T; current?: boolean; points: TL;
 }[] = [
   {
+    kind: 'work',
     role: { en: 'Web Developer', id: 'Web Developer' },
     org: 'Kembar Futa Group',
     period: { en: 'Jul 2026 — present', id: 'Jul 2026 — sekarang' },
@@ -172,6 +174,7 @@ export const experience: {
     },
   },
   {
+    kind: 'work',
     role: { en: 'Research & Development', id: 'Research & Development' },
     org: 'PT Global Tani Solution',
     period: { en: 'Nov 2024 — May 2026', id: 'Nov 2024 — Mei 2026' },
@@ -193,6 +196,7 @@ export const experience: {
     },
   },
   {
+    kind: 'organization',
     role: { en: 'Media & Public Relations Staff', id: 'Staf Media dan Humas' },
     org: 'PPK ORMAWA DIKTI — UKM Olahraga UTY',
     period: { en: '2024', id: '2024' },
@@ -210,6 +214,7 @@ export const experience: {
     },
   },
   {
+    kind: 'organization',
     role: { en: 'Administration & Public Relations Staff', id: 'Staf Administrasi dan Humas' },
     org: 'UKM Olahraga, Universitas Teknologi Yogyakarta',
     period: { en: '2021 — 2024', id: '2021 — 2024' },
@@ -321,6 +326,8 @@ export const sectionTitles: Record<string, T> = {
   capabilities: { en: 'Capabilities', id: 'Kemampuan' },
   projects: { en: 'Selected work', id: 'Karya terpilih' },
   experience: { en: 'Experience', id: 'Pengalaman' },
+  experienceWork: { en: 'Work', id: 'Pekerjaan' },
+  experienceOrg: { en: 'Organisations', id: 'Organisasi' },
   credentials: { en: 'Education & certification', id: 'Pendidikan & sertifikasi' },
   contact: { en: 'Contact', id: 'Kontak' },
 };

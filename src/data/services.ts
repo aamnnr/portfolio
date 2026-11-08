@@ -204,7 +204,7 @@ export const services: Service[] = [
       en: 'I will not write a thesis or sit an assessment in someone else’s name. If that is what is needed, we are not a match.',
       id: 'Saya tidak menuliskan skripsi atau mengikuti penilaian atas nama orang lain. Bila itu yang dibutuhkan, kita tidak cocok.',
     },
-    proof: ['face-attendance-knn', 'laptop-expert-system'],
+    proof: ['face-attendance-knn'],
   },
 ];
 

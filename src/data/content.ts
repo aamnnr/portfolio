@@ -177,7 +177,7 @@ export const experience: {
     kind: 'work',
     role: { en: 'Research & Development', id: 'Research & Development' },
     org: 'PT Global Tani Solution',
-    period: { en: 'Nov 2024 — May 2026', id: 'Nov 2024 — Mei 2026' },
+    period: { en: 'Nov 2024 — May 2026', id: 'Nov 2025 — Mei 2026' },
     points: {
       en: [
         'Wrote and tested the firmware behind the company’s IoT devices.',

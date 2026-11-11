@@ -7,8 +7,8 @@ export const site = {
   },
   /** Label pendek untuk kepala halaman, di samping nama. */
   roleShort: {
-    en: 'Software Engineer',
-    id: 'Software Engineer',
+    en: 'System Engineer',
+    id: 'System Engineer',
   },
   location: { en: 'Klaten, Central Java, Indonesia', id: 'Klaten, Jawa Tengah, Indonesia' },
   email: 'noeramin354@gmail.com',
@@ -17,7 +17,7 @@ export const site = {
   whatsapp: '6285869106314',
   socials: [
     { label: 'GitHub', handle: 'aamnnr', url: 'https://github.com/aamnnr' },
-    { label: 'LinkedIn', handle: 'nur-amin354', url: 'https://linkedin.com/in/nur-amin354' },
+    { label: 'LinkedIn', handle: 'Nur Amin', url: 'https://linkedin.com/in/nur-amin354' },
     { label: 'Instagram', handle: '@aamnnr', url: 'https://instagram.com/aamnnr' },
   ],
   // Dokumen revisi — dipakai di header sebagai penanda versi dokumen.

@@ -292,7 +292,7 @@ export const projects: Project[] = [
     ],
     stack: ['Next.js', 'TypeScript', 'PostgreSQL', 'Supabase', 'Drizzle ORM', 'Dexie', 'Tailwind CSS', 'Vitest'],
     repo: 'https://github.com/aamnnr/generus',
-    live: 'https://generus-two.vercel.app',
+    live: 'https://pantau-generus.vercel.app',
     overview: {
       en: [
         'Attendance, monthly curriculum targets and Qur’an reading progress used to live in notebooks, spreadsheets and group chats, so nobody above group level could see what was happening below them. Generus puts all three in one installable web app, used by admins on phones and by the curriculum team on laptops.',

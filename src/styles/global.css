@@ -92,6 +92,7 @@
     *::after {
       animation-duration: 0.01ms !important;
       transition-duration: 0.01ms !important;
+      transition-delay: 0s !important;
     }
   }
 }
@@ -151,9 +152,146 @@
     transform: none;
   }
 
-  /* Tanpa JS, konten harus tetap terlihat. */
-  .no-js .reveal {
+  /* ---------------------------------------------------------------- *
+   * Motion — kosakata alat ukur: garis yang tergambar, angka yang
+   * terbaca naik, tanda potong, pindaian. Dinyalakan oleh reveal.ts
+   * dan motion.ts; semuanya diam bila prefers-reduced-motion.
+   * ---------------------------------------------------------------- */
+
+  /* Garis ukur yang tergambar dari kiri (dipakai bersama kelas .reveal). */
+  .reveal.draw-line {
+    opacity: 1;
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 0.9s cubic-bezier(0.65, 0, 0.35, 1) 0.15s;
+  }
+
+  .reveal.draw-line.is-visible {
+    transform: scaleX(1);
+  }
+
+  /* Anak-anak muncul berurutan; urutan (--i) diisi oleh reveal.ts. */
+  .stagger > * {
+    opacity: 0;
+    transform: translateY(8px);
+    transition:
+      opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: calc(var(--i, 0) * 70ms + 80ms);
+  }
+
+  .stagger.is-visible > * {
     opacity: 1;
     transform: none;
+  }
+
+  /* Gambar terbuka dari atas ke bawah seperti hasil pindaian. */
+  .scan {
+    clip-path: inset(0 0 100% 0);
+    transition: clip-path 1s cubic-bezier(0.65, 0, 0.35, 1);
+  }
+
+  .scan.is-visible {
+    clip-path: inset(0 0 0 0);
+  }
+
+  /* Tanda potong di keempat sudut, seperti pada cetakan teknik. */
+  .crop-marks {
+    position: relative;
+    --mark: var(--color-oxide);
+    --len: 10px;
+  }
+
+  .crop-marks::before {
+    content: '';
+    position: absolute;
+    inset: 1rem -0.25rem;
+    pointer-events: none;
+    opacity: 0;
+    background:
+      linear-gradient(var(--mark), var(--mark)) top left / var(--len) 1px,
+      linear-gradient(var(--mark), var(--mark)) top left / 1px var(--len),
+      linear-gradient(var(--mark), var(--mark)) top right / var(--len) 1px,
+      linear-gradient(var(--mark), var(--mark)) top right / 1px var(--len),
+      linear-gradient(var(--mark), var(--mark)) bottom left / var(--len) 1px,
+      linear-gradient(var(--mark), var(--mark)) bottom left / 1px var(--len),
+      linear-gradient(var(--mark), var(--mark)) bottom right / var(--len) 1px,
+      linear-gradient(var(--mark), var(--mark)) bottom right / 1px var(--len);
+    background-repeat: no-repeat;
+    transition:
+      opacity 0.25s ease,
+      inset 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  @media (hover: hover) and (min-width: 768px) {
+    .crop-marks:hover::before,
+    .crop-marks:focus-within::before {
+      opacity: 1;
+      inset: 0.5rem -1rem;
+    }
+  }
+
+  /* Kursor CAD di hero. Posisi (--cx/--cy) dan pusat sorotan (--mx/--my) diisi motion.ts. */
+  .crosshair {
+    opacity: 0;
+    transition: opacity 0.35s ease;
+  }
+
+  .crosshair.is-active {
+    opacity: 1;
+  }
+
+  .grid-paper-lit {
+    --grid-line: color-mix(in srgb, var(--color-oxide) 40%, transparent);
+    -webkit-mask-image: radial-gradient(circle 150px at var(--mx, -999px) var(--my, -999px), #000 0%, transparent 100%);
+    mask-image: radial-gradient(circle 150px at var(--mx, -999px) var(--my, -999px), #000 0%, transparent 100%);
+  }
+
+  .crosshair-x,
+  .crosshair-y {
+    background-image: repeating-linear-gradient(
+      var(--dir, 90deg),
+      color-mix(in srgb, var(--color-ink) 28%, transparent) 0 4px,
+      transparent 4px 8px
+    );
+  }
+
+  .crosshair-x {
+    transform: translate3d(0, var(--cy, -10px), 0);
+  }
+
+  .crosshair-y {
+    --dir: 180deg;
+    transform: translate3d(var(--cx, -10px), 0, 0);
+  }
+
+  .crosshair-dot {
+    border: 1px solid var(--color-oxide);
+    background: var(--color-paper);
+    transform: translate3d(calc(var(--cx, -10px) - 3px), calc(var(--cy, -10px) - 3px), 0) rotate(45deg);
+  }
+
+  .crosshair-readout {
+    padding: 1px 5px;
+    color: var(--color-oxide);
+    background: color-mix(in srgb, var(--color-paper) 85%, transparent);
+    border: 1px solid var(--color-rule);
+    transform: translate3d(calc(var(--cx, -10px) + 10px), calc(var(--cy, -10px) + 10px), 0);
+    white-space: nowrap;
+  }
+
+  /* Tanpa JS, konten harus tetap terlihat. */
+  .no-js .reveal,
+  .no-js .stagger > * {
+    opacity: 1;
+    transform: none;
+  }
+
+  .no-js .scan {
+    clip-path: none;
+  }
+
+  .no-js .crosshair {
+    display: none;
   }
 }

@@ -111,7 +111,13 @@ const specCols = ['', '', 'md:grid-cols-2', 'md:grid-cols-3', 'md:grid-cols-2 lg
             <h2 class="label md:sticky md:top-24 md:self-start">{ui.mediaBlock[lang]}</h2>
             <div class={`grid gap-6 ${project.media.length > 1 ? 'sm:grid-cols-2' : ''}`}>
               {project.media.map((item, i, all) => (
-                <figure class={all.length > 1 && all.length % 2 === 1 && i === 0 ? 'sm:col-span-2' : ''}>
+                <figure
+                  class:list={[
+                    all.length > 1 && all.length % 2 === 1 && i === 0 && 'sm:col-span-2',
+                    // Gambar pertama (LCP) tidak ditahan; sisanya terbuka seperti hasil pindaian.
+                    i > 0 && 'scan',
+                  ]}
+                >
                   <Picture
                     src={projectImage(mediaSrc(item.src, lang))}
                     formats={['avif', 'webp']}

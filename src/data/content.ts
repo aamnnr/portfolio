@@ -8,12 +8,12 @@ type TL = Record<Lang, string[]>;
  * ------------------------------------------------------------------ */
 export const meta: Record<Lang, { title: string; description: string }> = {
   en: {
-    title: 'Nur Amin — Software Engineer: Web, Mobile & IoT',
+    title: 'Nur Amin — System Engineer: Web, Mobile & IoT',
     description:
-      'Software engineer in Klaten, Central Java, building web apps (Laravel, Next.js), Flutter mobile apps and ESP32 IoT systems end to end. Portfolio and services.',
+      'System engineer in Klaten, Central Java, building web apps (Laravel, Next.js), Flutter mobile apps and ESP32 IoT systems end to end. Portfolio and services.',
   },
   id: {
-    title: 'Nur Amin — Software Engineer: Web, Mobile & IoT',
+    title: 'Nur Amin — System Engineer: Web, Mobile & IoT',
     description:
       'Jasa pembuatan aplikasi web, aplikasi mobile, dan sistem IoT di Klaten, Jawa Tengah: Laravel, Next.js, Flutter, ESP32. Lihat portofolio, layanan, dan kontak.',
   },
@@ -135,11 +135,8 @@ export const capabilities: { group: T; items: { name: string; level: Level }[] }
     ],
   },
 {
-    group: { en: 'Analysis & Design', id: 'Analisis & Desain' },
+    group: { en: 'Others', id: 'Lainnya' },
     items: [
-      { name: 'UI/UX design', level: 'core' },
-      { name: 'Machine learning', level: 'working' },
-      { name: 'Data analysis', level: 'working' },
       { name: 'RapidMiner', level: 'working' },
       { name: 'Figma', level: 'working' },
       { name: 'CorelDRAW', level: 'working' },

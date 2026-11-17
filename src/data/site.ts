@@ -2,8 +2,8 @@ export const site = {
   name: 'Nur Amin',
   handle: 'aamnnr',
   role: {
-    en: 'Software Engineer — web, mobile & connected devices',
-    id: 'Software Engineer — web, mobile & perangkat terhubung',
+    en: 'System Engineer — web, mobile & connected devices',
+    id: 'System Engineer — web, mobile & perangkat terhubung',
   },
   /** Label pendek untuk kepala halaman, di samping nama. */
   roleShort: {

@@ -5,7 +5,12 @@
 
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-const revealables = document.querySelectorAll<HTMLElement>('.reveal');
+// `.stagger` memunculkan anak-anaknya berurutan; `.scan` membuka gambar dari atas.
+const revealables = document.querySelectorAll<HTMLElement>('.reveal, .stagger, .scan');
+
+document.querySelectorAll<HTMLElement>('.stagger').forEach((group) => {
+  Array.from(group.children).forEach((child, i) => (child as HTMLElement).style.setProperty('--i', String(i)));
+});
 
 if (reduceMotion || !('IntersectionObserver' in window)) {
   revealables.forEach((el) => el.classList.add('is-visible'));

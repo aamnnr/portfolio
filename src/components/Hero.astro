@@ -9,12 +9,23 @@ interface Props {
 const { lang } = Astro.props;
 ---
 
-<section class="relative overflow-hidden">
+<section class="relative overflow-hidden" data-crosshair-zone>
   <!-- Kertas grid teknis, memudar ke bawah supaya tidak mengganggu teks -->
   <div
     class="grid-paper pointer-events-none absolute inset-0 opacity-[0.55] [mask-image:linear-gradient(to_bottom,black,transparent_92%)]"
     aria-hidden="true"
+    data-parallax="0.18"
   >
+  </div>
+
+  <!-- Kursor CAD: grid menyala di sekitar kursor + crosshair yang menempel ke titik grid.
+       Hanya aktif untuk mouse (lihat motion.ts); tersembunyi di layar sentuh. -->
+  <div class="crosshair pointer-events-none absolute inset-0" aria-hidden="true" data-crosshair>
+    <div class="grid-paper grid-paper-lit absolute inset-0" data-parallax="0.18"></div>
+    <div class="crosshair-x absolute inset-x-0 top-0 h-px"></div>
+    <div class="crosshair-y absolute inset-y-0 left-0 w-px"></div>
+    <span class="crosshair-dot absolute top-0 left-0 size-[7px]"></span>
+    <span class="crosshair-readout absolute top-0 left-0 font-mono text-[0.625rem] tracking-wider tabular-nums" data-crosshair-readout></span>
   </div>
 
   <div class="relative mx-auto max-w-6xl px-gutter pt-24 pb-16 md:pt-32 md:pb-24">
@@ -64,17 +75,18 @@ const { lang } = Astro.props;
       <!-- Blok judul ala gambar teknik: ringkasan angka -->
       <aside class="self-end border border-rule bg-panel">
         <p class="label border-b border-rule px-4 py-2">{lang === 'en' ? 'Summary' : 'Ringkasan'}</p>
-        <dl class="divide-y divide-rule-soft">
+        <dl class="stagger divide-y divide-rule-soft">
           {
             [
-              { k: lang === 'en' ? 'Systems shipped' : 'Sistem selesai', v: String(projects.length).padStart(2, '0') },
-              { k: lang === 'en' ? 'Services offered' : 'Layanan ditawarkan', v: '04' },
-              { k: lang === 'en' ? 'Building since' : 'Membangun sejak', v: '2024' },
+              { k: lang === 'en' ? 'Systems shipped' : 'Sistem selesai', v: String(projects.length).padStart(2, '0'), from: 0 },
+              { k: lang === 'en' ? 'Services offered' : 'Layanan ditawarkan', v: '04', from: 0 },
+              { k: lang === 'en' ? 'Building since' : 'Membangun sejak', v: '2024', from: 2000 },
               { k: lang === 'en' ? 'Base' : 'Domisili', v: 'Klaten, ID' },
             ].map((row) => (
               <div class="flex items-baseline justify-between gap-4 px-4 py-2.5">
                 <dt class="text-sm text-muted">{row.k}</dt>
-                <dd class="font-mono text-sm tabular-nums">{row.v}</dd>
+                {/* Angka "dibaca" naik seperti alat ukur saat pertama terlihat */}
+                <dd class="font-mono text-sm tabular-nums" data-count={row.from !== undefined ? row.from : undefined}>{row.v}</dd>
               </div>
             ))
           }
@@ -83,10 +95,12 @@ const { lang } = Astro.props;
     </div>
 
     <!-- Diagram lapisan sistem -->
-    <figure class="mt-16 border-t border-rule pt-6 md:mt-24">
+    <figure class="relative mt-16 border-t border-rule pt-6 md:mt-24">
+      <!-- Aliran sinyal: garis oksida menyapu dari perangkat ke layar saat diagram terlihat -->
+      <span class="reveal draw-line absolute inset-x-0 -top-px h-px bg-oxide" aria-hidden="true"></span>
       <figcaption class="label mb-6">{hero.figure[lang]}</figcaption>
 
-      <ol class="grid gap-px bg-rule sm:grid-cols-2 lg:grid-cols-5">
+      <ol class="stagger grid gap-px bg-rule sm:grid-cols-2 lg:grid-cols-5">
         {
           layers.map((step, i) => (
             <li class="relative bg-paper p-4 lg:p-5">

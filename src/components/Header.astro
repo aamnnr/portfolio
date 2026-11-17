@@ -88,6 +88,15 @@ const anchor = (id: string) => `${home}#${id}`;
     </div>
   </div>
 
+  <!-- Progres gulir: penggaris tipis di tepi bawah header (diisi oleh motion.ts) -->
+  <div
+    data-scroll-progress
+    aria-hidden="true"
+    class="pointer-events-none absolute inset-x-0 -bottom-px h-px origin-left bg-oxide"
+    style="transform: scaleX(0)"
+  >
+  </div>
+
   <!-- Panel navigasi mobile -->
   <div id="mobile-menu" data-menu-panel hidden class="border-t border-rule bg-panel lg:hidden">
     <ul class="mx-auto max-w-6xl divide-y divide-rule-soft px-gutter">

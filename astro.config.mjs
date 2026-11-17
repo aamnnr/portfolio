@@ -4,7 +4,7 @@ import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 
 // Dipakai untuk sitemap, canonical & og:url.
-export const SITE = 'https://nur-amin.vercel.app';
+export const SITE = 'https://nuramin.my.id';
 
 // Situs disajikan di akar domain. Kalau suatu saat pindah ke hosting yang
 // menaruhnya di dalam subfolder (mis. GitHub Pages di /portfolio/), nilai ini

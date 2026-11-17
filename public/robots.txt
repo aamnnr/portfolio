@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://nur-amin.vercel.app/sitemap-index.xml
+Sitemap: https://nuramin.my.id/sitemap-index.xml

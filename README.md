@@ -127,7 +127,7 @@ tema, menu mobile, dan animasi masuk. Fon IBM Plex di-host sendiri, bukan dari C
 Keduanya diatur di `astro.config.mjs`:
 
 ```js
-export const SITE = 'https://nur-amin.vercel.app';
+export const SITE = 'https://nuramin.my.id';
 export const BASE = '/';
 ```
 

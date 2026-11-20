@@ -168,8 +168,8 @@ export const services: Service[] = [
     code: 'S-04',
     title: { en: 'UI/UX design & engineering final projects', id: 'Desain UI/UX & tugas akhir teknik' },
     summary: {
-      en: 'Interface design in Figma, and technical guidance for students building an IoT or machine-learning final project — help understanding and finishing it, not a ghost-written submission.',
-      id: 'Desain antarmuka di Figma, dan pendampingan teknis untuk mahasiswa yang menggarap tugas akhir IoT atau pembelajaran mesin — bantuan memahami dan menuntaskan, bukan pengerjaan yang disamarkan.',
+      en: 'Interface design in Figma, and technical guidance for students building an IoT final project — help understanding and finishing it, not a ghost-written submission.',
+      id: 'Desain antarmuka di Figma, dan pendampingan teknis untuk mahasiswa yang menggarap tugas akhir IoT — bantuan memahami dan menuntaskan, bukan pengerjaan yang disamarkan.',
     },
     scope: {
       en: [
@@ -204,7 +204,7 @@ export const services: Service[] = [
       en: 'I will not write a thesis or sit an assessment in someone else’s name. If that is what is needed, we are not a match.',
       id: 'Saya tidak menuliskan skripsi atau mengikuti penilaian atas nama orang lain. Bila itu yang dibutuhkan, kita tidak cocok.',
     },
-    proof: ['face-attendance-knn'],
+    proof: ['rfid-esp32cam-attendance'],
   },
 ];
 
